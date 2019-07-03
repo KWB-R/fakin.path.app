@@ -174,38 +174,34 @@ ui <- fluidPage(
 )
 
 # provide_data -----------------------------------------------------------------
-provide_data <- function(input)
+provide_data <- function(x, input)
 {
-  path <- kwb.utils::selectElements(input, "path_file")
   type <- kwb.utils::selectElements(input, "type_filter")
   pattern <- kwb.utils::selectElements(input, "path_filter")
-  sep <- kwb.utils::selectElements(input, "separator")
-  if (is.null(GLOBALS[["file_info"]]) || GLOBALS[["last_path"]] != path) {
-    GLOBALS$file_info <<- kwb.fakin::read_file_info(path, sep = sep)
-    GLOBALS$last_path <<- path
-  }
-  x <- kwb.utils::selectElements(GLOBALS, "file_info")
+  
   if (type != "all") {
     x <- x[x$type == type, ]
   }
+  
   if (kwb.utils::defaultIfNULL(pattern, "") != "") {
     x <- x[grepl(pattern, x$path), ]
   }
+  
   x
 }
 
 # get_top_level_paths ----------------------------------------------------------
-get_top_level_paths <- function(input, n_levels = 2)
-{
-  provide_data(input) %>%
-    dplyr::filter(.data$type == "directory") %>%
-    kwb.utils::selectColumns("path") %>%
-    kwb.file::split_into_root_folder_file_extension() %>%
-    dplyr::filter(.data$depth <= n_levels + 1) %>%
-    kwb.utils::selectColumns("folder") %>%
-    remove_empty() %>%
-    unique()
-}
+# get_top_level_paths <- function(input, n_levels = 2)
+# {
+#   provide_data(input) %>%
+#     dplyr::filter(.data$type == "directory") %>%
+#     kwb.utils::selectColumns("path") %>%
+#     kwb.file::split_into_root_folder_file_extension() %>%
+#     dplyr::filter(.data$depth <= n_levels + 1) %>%
+#     kwb.utils::selectColumns("folder") %>%
+#     remove_empty() %>%
+#     unique()
+# }
 
 # remove_empty -----------------------------------------------------------------
 remove_empty <- function(x)
@@ -228,9 +224,16 @@ get_plot_outputs <- function(input_n) {
   plot_outputs
 }
 
-# Define server logic required to draw a histogram
+# Define server logic ----------------------------------------------------------
 server <- function(input, output) {
-  
+
+  file_info_raw <- shiny::reactive({
+    kwb.fakin::read_file_info(
+      file = kwb.utils::selectElements(input, "path_file"), 
+      sep = kwb.utils::selectElements(input, "separator")
+    )
+  })
+    
   output$selected_file <- renderText({
     c("Selected file:", kwb.utils::selectElements(input, "path_file"))
   })
@@ -248,14 +251,14 @@ server <- function(input, output) {
     
   output$file_info <- DT::renderDataTable(
     options = list(scrollX = TRUE), {
-      provide_data(input)
+      provide_data(x = file_info_raw(), input)
     }
   )
   
   output$folder_graph <- networkD3::renderSankeyNetwork({
     max_depth <- kwb.utils::selectElements(input, "max_depth")
     fontSize <- kwb.utils::selectElements(input, "font_size")
-    file_info <- provide_data(input)
+    file_info <- provide_data(x = file_info_raw(), input)
     paths <- kwb.utils::selectColumns(file_info, "path")
     kwb.fakin::plot_path_network(
       paths, max_depth = max_depth, fontSize = fontSize
@@ -264,12 +267,13 @@ server <- function(input, output) {
   
   output$treemap <- shiny::renderPlot({
     kwb.fakin::plot_treemaps_from_path_data(
-      provide_data(input), n_levels = input$n_levels, types = input$treemap_type
+      provide_data(x = file_info_raw(), input), 
+      n_levels = input$n_levels, types = input$treemap_type
     )
   })
   
   output$depth <- shiny::renderPlot({
-    provide_data(input) %>%
+    provide_data(x = file_info_raw(), input) %>%
       kwb.fakin:::prepare_for_scatter_plot(
         n_root_parts = input$n_root_parts
       ) %>%
@@ -288,5 +292,5 @@ server <- function(input, output) {
   
 }
 
-# Run the application 
+# Run the application ----------------------------------------------------------
 shinyApp(ui = ui, server = server)

@@ -8,22 +8,22 @@
 #
 
 library(shiny)
+library(magrittr)
 
 get_file_info_files <- function() {
   files <- c(
     kwb.file::dir_full(kwb.fakin::extdata_file(""), "^example_file_info"),
-    #kwb.file::dir_full("~/Desktop/Data/FAKIN/file-info_by-department", "csv$")
-    kwb.file::dir_full("//medusa/processing/CONTENTS/file-info_by-department/2019-06", "csv$")
+    kwb.file::dir_full("~/Desktop/Data/FAKIN/file-info_by-department", "csv$")
   )
   names <- kwb.utils::removeExtension(basename(files))
   names <- kwb.utils::multiSubstitute(names, list(
-    "path-info(-ps-1)?_" = "",
+    "path-info_" = "",
     "(\\d{2})_\\d{4}" = "\\1"
   ))
   stats::setNames(files, names)
 }
 
-GLOBALS <- list()
+GLOBALS <- list(max_plots = 5)
 
 selectInput_path_file <- selectInput(
   inputId = "path_file", 
@@ -31,13 +31,15 @@ selectInput_path_file <- selectInput(
   choices = get_file_info_files()
 )
 
-selectInput_separator <- selectInput(
+inlineRadioButtons <- function(...) radioButtons(..., inline = TRUE)
+
+radioInput_separator <- inlineRadioButtons(
   inputId = "separator",
   label = "Column separator",
   choices = c(";", ",")
 )
 
-selectInput_type_filter <- selectInput(
+radioInput_type_filter <- inlineRadioButtons(
   inputId = "type_filter",
   label = "Type filter",
   choices = c("all", "file", "directory")
@@ -50,18 +52,52 @@ textInput_path_filter <- textInput(
 
 sliderInput_max_depth <- sliderInput(
   inputId = "max_depth",
-  label = "Maximum depth in graph",
-  min = 2, 
-  max = 5, 
-  value = 2
+  label = "Levels shown",
+  min = 2, max = 5, step = 1, value = 2
 )
 
 sliderInput_font_size <- sliderInput(
   inputId = "font_size",
   label = "Font size in pixels",
-  min = 7,
-  max = 20,
-  value = 10
+  min = 7, max = 20, step = 1, value = 10
+)
+
+sliderInput_n_levels <- shiny::sliderInput(
+  inputId = "n_levels", 
+  label = "Levels shown", 
+  min = 1, max = 3, step = 1, value = 2
+)
+
+sliderInput_n_root_parts <- shiny::sliderInput(
+  inputId = "n_root_parts", 
+  label = "Root folder levels", 
+  min = 1, max = 3, step = 1, value = 2
+)
+
+sliderInput_n_plots <- shiny::sliderInput(
+  inputId = "n_plots", 
+  label = "Number of plots", 
+  min = 1, max = GLOBALS$max_plots, value = 2
+)
+
+#selectInput_level_1 <- shiny::uiOutput("control_level_1")
+
+radioButtons_treemap_type <- inlineRadioButtons(
+  inputId = "treemap_type", 
+  label = "Area represents", 
+  choices = c("total size" = "size", "total number of files" = "files")
+)
+
+radioButtons_group_aesthetics <- inlineRadioButtons(
+  inputId = "group_aesthetics",
+  label = "Group aesthetics",
+  choices = c("colour", "shape")
+)
+
+radioButtons_group_by <- inlineRadioButtons(
+  inputId = "group_by",
+  label = "Group by",
+  choices = c("extension", "level-1")
 )
 
 tabPanel_table <- tabPanel(
@@ -72,12 +108,38 @@ tabPanel_table <- tabPanel(
 
 tabPanel_sankey <- tabPanel(
   title = "Sankey", 
+  fluidRow(
+    column(6, sliderInput_max_depth),
+    column(6, sliderInput_font_size)
+  ),
   networkD3::sankeyNetworkOutput("folder_graph")
 )
 
 tabPanel_treemap <- tabPanel(
   title = "Treemap",
+  fluidRow(
+    column(6, sliderInput_n_levels),
+    column(6, radioButtons_treemap_type)
+  ),
   shiny::plotOutput("treemap")
+)
+
+tabPanel_depth <- tabPanel(
+  title = "Files in depth",
+  fluidRow(
+    column(4, sliderInput_n_root_parts),
+    column(4, radioButtons_group_aesthetics),
+    column(4, radioButtons_group_by)
+  ),
+  shiny::plotOutput("depth")
+)
+
+tabPanel_multiplot <- tabPanel(
+  title = "Test multiplot",
+  fluidRow(
+    column(4, sliderInput_n_plots)
+  ),
+  shiny::uiOutput("multiplot")
 )
 
 # Define UI for application that draws a histogram
@@ -92,11 +154,10 @@ ui <- fluidPage(
     sidebarPanel(
       width = 4,
       selectInput_path_file,
-      selectInput_separator,
-      selectInput_type_filter,
-      textInput_path_filter,
-      sliderInput_max_depth,
-      sliderInput_font_size
+      radioInput_separator,
+      radioInput_type_filter,
+      textInput_path_filter
+      #, selectInput_level_1
     ),
     
     # Show a plot of the generated distribution
@@ -104,28 +165,67 @@ ui <- fluidPage(
       tabsetPanel(
         tabPanel_table,
         tabPanel_sankey,
-        tabPanel_treemap
+        tabPanel_treemap,
+        tabPanel_depth,
+        tabPanel_multiplot
       )
     )
   )
 )
 
-provide_data <- function(input) {
+# provide_data -----------------------------------------------------------------
+provide_data <- function(input)
+{
   path <- kwb.utils::selectElements(input, "path_file")
   type <- kwb.utils::selectElements(input, "type_filter")
   pattern <- kwb.utils::selectElements(input, "path_filter")
   sep <- kwb.utils::selectElements(input, "separator")
-  if (is.null(GLOBALS[["file_info"]])) {
-    GLOBALS$file_info <- kwb.fakin::read_file_info(path, sep = sep)
+  if (is.null(GLOBALS[["file_info"]]) || GLOBALS[["last_path"]] != path) {
+    GLOBALS$file_info <<- kwb.fakin::read_file_info(path, sep = sep)
+    GLOBALS$last_path <<- path
   }
   x <- kwb.utils::selectElements(GLOBALS, "file_info")
   if (type != "all") {
     x <- x[x$type == type, ]
   }
-  if (pattern != "") {
+  if (kwb.utils::defaultIfNULL(pattern, "") != "") {
     x <- x[grepl(pattern, x$path), ]
   }
   x
+}
+
+# get_top_level_paths ----------------------------------------------------------
+get_top_level_paths <- function(input, n_levels = 2)
+{
+  provide_data(input) %>%
+    dplyr::filter(.data$type == "directory") %>%
+    kwb.utils::selectColumns("path") %>%
+    kwb.file::split_into_root_folder_file_extension() %>%
+    dplyr::filter(.data$depth <= n_levels + 1) %>%
+    kwb.utils::selectColumns("folder") %>%
+    remove_empty() %>%
+    unique()
+}
+
+# remove_empty -----------------------------------------------------------------
+remove_empty <- function(x)
+{
+  x[! kwb.utils::isNaOrEmpty(x)]
+}
+
+# get_plot_outputs -------------------------------------------------------------
+get_plot_outputs <- function(input_n) {
+  # Insert plot output objects the list
+  plot_outputs <- lapply(1:input_n, function(i) {
+    plotname <- paste0("plot_", i)
+    plot_output_object <- renderPlot({
+      barplot(1:i, main = paste0("i: ", i, ", n is ", input_n, sep = ""))
+    })
+  })
+  
+  do.call(tagList, plot_outputs) # needed to display properly.
+  
+  plot_outputs
 }
 
 # Define server logic required to draw a histogram
@@ -134,7 +234,18 @@ server <- function(input, output) {
   output$selected_file <- renderText({
     c("Selected file:", kwb.utils::selectElements(input, "path_file"))
   })
-  
+
+  # output$control_level_1 <- shiny::renderUI({
+  #   top_levels <- get_top_level_paths(input)
+  #   str(top_levels)
+  #   shiny::selectizeInput(
+  #     "level_1", 
+  #     label = "Filter for top level folder", 
+  #     choices = paste0("^", top_levels),
+  #     options = list(create = TRUE)
+  #   )
+  # })
+    
   output$file_info <- DT::renderDataTable(
     options = list(scrollX = TRUE), {
       provide_data(input)
@@ -152,8 +263,29 @@ server <- function(input, output) {
   })
   
   output$treemap <- shiny::renderPlot({
-    kwb.fakin:::plot_treemaps_from_path_data(provide_data(input))
+    kwb.fakin::plot_treemaps_from_path_data(
+      provide_data(input), n_levels = input$n_levels, types = input$treemap_type
+    )
   })
+  
+  output$depth <- shiny::renderPlot({
+    provide_data(input) %>%
+      kwb.fakin:::prepare_for_scatter_plot(
+        n_root_parts = input$n_root_parts
+      ) %>%
+      kwb.fakin:::plot_file_size_in_depth(
+        main = "Total", 
+        group_aesthetics = input$group_aesthetics, 
+        group_by = input$group_by
+      )
+  })
+
+  observe({
+    output$multiplot <- renderUI({ 
+      get_plot_outputs(input$n_plots)
+    })
+  })
+  
 }
 
 # Run the application 

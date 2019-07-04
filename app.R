@@ -7,13 +7,22 @@
 #    http://shiny.rstudio.com/
 #
 
+GLOBALS <- list(
+  max_plots = 5,
+  path_database = if (kwb.utils::user() == "hsonne") {
+    "//medusa/processing/CONTENTS/file-info_by-department/2019-07"
+  } else {
+    "~/Desktop/Data/FAKIN/file-info_by-department"
+  }
+)
+  
 library(shiny)
 library(magrittr)
 
 get_file_info_files <- function() {
   files <- c(
     kwb.file::dir_full(kwb.fakin::extdata_file(""), "^example_file_info"),
-    kwb.file::dir_full("~/Desktop/Data/FAKIN/file-info_by-department", "csv$")
+    kwb.file::dir_full(GLOBALS$path_database, "csv$")
   )
   names <- kwb.utils::removeExtension(basename(files))
   names <- kwb.utils::multiSubstitute(names, list(
@@ -23,8 +32,6 @@ get_file_info_files <- function() {
   stats::setNames(files, names)
 }
 
-GLOBALS <- list(max_plots = 5)
-
 selectInput_path_file <- selectInput(
   inputId = "path_file", 
   label = "Load saved paths from",
@@ -32,6 +39,18 @@ selectInput_path_file <- selectInput(
 )
 
 inlineRadioButtons <- function(...) radioButtons(..., inline = TRUE)
+
+checkbox_remove_common_root <- shiny::checkboxInput(
+  inputId = "remove_common_root",
+  label = "Remove commmon root", 
+  value = TRUE
+)
+
+checkbox_keep_first_root <- shiny::checkboxInput(
+  inputId = "keep_first_root",
+  label = "Keep first root segment", 
+  value = FALSE
+)
 
 radioInput_separator <- inlineRadioButtons(
   inputId = "separator",
@@ -155,6 +174,8 @@ ui <- fluidPage(
       width = 4,
       selectInput_path_file,
       radioInput_separator,
+      checkbox_remove_common_root,
+      checkbox_keep_first_root,
       radioInput_type_filter,
       textInput_path_filter
       #, selectInput_level_1
@@ -176,8 +197,14 @@ ui <- fluidPage(
 # provide_data -----------------------------------------------------------------
 provide_data <- function(x, input)
 {
+  remove_common <- kwb.utils::selectElements(input, "remove_common_root")
+  keep_first <- kwb.utils::selectElements(input, "keep_first_root")
   type <- kwb.utils::selectElements(input, "type_filter")
   pattern <- kwb.utils::selectElements(input, "path_filter")
+  
+  if (remove_common) {
+    x$path <- kwb.file::remove_common_root(x$path, n_keep = 0 + keep_first)
+  }
   
   if (type != "all") {
     x <- x[x$type == type, ]

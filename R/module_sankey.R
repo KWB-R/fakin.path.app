@@ -4,13 +4,13 @@ sankeyUI <- function(id)
   ns <- shiny::NS(id)
   
   shiny::tagList(
-    fluidRow(
-      column(6, shiny::sliderInput(
+    shiny::fluidRow(
+      shiny::column(6, shiny::sliderInput(
         inputId = ns("max_depth"),
         label = "Levels shown",
         min = 2, max = 5, step = 1, value = 2
       )),
-      column(6, shiny::sliderInput(
+      shiny::column(6, shiny::sliderInput(
         inputId = ns("font_size"),
         label = "Font size in pixels",
         min = 7, max = 20, step = 1, value = 10
@@ -23,10 +23,11 @@ sankeyUI <- function(id)
 # sankey -----------------------------------------------------------------------
 sankey <- function(input, output, session, file_info)
 {
+  message("in sankey()")
   output$graph <- networkD3::renderSankeyNetwork({
     kwb.fakin::plot_path_network(
-      paths = kwb.utils::selectColumns(file_info(), "path"), 
-      max_depth = kwb.utils::selectElements(input, "max_depth"), 
+      paths = kwb.utils::selectColumns(file_info(), "path"),
+      max_depth = kwb.utils::selectElements(input, "max_depth"),
       fontSize = kwb.utils::selectElements(input, "font_size")
     )
   })

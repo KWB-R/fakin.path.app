@@ -28,16 +28,16 @@ depthUI <- function(id)
 # depth ------------------------------------------------------------------------
 depth <- function(input, output, session)
 {
-  output$depth <- shiny::renderPlot({
-    provide_data(x = file_info_raw(), input) %>%
-      kwb.fakin:::prepare_for_scatter_plot(
-        n_root_parts = input$n_root_parts
-      ) %>%
-      kwb.fakin:::plot_file_size_in_depth(
-        main = "Total", 
-        group_aesthetics = input$group_aesthetics, 
-        group_by = input$group_by
-      )
-  })
-  
+  message("in depth()")
+  # output$depth <- shiny::renderPlot({
+  #   provide_data(x = file_info_raw(), input) %>%
+  #     kwb.fakin:::prepare_for_scatter_plot(
+  #       n_root_parts = input$n_root_parts
+  #     ) %>%
+  #     kwb.fakin:::plot_file_size_in_depth(
+  #       main = "Total", 
+  #       group_aesthetics = input$group_aesthetics, 
+  #       group_by = input$group_by
+  #     )
+  # })
 }

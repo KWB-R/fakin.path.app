@@ -1,0 +1,34 @@
+Package: fakin.path.app
+Title: Shiny App to Visialise File Paths
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Hauke",
+             family = "Sonnenberg",
+             role = c("aut", "cre"),
+             email = "hauke.sonnenberg@kompetenz-wasser.de",
+             comment = structure("0000-0001-9134-2871", .Names = "ORCID")),
+      person(given = "Kompetenzzentrum Wasser Berlin gGmbH (KWB)",
+             role = "cph"))
+Description: This package contains an R Shiny App that
+    loads file path information from a file and displays the paths in
+    different ways.  The aim of the app is to find weaknesses in the
+    folder structure.
+License: MIT + file LICENSE
+URL: https://github.com/KWB-R/fakin.path.app
+BugReports: https://github.com/KWB-R/fakin.path.app/issues
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    covr (>= 3.2.1)
+RoxygenNote: 6.1.1
+Imports: 
+    DT (>= 0.7),
+    kwb.fakin (>= 0.3.0.9000),
+    kwb.file (>= 0.0.0.9000),
+    kwb.utils (>= 0.4.2.9000),
+    networkD3 (>= 0.4),
+    shiny (>= 1.3.2)
+Remotes:
+    github::kwb-r/kwb.fakin,
+    github::kwb-r/kwb.file,
+    github::kwb-r/kwb.utils@dev

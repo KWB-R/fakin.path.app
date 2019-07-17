@@ -19,5 +19,8 @@ filterControlsUI <- function(id)
 # filterControls ---------------------------------------------------------------
 filterControls <- function(input, output, session)
 {
-  
+  list(
+    type_filter = shiny::reactive(input$type_filter),
+    path_filter = shiny::reactive(input$path_filter)
+  )
 }

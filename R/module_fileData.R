@@ -4,46 +4,71 @@ fileDataUI <- function(id)
   ns <- shiny::NS(id)
   
   shiny::tagList(
-    shiny::verbatimTextOutput(ns("file")), 
+    csvFileUI(ns("id_csvFile"), GLOBALS$path_database),
+    shiny::textOutput(ns("text")),
     DT::dataTableOutput(ns("table"))
   )
 }
 
 # fileData ---------------------------------------------------------------------
-fileData <- function(input, output, session, path, file_data)
+fileData <- function(input, output, session#, myFilterControls
+                     )
 {
-  #provide_data <- function(x, input)
-  #{
-  get <- kwb.utils::selectElements
+  myCsvFile <- shiny::callModule(csvFile, "id_csvFile")
   
-  keep_first <- get(input, "keep_first_root")
-  type <- get(input, "type_filter")
-  pattern <- get(input, "path_filter")
-  
-  if (get(input, "remove_common_root")) {
-    x$path <- kwb.file::remove_common_root(x$path, n_keep = 0 + keep_first)
-  }
-  
-  if (type != "all") {
-    x <- x[x$type == type, ]
-  }
-  
-  if (kwb.utils::defaultIfNULL(pattern, "") != "") {
-    x <- x[grepl(pattern, x$path), ]
-  }
-  
-  x
-  #}
+  file_data <- shiny::reactive({
+    
+    x <- myCsvFile$content()
+    x$type <- factor(x$type, levels = c("directory", "file"))
+    #x <- apply_filters(x, myFilterControls)
 
-  output$file <- shiny::renderPrint({
-    writeLines(
-      sprintf("%d paths have been read from the file.", nrow(file_data()))
-    )
+    x
   })
   
-  output$table <- DT::renderDataTable(
-    options = list(scrollX = TRUE), {
-      file_data()
+  shiny::observe({
+    cat(paste(collapse = "\n", c(
+      sprintf("Paths read from %s in\n%s", 
+              basename(myCsvFile$file()), 
+              dirname(myCsvFile$file())),
+      sprintf("Rows: %d, Columns: %d", 
+              nrow(myCsvFile$content()), 
+              ncol(myCsvFile$content())),
+      sprintf("length(all): %d", length(input$table_rows_all)),
+      sprintf("length(current): %d", length(input$table_rows_current)),
+      sprintf("length(selected): %d", length(input$table_rows_selected))
+    )))
+  })
+  
+  output$text <- shiny::renderText({
+    root <- kwb.utils::getAttribute(file_data(), "root")
+    if (root != "") {
+      sprintf("Paths are relative to: '%s'.", root)
+    } else {
+      ""
     }
+  })
+  
+  dt_options <- list(scrollX = TRUE, searching = TRUE, lengthChange = FALSE)
+  
+  output$table <- DT::renderDataTable(
+    file_data(), options = dt_options, filter = "top"
+    #, colnames = c("File", "Type", "Size (MiB)")
   )
+  
+  file_data
+}
+
+# apply_filters ----------------------------------------------------------------
+apply_filters <- function(x, myFilterControls)
+{
+  type_filter <- myFilterControls$type_filter()
+  path_filter <- myFilterControls$path_filter()
+  
+  if (type_filter != "all") {
+    x <- x[x$type == type_filter, ]
+  }
+  
+  if (path_filter != "") {
+    x <- x[grepl(path_filter, x$path), ]
+  }
 }

@@ -17,7 +17,7 @@ multiPlotUI <- function(id, max_plots)
 multiPlot <- function(input, output, session)
 {
   message("in multiPlot()")
-  # observe({
+  # shiny::observe({
     # output$plot <- renderUI({
     #   get_plot_outputs(input$n_plots)
     # })

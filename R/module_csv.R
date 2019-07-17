@@ -9,11 +9,6 @@ csvFileUI <- function(id, path_database)
       label = "Load saved paths from",
       choices = get_file_info_files(path_database)
     )
-    # , inlineRadioButtons(
-    #   inputId = ns("sep"),
-    #   label = "Column separator",
-    #   choices = c(";", ",")
-    # )
   )
 }
 
@@ -37,10 +32,42 @@ get_file_info_files <- function(path_database)
 # csvFile ----------------------------------------------------------------------
 csvFile <- function(input, output, session, read_function)
 {
-  file <- shiny::reactive(kwb.utils::selectElements(input, "file"))
-  #selected_sep <- shiny::reactive(kwb.utils::selectElements(input, "sep"))
+  file_path <- shiny::reactive(input$file)
   
-  content <- shiny::reactive(read_function(file = file()))
+  content <- shiny::reactive({
+    
+    file <- file_path()
+    
+    x <- kwb.fakin::read_file_paths(file)
+    
+    x <- kwb.utils::renameColumns(x, list(
+      modification_time = "modified", 
+      last_access = "modified"
+    ))
+    
+    x <- kwb.utils::selectColumns(x, c("path", "type", "size", "modified"))
+    
+    dates <- as.Date(as.POSIXct(x$modified, "%Y-%m-%dT%H:%M:%S", tz = "UTC"))
+    x$modified <- dates
+    
+    x$size <- round(x$size, 3)
+
+    path_list <- pathlist::pathlist(paths = x$path)
+    x$toplevel <- factor(pathlist::toplevel(path_list))
+    x$folder <- pathlist::folder(path_list)
+    x$filename <- pathlist::filename(path_list)
+    x$extension <- ""
+    is_file <- x$type == "file"
+    x$extension[is_file] <- kwb.utils::fileExtension(x$filename[is_file])
+    x$extension <- factor(x$extension)
+    x$depth <- path_list@depths
+
+    x <- kwb.utils::moveColumnsToFront(kwb.utils::removeColumns(x, "path"), c(
+      "toplevel", "folder", "filename", "extension"
+    ))
+    
+    structure(x, root = path_list@root)
+  })
   
   # file_info <- shiny::reactive({
   #   provide_data(x = content(), input)
@@ -50,5 +77,5 @@ csvFile <- function(input, output, session, read_function)
   #   c("Selected file:", kwb.utils::selectElements(input, "path_file"))
   # })
 
-  list(file = file, content = content)
+  list(file = file_path, content = content)
 }

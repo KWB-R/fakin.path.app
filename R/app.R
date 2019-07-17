@@ -25,16 +25,7 @@ get_ui <- function() shiny::fluidPage(
   shiny::titlePanel("Analyse Paths"),
   
   # Sidebar with a slider input for number of bins 
-  #shiny::sidebarLayout(
   shiny::verticalLayout(
-    # shiny::sidebarPanel(
-    #   width = 4,
-    #   csvFileUI("id_csvFile", GLOBALS$path_database),
-    #   #commonRootUI("common_root"),
-    #   filterControlsUI("id_filterControls")
-    # ),
-    
-    # Show a plot of the generated distribution
     shiny::mainPanel(
       width = 12,
       shiny::tabsetPanel(
@@ -53,31 +44,12 @@ get_ui <- function() shiny::fluidPage(
 # Define server logic ----------------------------------------------------------
 server <- function(input, output)
 {
-  if (TRUE) {
-    #myCsvFile <- shiny::callModule(csvFile, "id_csvFile")
-    
-    # myFilterControls <- shiny::callModule(
-    #   filterControls, "id_filterControls"
-    # )
-    # 
-    # shiny::observe({
-    #   cat(sprintf(
-    #     "file: %s\ntype_filter: %s\npath_filter: %s\n",
-    #     "<not here any more>", #myCsvFile$file(), 
-    #     myFilterControls$type_filter(), 
-    #     myFilterControls$path_filter()
-    #   ))
-    # })
-    
-    myFileData <- shiny::callModule(
-      fileData, "id_fileData"#, myCsvFile, myFilterControls
-    )
-    
-    #shiny::callModule(sankey, "sankey", file_info = file_info)
-    # shiny::callModule(treemap, "treemap")
-    # shiny::callModule(depth, "depth")
-    # shiny::callModule(multiPlot, "multiplot")
-  }
+  myFileData <- shiny::callModule(fileData, "id_fileData")
+  
+  # shiny::callModule(sankey, "sankey", file_info = file_info)
+  # shiny::callModule(treemap, "treemap")
+  # shiny::callModule(depth, "depth")
+  # shiny::callModule(multiPlot, "multiplot")
 }
 
 # run_app(): Run the application -----------------------------------------------

@@ -21,14 +21,16 @@ sankeyUI <- function(id)
 }
 
 # sankey -----------------------------------------------------------------------
-sankey <- function(input, output, session, file_info)
+sankey <- function(input, output, session, path_list)
 {
-  message("in sankey()")
   output$graph <- networkD3::renderSankeyNetwork({
     kwb.fakin::plot_path_network(
-      paths = kwb.utils::selectColumns(file_info(), "path"),
+      #paths = kwb.utils::selectColumns(file_info(), "path"),
+      paths = path_list(),
       max_depth = kwb.utils::selectElements(input, "max_depth"),
-      fontSize = kwb.utils::selectElements(input, "font_size")
+      fontSize = kwb.utils::selectElements(input, "font_size"),
+      height = GLOBALS$sankey_height,
+      method = 2
     )
   })
 }

@@ -13,7 +13,8 @@ GLOBALS <- list(
     "//medusa/processing/CONTENTS/file-info_by-department/2019-07"
   } else {
     "~/Desktop/Data/FAKIN/file-info_by-department"
-  }
+  },
+  sankey_height = 600
 )
   
 # Inputs -----------------------------------------------------------------------
@@ -44,9 +45,10 @@ get_ui <- function() shiny::fluidPage(
 # Define server logic ----------------------------------------------------------
 server <- function(input, output)
 {
-  myFileData <- shiny::callModule(fileData, "id_fileData")
+  filtered_path_list <- shiny::callModule(fileData, "id_fileData")
   
-  # shiny::callModule(sankey, "sankey", file_info = file_info)
+  shiny::callModule(sankey, "sankey", path_list = filtered_path_list)
+  
   # shiny::callModule(treemap, "treemap")
   # shiny::callModule(depth, "depth")
   # shiny::callModule(multiPlot, "multiplot")

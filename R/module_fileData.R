@@ -11,8 +11,9 @@ fileDataUI <- function(id)
 }
 
 # fileData ---------------------------------------------------------------------
-fileData <- function(input, output, session#, myFilterControls
-                     )
+fileData <- function(
+  input, output, session #, myFilterControls
+)
 {
   myCsvFile <- shiny::callModule(csvFile, "id_csvFile")
   
@@ -24,6 +25,8 @@ fileData <- function(input, output, session#, myFilterControls
 
     x
   })
+
+  filtered_indices <- shiny::reactive(input$table_rows_all)
   
   shiny::observe({
     cat(paste(collapse = "\n", c(
@@ -33,7 +36,7 @@ fileData <- function(input, output, session#, myFilterControls
       sprintf("Rows: %d, Columns: %d", 
               nrow(myCsvFile$content()), 
               ncol(myCsvFile$content())),
-      sprintf("length(all): %d", length(input$table_rows_all)),
+      sprintf("length(all): %d", length(filtered_indices())),
       sprintf("length(current): %d", length(input$table_rows_current)),
       sprintf("length(selected): %d", length(input$table_rows_selected))
     )))
@@ -52,10 +55,11 @@ fileData <- function(input, output, session#, myFilterControls
   
   output$table <- DT::renderDataTable(
     file_data(), options = dt_options, filter = "top"
-    #, colnames = c("File", "Type", "Size (MiB)")
   )
   
-  file_data
+  shiny::reactive({
+    myCsvFile$path_list()[filtered_indices()]
+  })
 }
 
 # apply_filters ----------------------------------------------------------------

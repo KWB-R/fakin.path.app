@@ -58,8 +58,14 @@ server <- function(input, output)
 
 #' Run the Shiny App
 #' 
+#' @param path_database if not \code{NULL} the path to a folder containing 
+#'   text files with path information
 #' @export
-run_app <- function()
+run_app <- function(path_database = NULL)
 {
+  if (! is.null(path_database)) {
+    GLOBALS$path_database <- path_database
+  }
+  
   shiny::shinyApp(ui = get_ui(), server = server)
 }

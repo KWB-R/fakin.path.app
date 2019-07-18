@@ -11,9 +11,7 @@ fileDataUI <- function(id)
 }
 
 # fileData ---------------------------------------------------------------------
-fileData <- function(
-  input, output, session #, myFilterControls
-)
+fileData <- function(input, output, session)
 {
   myCsvFile <- shiny::callModule(csvFile, "id_csvFile")
   
@@ -21,7 +19,6 @@ fileData <- function(
     
     x <- myCsvFile$content()
     x$type <- factor(x$type, levels = c("directory", "file"))
-    #x <- apply_filters(x, myFilterControls)
 
     x
   })
@@ -60,19 +57,4 @@ fileData <- function(
   shiny::reactive({
     myCsvFile$path_list()[filtered_indices()]
   })
-}
-
-# apply_filters ----------------------------------------------------------------
-apply_filters <- function(x, myFilterControls)
-{
-  type_filter <- myFilterControls$type_filter()
-  path_filter <- myFilterControls$path_filter()
-  
-  if (type_filter != "all") {
-    x <- x[x$type == type_filter, ]
-  }
-  
-  if (path_filter != "") {
-    x <- x[grepl(path_filter, x$path), ]
-  }
 }

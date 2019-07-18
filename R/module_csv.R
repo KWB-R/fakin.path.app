@@ -39,7 +39,8 @@ csvFile <- function(input, output, session, read_function)
     x <- kwb.fakin::read_file_paths(file)
     x <- kwb.utils::renameColumns(x, list(
       modification_time = "modified", 
-      last_access = "modified"
+      last_access = "modified",
+      LastWriteTimeUtc = "modified"
     ))
     kwb.utils::selectColumns(x, c("path", "type", "size", "modified"))
   })

@@ -20,14 +20,18 @@ treemapUI <- function(id)
   )
 }
 
-# treemap ----------------------------------------------------------------------
-treemap <- function(input, output, session)
+# mytreemap --------------------------------------------------------------------
+mytreemap <- function(input, output, session, path_data)
 {
-  message("in treemap()")
-  # output$treemap <- shiny::renderPlot({
-  #   kwb.fakin::plot_treemaps_from_path_data(
-  #     provide_data(x = file_info_raw(), input), 
-  #     n_levels = input$n_levels, types = input$treemap_type
-  #   )
-  # })
+  message("render treemap")
+  
+  output$plot <- shiny::renderPlot({
+    kwb.fakin::plot_treemaps_from_path_data(
+      path_data(),
+      n_levels = input$n_levels, 
+      types = input$treemap_type
+    )
+  })
+  
+  message("back from render treemap.")
 }

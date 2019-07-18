@@ -29,7 +29,7 @@ sankey <- function(input, output, session, path_list)
       paths = path_list(),
       max_depth = kwb.utils::selectElements(input, "max_depth"),
       fontSize = kwb.utils::selectElements(input, "font_size"),
-      height = GLOBALS$sankey_height,
+      height = get_global("sankey_height"),
       method = 2
     )
   })

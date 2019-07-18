@@ -7,15 +7,27 @@
 #    http://shiny.rstudio.com/
 #
 
-GLOBALS <- list(
-  max_plots = 5,
-  path_database = if (kwb.utils::user() == "hsonne") {
-    "//medusa/processing/CONTENTS/file-info_by-department/2019-07"
+# get_global -------------------------------------------------------------------
+get_global <- function(name)
+{
+  globals <- list(
+    max_plots = 5,
+    path_database = if (kwb.utils::user() == "hsonne") {
+      "//medusa/processing/CONTENTS/file-info_by-department/2019-07"
+    } else {
+      "~/Desktop/Data/FAKIN/file-info_by-department"
+    },
+    sankey_height = 600
+  )
+  
+  value <- options()[[paste0("fakin.path.app.", name)]]
+  
+  if (is.null(value)) {
+    kwb.utils::selectElements(globals, name)
   } else {
-    "~/Desktop/Data/FAKIN/file-info_by-department"
-  },
-  sankey_height = 600
-)
+    value
+  }
+}
   
 # Inputs -----------------------------------------------------------------------
 
@@ -34,9 +46,6 @@ get_ui <- function() shiny::fluidPage(
         shiny::tabPanel("Sankey", sankeyUI("sankey")),
         shiny::tabPanel("Treemap", treemapUI("treemap")),
         shiny::tabPanel("Files in depth", depthUI("depth"))
-        # , shiny::tabPanel("Test multiplot", multiPlotUI(
-        #   "multiplot", max_plots = GLOBALS$max_plots
-        # ))
       )
     )
   )
@@ -60,12 +69,16 @@ server <- function(input, output)
 #' 
 #' @param path_database if not \code{NULL} the path to a folder containing 
 #'   text files with path information
+#' @param reactlog logical. The shiny option \code{shiny.reactlog} is set 
+#'   accordingly before starting the app
 #' @export
-run_app <- function(path_database = NULL)
+run_app <- function(path_database = NULL, reactlog = FALSE)
 {
   if (! is.null(path_database)) {
-    GLOBALS$path_database <- path_database
+    options(fakin.path.app.path_database = path_database)
   }
+  
+  options(shiny.reactlog = reactlog) 
   
   shiny::shinyApp(ui = get_ui(), server = server)
 }

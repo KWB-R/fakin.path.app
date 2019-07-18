@@ -4,7 +4,7 @@ fileDataUI <- function(id)
   ns <- shiny::NS(id)
   
   shiny::tagList(
-    csvFileUI(ns("id_csvFile"), GLOBALS$path_database),
+    csvFileUI(ns("id_csvFile"), get_global("path_database")),
     shiny::textOutput(ns("text")),
     DT::dataTableOutput(ns("table"))
   )

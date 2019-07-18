@@ -22,8 +22,8 @@ get_file_info_files <- function(path_database)
   
   names <- kwb.utils::removeExtension(basename(files))
   names <- kwb.utils::multiSubstitute(names, list(
-    "path-info_" = "",
-    "(\\d{2})_\\d{4}" = "\\1"
+    "path-info(-ps-1)?_" = "",
+    "(\\d{2})_\\d{4}" = "\\2"
   ))
   
   stats::setNames(files, names)

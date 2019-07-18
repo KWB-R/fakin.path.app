@@ -8,7 +8,7 @@ sankeyUI <- function(id)
       shiny::column(6, shiny::sliderInput(
         inputId = ns("max_depth"),
         label = "Levels shown",
-        min = 2, max = 5, step = 1, value = 2
+        min = 2, max = 20, step = 1, value = 2
       )),
       shiny::column(6, shiny::sliderInput(
         inputId = ns("font_size"),

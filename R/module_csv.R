@@ -46,7 +46,10 @@ csvFile <- function(input, output, session, read_function)
   })
 
   path_list <- shiny::reactive({
-    pathlist::pathlist(paths = raw_content()$path)
+    pathlist::pathlist(
+      paths = raw_content()$path, 
+      data = raw_content()[, c("type", "size")]
+    )
   })
   
   content <- shiny::reactive({

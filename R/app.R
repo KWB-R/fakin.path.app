@@ -1,43 +1,4 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
-# get_global -------------------------------------------------------------------
-get_global <- function(name)
-{
-  user <- try(kwb.utils::user())
-  
-  if (inherits(user, "try-error")) {
-    user <- "unknown"
-  }
-  
-  globals <- list(
-    max_plots = 5,
-    path_database = if (user == "hsonne") {
-      "//medusa/processing/CONTENTS/file-info_by-department/2019-07"
-    } else {
-      "~/Desktop/Data/FAKIN/file-info_by-department"
-    },
-    sankey_height = 600
-  )
-  
-  value <- options()[[paste0("fakin.path.app.", name)]]
-  
-  if (is.null(value)) {
-    kwb.utils::selectElements(globals, name)
-  } else {
-    value
-  }
-}
-  
-# Inputs -----------------------------------------------------------------------
-
-# Define UI for application that draws a histogram
+# Define UI for application ----------------------------------------------------
 get_ui <- function() shiny::fluidPage(
   
   # Application title

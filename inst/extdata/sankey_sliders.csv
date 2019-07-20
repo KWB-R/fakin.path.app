@@ -1,0 +1,7 @@
+name;label;min;max;value;step
+max_depth;Levels shown;2;20;2;1
+height;Diagram height;100;2000;400;50
+width;Diagram width;100;2000;600;50
+fontSize;Font size;6;40;12;1
+nodePadding;Node padding;0;20;10;1
+#nodeWidth;Node width;1;40;10;1

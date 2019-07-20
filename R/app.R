@@ -62,12 +62,16 @@ server <- function(input, output)
 {
   filtered_path_list <- shiny::callModule(fileData, "id_fileData")
   
-  shiny::callModule(sankey, "id_sankey", path_list = filtered_path_list)
-  
-  message("calling module treemap")
+  # Call the sankey module. The id needs to be passed to the server function.
+  # It is required to name the output that is generated dynamically.
+  # Take care: do not use a helper variable to pass the id but a constant 
+  # string, as in the following 
+  shiny::callModule(
+    sankey, "id_sankey", path_list = filtered_path_list, id = "id_sankey"
+  )
+
   shiny::callModule(mytreemap, "id_treemap", path_data = filtered_path_list)
-  message("after calling module treemap")
-  
+
   # shiny::callModule(depth, "depth")
   # shiny::callModule(multiPlot, "multiplot")
 }

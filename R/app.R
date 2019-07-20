@@ -12,7 +12,7 @@ get_ui <- function() shiny::fluidPage(
         shiny::tabPanel("Table", fileDataUI("id_fileData")),
         shiny::tabPanel("Sankey", sankeyUI("id_sankey")),
         shiny::tabPanel("Treemap", treemapUI("id_treemap")),
-        shiny::tabPanel("Files in depth", depthUI("depth"))
+        shiny::tabPanel("Files in depth", depthUI("id_depth"))
       )
     )
   )
@@ -33,7 +33,8 @@ server <- function(input, output)
 
   shiny::callModule(mytreemap, "id_treemap", path_data = filtered_path_list)
 
-  # shiny::callModule(depth, "depth")
+  shiny::callModule(depth, "id_depth", path_data = filtered_path_list)
+  
   # shiny::callModule(multiPlot, "multiplot")
 }
 

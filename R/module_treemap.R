@@ -26,8 +26,6 @@ treemapUI <- function(id)
 # mytreemap --------------------------------------------------------------------
 mytreemap <- function(input, output, session, path_data)
 {
-  message("render treemap")
-  
   output$plot <- shiny::renderPlot({
     kwb.fakin::plot_treemaps_from_path_data(
       path_data(),
@@ -35,6 +33,4 @@ mytreemap <- function(input, output, session, path_data)
       types = input$treemap_type
     )
   })
-  
-  message("back from render treemap.")
 }

@@ -3,20 +3,23 @@ treemapUI <- function(id)
 {
   ns <- shiny::NS(id)
   
-  shiny::tagList(
-    shiny::fluidRow(
-      shiny::column(6, shiny::sliderInput(
+  shiny::sidebarLayout(
+    shiny::sidebarPanel(
+      width = get_global("sidebar_width"),
+      shiny::sliderInput(
         inputId = ns("n_levels"), 
         label = "Levels shown", 
-        min = 1, max = 3, step = 1, value = 2
-      )),
-      shiny::column(6, inlineRadioButtons(
+        min = 1, max = 3, step = 1, value = 1
+      ),
+      shiny::radioButtons(
         inputId = ns("treemap_type"), 
-        label = "Area represents", 
+        label = "Rectangle area represents", 
         choices = c("total size" = "size", "total number of files" = "files")
-      ))
+      )    
     ),
-    shiny::plotOutput(ns("plot"))
+    shiny::mainPanel(
+      shiny::plotOutput(ns("plot"), height = get_global("treeplot_height"))
+    )
   )
 }
 

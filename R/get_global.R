@@ -14,7 +14,8 @@ get_global <- function(name)
     } else {
       "~/Desktop/Data/FAKIN/file-info_by-department"
     },
-    sankey_height = 600
+    sidebar_width = 3,
+    treeplot_height = "500px"
   )
   
   value <- options()[[paste0("fakin.path.app.", name)]]

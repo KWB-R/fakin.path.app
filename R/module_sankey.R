@@ -18,7 +18,9 @@ sankeyUI <- function(id)
   slider_inputs <- unname(lapply(config, do.call, what = shiny::sliderInput))
   
   shiny::sidebarLayout(
-    do.call(shiny::sidebarPanel, c(slider_inputs, width = 3)),
+    do.call(shiny::sidebarPanel, c(
+      slider_inputs, width = get_global("sidebar_width")
+    )),
     shiny::mainPanel(
       shiny::uiOutput(ns("graph"))
     )

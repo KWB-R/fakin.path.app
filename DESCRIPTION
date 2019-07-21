@@ -23,6 +23,7 @@ Suggests:
 RoxygenNote: 6.1.1
 Imports: 
     DT (>= 0.7),
+    jsTree,
     kwb.fakin (>= 0.3.0.9000),
     kwb.file (>= 0.0.0.9000),
     kwb.utils (>= 0.4.2.9000),

@@ -6,15 +6,15 @@ statsUI <- function(id)
   header_fun <- shiny::h4
   
   shiny::tagList(
-    header_fun("Compliance"),
+    #header_fun("Compliance"),
     shiny::textOutput(ns("compliance")),
-    header_fun("Longest paths"),
+    #header_fun("Longest paths"),
     shiny::tableOutput(ns("longest_paths")),
-    header_fun("Longest filenames"),
+    #header_fun("Longest filenames"),
     shiny::tableOutput(ns("longest_files")),
-    header_fun("Longest folder names"),
+    #header_fun("Longest folder names"),
     shiny::tableOutput(ns("longest_folders")),
-    header_fun("Biggest files"),
+    #header_fun("Biggest files"),
     shiny::tableOutput(ns("biggest_files"))
   )
 }
@@ -40,22 +40,22 @@ stats <- function(input, output, session, path_data)
   })
   
   output$longest_paths <- shiny::renderTable({
-    to_path_length_table("path", path_summary()$longest_path)
+    to_path_length_table("Longest paths", path_summary()$longest_path)
   })
   
   output$longest_files <- shiny::renderTable({
-    to_path_length_table("file", path_summary()$longest_file)
+    to_path_length_table("Longest filenames", path_summary()$longest_file)
   })
   
   output$longest_folders <- shiny::renderTable({
-    to_path_length_table("folder", path_summary()$longest_folder)
+    to_path_length_table("Longest folder names", path_summary()$longest_folder)
   })
   
   output$biggest_files <- shiny::renderTable({
-    data.frame(
-      file = path_summary()$biggest_file,
-      size_mib = kwb.utils::getAttribute(path_summary()$biggest_file, "sizes")
-    )
+    stats::setNames(nm = c("Biggest files", "Size in MiB"), data.frame(
+      path_summary()$biggest_file,
+      kwb.utils::getAttribute(path_summary()$biggest_file, "sizes")
+    ))
   })
 
 }

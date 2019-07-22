@@ -14,7 +14,7 @@ get_ui <- function() shiny::fluidPage(
         shiny::tabPanel("Sankey", sankeyUI("id_sankey")),
         shiny::tabPanel("Treemap", treemapUI("id_treemap")),
         shiny::tabPanel("Scatter", depthUI("id_depth")),
-        shiny::tabPanel("Wordcloud", wordcloudUI("id_wordcloud")),
+        shiny::tabPanel("Frequencies", wordcloudUI("id_wordcloud")),
         shiny::tabPanel("Explore", exploreUI("id_explore"))
       )
     )

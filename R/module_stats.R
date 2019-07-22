@@ -7,7 +7,7 @@ statsUI <- function(id)
   
   shiny::tagList(
     #header_fun("Compliance"),
-    shiny::textOutput(ns("compliance")),
+    shiny::tableOutput(ns("compliance")),
     #header_fun("Longest paths"),
     shiny::tableOutput(ns("longest_paths")),
     #header_fun("Longest filenames"),
@@ -28,15 +28,25 @@ stats <- function(input, output, session, path_data)
     } # else NULL
   })
   
+  pattern_counts <- shiny::reactive({
+    filenames <- pathlist::filename(path_data())
+    patterns <- c("^Dok1", "^Mappe1", "^Pr.sentation1")
+    kwb.utils::noFactorDataFrame(
+      Indicator = sprintf("Number of files matching '%s'", patterns),
+      Value = lengths(lapply(patterns, grep, filenames))
+    )
+  })
+  
   to_path_length_table <- function(name, xx) {
     stats::setNames(data.frame(xx, nchar(xx)), c(name, "length"))
   }
   
-  output$compliance <- shiny::renderPrint({
-    cat(sprintf(
-      "File/folder name quality: %0.1f %%", 
-      path_summary()$percentage_good_filename
-    ))
+  output$compliance <- shiny::renderTable({
+    indicators <- kwb.utils::noFactorDataFrame(
+      Indicator = "File/folder name quality",
+      Value = sprintf("%0.1f %%", path_summary()$percentage_good_filename)
+    )
+    rbind(indicators, pattern_counts())
   })
   
   output$longest_paths <- shiny::renderTable({

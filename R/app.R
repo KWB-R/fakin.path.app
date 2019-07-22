@@ -10,12 +10,12 @@ get_ui <- function() shiny::fluidPage(
       width = 12,
       shiny::tabsetPanel(
         shiny::tabPanel("Table", fileDataUI("id_fileData")),
+        shiny::tabPanel("Statistics", statsUI("id_stats")),
         shiny::tabPanel("Sankey", sankeyUI("id_sankey")),
-        shiny::tabPanel("Explore", exploreUI("id_explore")),
         shiny::tabPanel("Treemap", treemapUI("id_treemap")),
-        shiny::tabPanel("Files in depth", depthUI("id_depth")),
-        shiny::tabPanel("Stats", statsUI("id_stats")),
-        shiny::tabPanel("Wordcloud", wordcloudUI("id_wordcloud"))
+        shiny::tabPanel("Scatter", depthUI("id_depth")),
+        shiny::tabPanel("Wordcloud", wordcloudUI("id_wordcloud")),
+        shiny::tabPanel("Explore", exploreUI("id_explore"))
       )
     )
   )

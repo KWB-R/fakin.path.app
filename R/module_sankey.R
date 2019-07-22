@@ -17,9 +17,19 @@ sankeyUI <- function(id)
 
   slider_inputs <- unname(lapply(config, do.call, what = shiny::sliderInput))
   
+  # weight_by_input <- shiny::selectInput(
+  #   inputId = ns("weight_by"), 
+  #   label = "Link width represents", 
+  #   choices = c(
+  #     "file count" = "n_files", "file size" = "size", "nothing" = "none" 
+  #   )
+  # )
+  
+  weight_by_input <- NULL
+  
   shiny::sidebarLayout(
     do.call(shiny::sidebarPanel, c(
-      slider_inputs, width = get_global("sidebar_width")
+      weight_by_input, slider_inputs, width = get_global("sidebar_width")
     )),
     shiny::mainPanel(
       shiny::uiOutput(ns("graph"))
@@ -31,7 +41,7 @@ sankeyUI <- function(id)
 sankey <- function(input, output, session, path_list, id = NULL)
 {
   default_on_null <- kwb.utils::defaultIfNULL
-  
+
   output$graph_ <- networkD3::renderSankeyNetwork({
     kwb.fakin::plot_path_network(
       paths = path_list(),
@@ -39,6 +49,9 @@ sankey <- function(input, output, session, path_list, id = NULL)
       nodePadding = default_on_null(input$nodePadding, 10),
       nodeWidth = default_on_null(input$nodeWidth, 15),
       fontSize = default_on_null(input$fontSize, 12),
+      margin = c(bottom = 0L, left = 0L, top = 0L, right = 0L),
+      weight_by = "n_files", #input$weight_by,
+      sizes = kwb.utils::selectColumns(path_list()@data, "size"), 
       method = 2
     )
   })

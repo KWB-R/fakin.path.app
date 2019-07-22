@@ -18,7 +18,7 @@ depthUI <- function(id)
       shiny::column(4, inlineRadioButtons(
         inputId = ns("group_by"),
         label = "Group by",
-        choices = c("extension", "level-1")
+        choices = c("top-level" = "level-1", "extension")
       ))
     ),
     shiny::plotOutput(ns("plot"))

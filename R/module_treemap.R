@@ -18,7 +18,7 @@ treemapUI <- function(id)
       )    
     ),
     shiny::mainPanel(
-      shiny::plotOutput(ns("plot"), height = get_global("treeplot_height"))
+      shiny::plotOutput(ns("plot"), height = get_global("plot_height"))
     )
   )
 }

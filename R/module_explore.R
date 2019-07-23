@@ -2,15 +2,23 @@
 exploreUI <- function(id)
 {
   ns <- shiny::NS(id)
+
+  tree_output_column <- function(output_id) shiny::column(
+    width = 6, 
+    jsTree::jsTreeOutput(output_id, height = get_global("plot_height"))
+  )
   
   shiny::sidebarLayout(
     shiny::sidebarPanel(
       width = get_global("sidebar_width"),
-      shiny::sliderInput(ns("max_depth"), "Maximum depth", 1, 10, 5, 1)
+      shiny::sliderInput(ns("max_depth"), "Maximum depth", 1, 10, 4, 1)
     ),
     shiny::mainPanel(
-      shiny::column(6, jsTree::jsTreeOutput(ns("jstree1"), height = "600px")),
-      shiny::column(6, jsTree::jsTreeOutput(ns("jstree2"), height = "600px"))
+      width = 9,
+      shiny::fluidRow(
+        tree_output_column(ns("jstree1")),
+        tree_output_column(ns("jstree2"))
+      )
     )
   )
 }
@@ -19,13 +27,28 @@ exploreUI <- function(id)
 explore <- function(input, output, session, path_data)
 {
   paths <- shiny::reactive({
-    stopifnot(inherits(path_data(), "pathlist"))
-    types <- kwb.utils::selectColumns(path_data()@data, "type")
-    depths <- path_data()@depths
-    keep <- types == "directory" & depths <= input$max_depth
-    paste0(as.character(path_data()[keep]), "/.")
+    
+    # Get pathlist object
+    pl <- path_data()
+    
+    stopifnot(inherits(pl, "pathlist"))
+
+    pl@root <- hide_server(pl@root)
+
+    # Provide file types and depth levels
+    types <- kwb.utils::selectColumns(pl@data, "type")
+
+    # Keep only the files. Empty directories would otherwise be shown as files
+    keep <- types == "file" & pl@depths <= input$max_depth
+
+    if (! any(keep)) {
+      return(".")
+    }
+    
+    # Return the path strings
+    as.character(pl[keep])
   })
-  
+
   output$jstree1 <- jsTree::renderJsTree({
     jsTree::jsTree(paths(), height = "100%")
   }) 
@@ -34,4 +57,24 @@ explore <- function(input, output, session, path_data)
     jsTree::jsTree(paths(), height = "100%")
   }) 
   
+}
+
+# hide_server ------------------------------------------------------------------
+hide_server <- function(root)
+{
+  if (! nzchar(root)) {
+    return(".")
+  }
+  
+  kwb.utils::multiSubstitute(root, list(
+    # Replace real server name with "server"
+    "^//[^/]+" = "//server", 
+    # Remove dollar character
+    "\\$" = "", 
+    # Remove slashes at start
+    "^/+" = "",
+    # Replace slash with backslash so that jsTree does not create levels but 
+    # keeps the full root path as the root element of the tree
+    "/" = "\\\\" 
+  ))
 }

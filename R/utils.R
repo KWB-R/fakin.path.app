@@ -5,7 +5,7 @@ inlineRadioButtons <- function(...)
 }
 
 # plot_centered_message --------------------------------------------------------
-plot_centered_message <- function(text = "Message", cex.text = 3)
+plot_centered_message <- function(text = "Message", cex.text = 1)
 {
   graphics::plot(
     NA, NA, xlim = c(0, 1), ylim = c(0, 1), type = "n", axes = FALSE, 

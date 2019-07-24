@@ -15,7 +15,7 @@ treemapUI <- function(id)
         inputId = ns("treemap_type"), 
         label = "Rectangle area represents", 
         choices = c("total size" = "size", "total number of files" = "files")
-      )    
+      )
     ),
     shiny::mainPanel(
       shiny::plotOutput(ns("plot"), height = get_global("plot_height"))
@@ -27,10 +27,20 @@ treemapUI <- function(id)
 mytreemap <- function(input, output, session, path_data)
 {
   output$plot <- shiny::renderPlot({
-    kwb.fakin::plot_treemaps_from_path_data(
-      path_data(),
-      n_levels = input$n_levels, 
-      types = input$treemap_type
-    )
+    
+    types <- kwb.utils::selectColumns(path_data()@data, "type")
+    
+    if (! any(types == "file")) {
+      plot_centered_message(paste0(
+        "No file data available.\n", 
+        "You may need to remove a filter on 'directories'"
+      ))
+    } else {
+      kwb.fakin::plot_treemaps_from_path_data(
+        path_data(),
+        n_levels = input$n_levels, 
+        types = input$treemap_type
+      )
+    }
   })
 }

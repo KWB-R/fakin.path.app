@@ -24,15 +24,15 @@ stats <- function(input, output, session, path_data)
 {
   path_summary <- shiny::reactive({
     if (! is.null(path_data())) {
-      kwb.fakin:::get_path_summary(path_data(), n = 5)      
+      kwb.fakin:::get_path_summary(path_data(), n = 5)
     } # else NULL
   })
   
   pattern_counts <- shiny::reactive({
     filenames <- pathlist::filename(path_data())
-    patterns <- c("^Dok1", "^Mappe1", "^Pr.sentation1")
+    patterns <- c("^Dok1", "^Mappe1", "^Pr.sentation1", "^Kopie von")
     kwb.utils::noFactorDataFrame(
-      Indicator = sprintf("Number of files matching '%s'", patterns),
+      Indicator = sprintf("Number of files/folders matching '%s'", patterns),
       Value = lengths(lapply(patterns, grep, filenames))
     )
   })

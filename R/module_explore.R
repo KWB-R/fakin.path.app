@@ -33,7 +33,7 @@ explore <- function(input, output, session, path_data)
     
     stopifnot(inherits(pl, "pathlist"))
 
-    pl@root <- hide_server(pl@root)
+    pl@root <- hide_server(pl@root, for_js_tree = TRUE)
 
     # Provide file types and depth levels
     types <- kwb.utils::selectColumns(pl@data, "type")

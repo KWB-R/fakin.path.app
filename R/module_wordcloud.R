@@ -146,10 +146,10 @@ plot_wordcloud_or_message <- function(
   if (nrow(freq)) {
     wordcloud::wordcloud(
       words = freq[, 1], freq = freq[, 2], scale = scale, 
-      min.freq = min(freq[, 2])
+      min.freq = min(freq[, 2]), rot.per = 0, fixed.asp = FALSE
     )
   } else {
-    plot_centered_message(failure_text)
+    plot_centered_message(failure_text, cex.text = 3)
   }
   
   graphics::title(main, cex.main = 2)

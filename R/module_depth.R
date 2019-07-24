@@ -7,7 +7,7 @@ depthUI <- function(id)
     shiny::fluidRow(
       shiny::column(4, shiny::sliderInput(
         inputId = ns("n_sample"), label = "Sample size", 
-        min = 5000L, max = 50000L, value = 5000L, step = 5000L
+        min = 2500L, max = 50000L, value = 2500L, step = 2500L
       )),
       shiny::column(4, shiny::sliderInput(
         inputId = ns("n_groups"), label = "Number of groups", 
@@ -26,6 +26,9 @@ depth <- function(input, output, session, path_data)
     pl <- path_data()
     
     stopifnot(inherits(pl, "pathlist"))
+
+    # Reinitialise the pathlist object so that the root is recalculated
+    pl <- pathlist::pathlist(segments = pathlist::as.list(pl), data = pl@data)
     
     n_sample <- input$n_sample
     n_available <- length(pl)

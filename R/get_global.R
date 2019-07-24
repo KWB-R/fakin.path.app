@@ -12,7 +12,7 @@ get_global <- function(name)
     path_database = if (user == "hsonne") {
       "//medusa/processing/CONTENTS/file-info_by-department/2019-07"
     } else {
-      "~/Desktop/Data/FAKIN/file-info_by-department"
+      "~/Desktop/Data/FAKIN/file-info_by-department/2019-07"
     },
     sidebar_width = 3,
     plot_height = "550px"

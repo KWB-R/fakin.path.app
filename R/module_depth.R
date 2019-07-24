@@ -3,18 +3,35 @@ depthUI <- function(id)
 {
   ns <- shiny::NS(id)
   
-  shiny::tagList(
-    shiny::fluidRow(
-      shiny::column(4, shiny::sliderInput(
+  # shiny::tagList(
+  #   shiny::fluidRow(
+  #     shiny::column(4, shiny::sliderInput(
+  #       inputId = ns("n_sample"), label = "Sample size", 
+  #       min = 2500L, max = 50000L, value = 2500L, step = 2500L
+  #     )),
+  #     shiny::column(4, shiny::sliderInput(
+  #       inputId = ns("n_groups"), label = "Number of groups", 
+  #       min = 3L, max = 8L, value = 5L, step = 1L
+  #     ))
+  #   ),
+  #   plotly::plotlyOutput(ns("plot"), height = get_global("plot_height"))
+  # )
+  
+  shiny::sidebarLayout(
+    shiny::sidebarPanel(
+      width = get_global("sidebar_width"),
+      shiny::sliderInput(
         inputId = ns("n_sample"), label = "Sample size", 
         min = 2500L, max = 50000L, value = 2500L, step = 2500L
-      )),
-      shiny::column(4, shiny::sliderInput(
+      ),
+      shiny::sliderInput(
         inputId = ns("n_groups"), label = "Number of groups", 
         min = 3L, max = 8L, value = 5L, step = 1L
-      ))
+      )
     ),
-    plotly::plotlyOutput(ns("plot"), height = get_global("plot_height"))
+    shiny::mainPanel(
+      plotly::plotlyOutput(ns("plot"), height = get_global("plot_height"))
+    )
   )
 }
 
@@ -28,7 +45,7 @@ depth <- function(input, output, session, path_data)
     stopifnot(inherits(pl, "pathlist"))
 
     # Hide server name and dollar in the root path
-    pl@root <- hide_server(pl@root)
+    #pl@root <- hide_server(pl@root)
     
     # Reinitialise the pathlist object so that the root is recalculated
     pl <- pathlist::pathlist(segments = pathlist::as.list(pl), data = pl@data)
@@ -49,9 +66,9 @@ depth <- function(input, output, session, path_data)
       prepare_depth_size_data_for_plotly(pl)
     )
     
-    kwb.utils::catAndRun("Saving df to file", {
-      save(df, file = "~/Desktop/tmp/df.RData")
-    })
+    # kwb.utils::catAndRun("Saving df to file", {
+    #   save(df, file = "~/Desktop/tmp/df.RData")
+    # })
 
     labels <- kwb.utils::catAndRun("Creating labels", {
       get_folder_file_size_labels(df)

@@ -4,6 +4,17 @@ inlineRadioButtons <- function(...)
   shiny::radioButtons(..., inline = TRUE)
 }
 
+# plot_centered_message --------------------------------------------------------
+plot_centered_message <- function(text = "Message", cex.text = 3)
+{
+  graphics::plot(
+    NA, NA, xlim = c(0, 1), ylim = c(0, 1), type = "n", axes = FALSE, 
+    xlab = "", ylab = ""
+  )
+  
+  graphics::text(0.5, 0.5, text, cex = cex.text)
+}
+
 # read_slider_config_raw -------------------------------------------------------
 read_slider_config_raw <- function(file)
 {

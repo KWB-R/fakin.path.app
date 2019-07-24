@@ -42,7 +42,7 @@ fileData <- function(input, output, session)
   output$text <- shiny::renderText({
     root <- kwb.utils::getAttribute(file_data(), "root")
     if (root != "") {
-      sprintf("Paths are relative to: '%s'.", root)
+      sprintf("Paths are relative to: %s", root)
     } else {
       ""
     }

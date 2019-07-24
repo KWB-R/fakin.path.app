@@ -14,7 +14,7 @@ depthUI <- function(id)
         min = 3L, max = 8L, value = 5L, step = 1L
       ))
     ),
-    plotly::plotlyOutput(ns("plot"))
+    plotly::plotlyOutput(ns("plot"), height = get_global("plot_height"))
   )
 }
 
@@ -27,6 +27,9 @@ depth <- function(input, output, session, path_data)
     
     stopifnot(inherits(pl, "pathlist"))
 
+    # Hide server name and dollar in the root path
+    pl@root <- hide_server(pl@root)
+    
     # Reinitialise the pathlist object so that the root is recalculated
     pl <- pathlist::pathlist(segments = pathlist::as.list(pl), data = pl@data)
     

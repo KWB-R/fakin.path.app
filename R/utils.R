@@ -1,3 +1,23 @@
+# hide_server ------------------------------------------------------------------
+hide_server <- function(root)
+{
+  if (! nzchar(root)) {
+    return(".")
+  }
+  
+  kwb.utils::multiSubstitute(root, list(
+    # Replace real server name with "server"
+    "^//[^/]+" = "//server", 
+    # Remove dollar character
+    "\\$" = "", 
+    # Remove slashes at start
+    "^/+" = "",
+    # Replace slash with backslash so that jsTree does not create levels but 
+    # keeps the full root path as the root element of the tree
+    "/" = "\\\\" 
+  ))
+}
+
 # inlineRadioButtons -----------------------------------------------------------
 inlineRadioButtons <- function(...)
 {

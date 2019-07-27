@@ -44,8 +44,18 @@ depth <- function(input, output, session, path_data)
     
     stopifnot(inherits(pl, "pathlist"))
 
-    # Hide server name and dollar in the root path
-    #pl@root <- hide_server(pl@root)
+    kwb.utils::checkForMissingColumns(pl@data, c("type", "size"))
+
+    # Filter for files, discarding directories    
+    pl <- pl[pl@data$type == "file"]
+    
+    if (length(pl) == 0) {
+      shiny::showNotification(duration = 5, paste0(
+        "No files selected.\n", 
+        "You may need to remove a filter on type = 'directory'"
+      ))
+      return()
+    }
     
     # Reinitialise the pathlist object so that the root is recalculated
     pl <- pathlist::pathlist(segments = pathlist::as.list(pl), data = pl@data)
@@ -66,10 +76,6 @@ depth <- function(input, output, session, path_data)
       prepare_depth_size_data_for_plotly(pl)
     )
     
-    # kwb.utils::catAndRun("Saving df to file", {
-    #   save(df, file = "~/Desktop/tmp/df.RData")
-    # })
-
     labels <- kwb.utils::catAndRun("Creating labels", {
       get_folder_file_size_labels(df)
     })

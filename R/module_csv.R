@@ -51,7 +51,9 @@ csvFile <- function(input, output, session, read_function)
     } 
 
     file <- file_path()
-    x <- kwb.fakin::read_file_paths(file)
+    x <- run_with_modal(text = paste("Reading", basename(file)), {
+      kwb.fakin::read_file_paths(file)
+    })
     x <- kwb.utils::renameColumns(x, list(
       modification_time = "modified", 
       last_access = "modified",
@@ -62,7 +64,9 @@ csvFile <- function(input, output, session, read_function)
 
   rds_content <- shiny::reactive({
     if (rds_file_exists()) {
-      readRDS(rds_file())
+      run_with_modal(text = paste("Loading", basename(rds_file())), {
+        readRDS(rds_file())
+      })
     } else {
       NULL
     }
@@ -74,10 +78,12 @@ csvFile <- function(input, output, session, read_function)
       return(rds_content()$path_list)
     }
 
-    pl <- pathlist::pathlist(
-      paths = raw_content()$path, 
-      data = raw_content()[, c("type", "size")]
-    )
+    pl <- run_with_modal(text = "Providing table data", {
+      pathlist::pathlist(
+        paths = raw_content()$path, 
+        data = raw_content()[, c("type", "size")]
+      )
+    })
     
     pl@root <- hide_server(pl@root)
     
@@ -93,7 +99,7 @@ csvFile <- function(input, output, session, read_function)
     x <- raw_content()
     dates <- as.Date(as.POSIXct(x$modified, "%Y-%m-%dT%H:%M:%S", tz = "UTC"))
     x$modified <- dates
-    x$size <- round(x$size, 3)
+    x$size <- round(x$size, 6)
     x$toplevel <- factor(pathlist::toplevel(path_list()))
     x$folder <- pathlist::folder(path_list())
     x$filename <- pathlist::filename(path_list())
@@ -110,7 +116,10 @@ csvFile <- function(input, output, session, read_function)
     content <- structure(x, root = path_list()@root)
 
     rds_content <- list(content = content, path_list = path_list())
-    saveRDS(rds_content, file = rds_file())
+    
+    run_with_modal(text = paste("Caching data in", basename(rds_file())), {
+      saveRDS(rds_content, file = rds_file())
+    })
     
     content
   })

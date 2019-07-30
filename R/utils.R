@@ -55,3 +55,12 @@ remove_empty <- function(x)
 {
   x[! kwb.utils::isNaOrEmpty(x)]
 }
+
+# run_with_modal ---------------------------------------------------------------
+run_with_modal <- function(expr, text = "Loading")
+{
+  shiny::showModal(modalDialog(text, footer = NULL))
+  result <- eval(expr, envir = -1)
+  shiny::removeModal()
+  result
+}

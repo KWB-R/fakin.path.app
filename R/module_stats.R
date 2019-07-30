@@ -30,7 +30,10 @@ stats <- function(input, output, session, path_data)
   
   pattern_counts <- shiny::reactive({
     filenames <- pathlist::filename(path_data())
-    patterns <- c("^Dok1", "^Mappe1", "^Pr.sentation1", "^Kopie von")
+    patterns <- c(
+      "^(Dok1|Mappe1|Pr.sentation1)", "^Kopie von", "gdalwmscache", 
+      "win-library", "^README\\.txt$", "^README\\.yml$"
+    )
     kwb.utils::noFactorDataFrame(
       Indicator = sprintf("Number of files/folders matching '%s'", patterns),
       Value = lengths(lapply(patterns, grep, filenames))

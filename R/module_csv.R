@@ -51,7 +51,8 @@ csvFile <- function(input, output, session, read_function)
     } 
 
     file <- file_path()
-    x <- run_with_modal(text = paste("Reading", basename(file)), {
+    x <- run_with_modal(
+      text = paste("Reading", basename(file)), {
       kwb.fakin::read_file_paths(file)
     })
     x <- kwb.utils::renameColumns(x, list(
@@ -64,7 +65,8 @@ csvFile <- function(input, output, session, read_function)
 
   rds_content <- shiny::reactive({
     if (rds_file_exists()) {
-      run_with_modal(text = paste("Loading", basename(rds_file())), {
+      run_with_modal(
+        text = paste("Loading", basename(rds_file())), {
         readRDS(rds_file())
       })
     } else {
@@ -78,7 +80,8 @@ csvFile <- function(input, output, session, read_function)
       return(rds_content()$path_list)
     }
 
-    pl <- run_with_modal(text = "Providing table data", {
+    pl <- run_with_modal(
+      text = "Providing table data", {
       pathlist::pathlist(
         paths = raw_content()$path, 
         data = raw_content()[, c("type", "size")]
@@ -117,12 +120,15 @@ csvFile <- function(input, output, session, read_function)
 
     rds_content <- list(content = content, path_list = path_list())
     
-    run_with_modal(text = paste("Caching data in", basename(rds_file())), {
+    run_with_modal(
+      text = paste("Caching data in", basename(rds_file())), {
       saveRDS(rds_content, file = rds_file())
     })
     
     content
   })
+  
+  shiny::removeModal()
   
   list(file = file_path, content = content, path_list = path_list)
 }

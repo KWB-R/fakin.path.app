@@ -61,11 +61,15 @@ csvFile <- function(input, output, session, read_function)
         last_access = "modified",
         LastWriteTimeUtc = "modified"
       ))
+      
       kwb.utils::selectColumns(x, c("path", "type", "size", "modified"))
-    } 
-
+      
+    } else {
+      
+      NULL
+    }    
   })
-
+  
   rds_content <- shiny::reactive({
     if (rds_file_exists()) {
       run_with_modal(

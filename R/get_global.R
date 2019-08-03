@@ -1,28 +1,32 @@
+# Environment used to hold global variables
+globals <- new.env()
+
+# set_global -------------------------------------------------------------------
+set_global <- function(..., list. = list())
+{
+  stopifnot(is.list(list.))
+  
+  assignments <- c(list., list(...))
+  
+  var_names <- names(assignments)
+  
+  for (i in seq_along(assignments)) {
+    assign(var_names[i], assignments[[i]], envir = globals)
+  }
+}
+
 # get_global -------------------------------------------------------------------
 get_global <- function(name)
 {
-  user <- try(kwb.utils::user())
-  
-  if (inherits(user, "try-error")) {
-    user <- "unknown"
-  }
-  
-  globals <- list(
-    max_plots = 5,
-    path_database = if (user == "hsonne") {
-      "//medusa/processing/CONTENTS/file-info_by-department/2019-07"
-    } else {
-      "~/Desktop/Data/FAKIN/file-info_by-department/2019-07"
-    },
+  get(name, envir = globals)
+}
+
+# default_globals --------------------------------------------------------------
+default_globals <- function()
+{
+  list(
+    path_database = "",
     sidebar_width = 3,
     plot_height = "550px"
   )
-  
-  value <- options()[[paste0("fakin.path.app.", name)]]
-  
-  if (is.null(value)) {
-    kwb.utils::selectElements(globals, name)
-  } else {
-    value
-  }
 }

@@ -20,16 +20,16 @@ statsUI <- function(id)
 }
 
 # stats ------------------------------------------------------------------------
-stats <- function(input, output, session, path_data)
+stats <- function(input, output, session, path_list)
 {
   path_summary <- shiny::reactive({
-    if (! is.null(path_data())) {
-      kwb.fakin:::get_path_summary(path_data(), n = 5)
+    if (! is.null(path_list())) {
+      kwb.fakin:::get_path_summary(path_list(), n = 5)
     } # else NULL
   })
   
   pattern_counts <- shiny::reactive({
-    filenames <- pathlist::filename(path_data())
+    filenames <- pathlist::filename(path_list())
     patterns <- c(
       "^(Dok1|Mappe1|Pr.sentation1)", "^Kopie von", "gdalwmscache", 
       "win-library", "^README\\.txt$", "^README\\.yml$"

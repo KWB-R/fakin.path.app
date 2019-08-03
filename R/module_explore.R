@@ -24,12 +24,12 @@ exploreUI <- function(id)
 }
 
 # explore ----------------------------------------------------------------------
-explore <- function(input, output, session, path_data)
+explore <- function(input, output, session, path_list)
 {
   paths <- shiny::reactive({
     
     # Get pathlist object
-    pl <- path_data()
+    pl <- path_list()
     
     stopifnot(inherits(pl, "pathlist"))
 

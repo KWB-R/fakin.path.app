@@ -3,20 +3,6 @@ depthUI <- function(id)
 {
   ns <- shiny::NS(id)
   
-  # shiny::tagList(
-  #   shiny::fluidRow(
-  #     shiny::column(4, shiny::sliderInput(
-  #       inputId = ns("n_sample"), label = "Sample size", 
-  #       min = 2500L, max = 50000L, value = 2500L, step = 2500L
-  #     )),
-  #     shiny::column(4, shiny::sliderInput(
-  #       inputId = ns("n_groups"), label = "Number of groups", 
-  #       min = 3L, max = 8L, value = 5L, step = 1L
-  #     ))
-  #   ),
-  #   plotly::plotlyOutput(ns("plot"), height = get_global("plot_height"))
-  # )
-  
   shiny::sidebarLayout(
     shiny::sidebarPanel(
       width = get_global("sidebar_width"),
@@ -36,11 +22,11 @@ depthUI <- function(id)
 }
 
 # depth ------------------------------------------------------------------------
-depth <- function(input, output, session, path_data)
+depth <- function(input, output, session, path_list)
 {
   output$plot <- plotly::renderPlotly({
 
-    pl <- path_data()
+    pl <- path_list()
     
     stopifnot(inherits(pl, "pathlist"))
 

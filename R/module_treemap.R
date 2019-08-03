@@ -24,11 +24,11 @@ treemapUI <- function(id)
 }
 
 # mytreemap --------------------------------------------------------------------
-mytreemap <- function(input, output, session, path_data)
+mytreemap <- function(input, output, session, path_list)
 {
   output$plot <- shiny::renderPlot({
     
-    types <- kwb.utils::selectColumns(path_data()@data, "type")
+    types <- kwb.utils::selectColumns(path_list()@data, "type")
     
     if (! any(types == "file")) {
       plot_centered_message(paste0(
@@ -37,7 +37,7 @@ mytreemap <- function(input, output, session, path_data)
       ))
     } else {
       kwb.fakin::plot_treemaps_from_path_data(
-        path_data(),
+        path_list(),
         n_levels = input$n_levels, 
         types = input$treemap_type
       )

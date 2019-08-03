@@ -34,7 +34,7 @@ wordcloudUI <- function(id)
 }
 
 # wordcloud --------------------------------------------------------------------
-wordcloud <- function(input, output, session, path_data)
+wordcloud <- function(input, output, session, path_list)
 {
   dummy_data_frame <- kwb.utils::noFactorDataFrame(
     name = character(), count = integer()
@@ -54,10 +54,10 @@ wordcloud <- function(input, output, session, path_data)
   }
 
   file_types <- shiny::reactive({
-    if (length(path_data()) == 0) {
+    if (length(path_list()) == 0) {
       character()
     } else {
-      kwb.utils::selectColumns(path_data()@data, "type")
+      kwb.utils::selectColumns(path_list()@data, "type")
     }
   })
 
@@ -74,7 +74,7 @@ wordcloud <- function(input, output, session, path_data)
     indices <- indices_directory()
 
     result <- if (length(indices)) {
-      folder_names <- pathlist::filename(path_data()[indices])
+      folder_names <- pathlist::filename(path_list()[indices])
       top_n_freq_data(extract_words(folder_names), input$top_n)
     } else {
       dummy_data_frame
@@ -88,7 +88,7 @@ wordcloud <- function(input, output, session, path_data)
     indices <- indices_file()
     
     result <- if (length(indices)) {
-      filenames <- pathlist::filename(path_data()[indices])
+      filenames <- pathlist::filename(path_list()[indices])
       filenames <- kwb.utils::removeExtension(filenames)
       top_n_freq_data(extract_words(filenames), input$top_n)
     } else {
@@ -102,7 +102,7 @@ wordcloud <- function(input, output, session, path_data)
     indices <- indices_file()
     
     result <- if (length(indices)) {
-      filenames <- pathlist::filename(path_data()[indices])
+      filenames <- pathlist::filename(path_list()[indices])
       extensions <- kwb.utils::fileExtension(filenames)
       freq_data <- top_n_freq_data(extensions, input$top_n)
       freq_data[kwb.utils::isNaOrEmpty(freq_data[, 1]), 1] <- "<none>"

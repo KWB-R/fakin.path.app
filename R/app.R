@@ -34,11 +34,11 @@ server <- function(input, output)
     sankey, "id_sankey", path_list = path_list, id = "id_sankey"
   )
   
-  shiny::callModule(explore, "id_explore", path_data = path_list)
-  shiny::callModule(mytreemap, "id_treemap", path_data = path_list)
-  shiny::callModule(depth, "id_depth", path_data = path_list)
-  shiny::callModule(stats, "id_stats", path_data = path_list)
-  shiny::callModule(wordcloud, "id_wordcloud", path_data = path_list)
+  shiny::callModule(explore, "id_explore", path_list = path_list)
+  shiny::callModule(mytreemap, "id_treemap", path_list = path_list)
+  shiny::callModule(depth, "id_depth", path_list = path_list)
+  shiny::callModule(stats, "id_stats", path_list = path_list)
+  shiny::callModule(wordcloud, "id_wordcloud", path_list = path_list)
 }
 
 # run_app(): Run the application -----------------------------------------------
@@ -54,7 +54,14 @@ run_app <- function(path_database = NULL, ...)
   # Set defaults (1. hard coded, 2. from environment variables, 3. from user)
   set_global(list. = default_globals())
   set_global(list. = get_environment_vars("^PATHANA_"))
-  set_global(path_database = path_database, ...)
+  
+  if (! is.null(path_database)) {
+    set_global(path_database = path_database)
+  }
+
+  if (length(list(...))) {
+    set_global(...)
+  }  
 
   shiny::shinyApp(ui = get_ui(), server = server)
 }

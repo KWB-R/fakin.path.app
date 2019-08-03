@@ -4,7 +4,7 @@ exploreUI <- function(id)
   ns <- shiny::NS(id)
 
   tree_output_column <- function(output_id) shiny::column(
-    width = 6, 
+    width = 12, 
     jsTree::jsTreeOutput(output_id, height = get_global("plot_height"))
   )
   
@@ -14,10 +14,10 @@ exploreUI <- function(id)
       shiny::sliderInput(ns("max_depth"), "Maximum depth", 1, 10, 4, 1)
     ),
     shiny::mainPanel(
-      width = 9,
+      width = 12 - get_global("sidebar_width"),
       shiny::fluidRow(
-        tree_output_column(ns("jstree1")),
-        tree_output_column(ns("jstree2"))
+        tree_output_column(ns("jstree1"))
+        #, tree_output_column(ns("jstree2"))
       )
     )
   )
@@ -46,15 +46,19 @@ explore <- function(input, output, session, path_list)
     }
     
     # Return the path strings
-    as.character(pl[keep])
+    result <- as.character(pl[keep])
+    
+    kwb.utils::printIf(TRUE, head(result))
+    
+    result
   })
 
   output$jstree1 <- jsTree::renderJsTree({
     jsTree::jsTree(paths(), height = "100%")
   }) 
   
-  output$jstree2 <- jsTree::renderJsTree({
-    jsTree::jsTree(paths(), height = "100%")
-  }) 
+  # output$jstree2 <- jsTree::renderJsTree({
+  #   jsTree::jsTree(paths(), height = "100%")
+  # }) 
   
 }

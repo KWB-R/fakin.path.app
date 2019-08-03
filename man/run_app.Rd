@@ -4,14 +4,13 @@
 \alias{run_app}
 \title{Run the Shiny App}
 \usage{
-run_app(path_database = NULL, reactlog = FALSE)
+run_app(path_database = NULL, ...)
 }
 \arguments{
 \item{path_database}{if not \code{NULL} the path to a folder containing 
 text files with path information}
 
-\item{reactlog}{logical. The shiny option \code{shiny.reactlog} is set 
-accordingly before starting the app}
+\item{\dots}{further \code{key = value} pairs to be used as global variables}
 }
 \description{
 Run the Shiny App

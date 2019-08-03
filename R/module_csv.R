@@ -52,17 +52,14 @@ csvFile <- function(input, output, session, read_function)
     if (! rds_file_exists()) {
       
       x <- run_with_modal(
-        text = paste("Reading", basename(csv_file())), {
-          kwb.fakin::read_file_paths(csv_file())
-        })
-      
-      x <- kwb.utils::renameColumns(x, list(
-        modification_time = "modified", 
-        last_access = "modified",
-        LastWriteTimeUtc = "modified"
-      ))
-      
-      kwb.utils::selectColumns(x, c("path", "type", "size", "modified"))
+        text = paste("Reading", basename(csv_file())),
+        expr = kwb.fakin::read_file_paths(csv_file())
+      )
+
+      kwb.utils::selectColumns(
+        x = normalise_column_names(x), 
+        columns = c("path", "type", "size", "modified")
+      )
       
     } # else {NULL}    
   })

@@ -42,6 +42,16 @@ inlineRadioButtons <- function(...)
   shiny::radioButtons(..., inline = TRUE)
 }
 
+# normalise_column_names -------------------------------------------------------
+normalise_column_names <- function(x)
+{
+  kwb.utils::renameColumns(x, list(
+    modification_time = "modified",
+    last_access = "modified",
+    LastWriteTimeUtc = "modified"
+  ))
+}
+
 # plot_centered_message --------------------------------------------------------
 plot_centered_message <- function(text = "Message", cex.text = 1)
 {

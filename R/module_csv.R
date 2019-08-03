@@ -64,10 +64,7 @@ csvFile <- function(input, output, session, read_function)
       
       kwb.utils::selectColumns(x, c("path", "type", "size", "modified"))
       
-    } else {
-      
-      NULL
-    }    
+    } # else {NULL}    
   })
   
   rds_content <- shiny::reactive({

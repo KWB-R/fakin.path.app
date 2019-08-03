@@ -97,7 +97,7 @@ prepare_depth_size_data_for_plotly <- function(pl)
   files <- pathlist::filename(pl)
   
   result <- kwb.utils::noFactorDataFrame(
-    depth = pl@depths,
+    depth = pathlist::depth(pl),
     size = pl@data$size,
     file = files,
     extension = kwb.utils::fileExtension(files),

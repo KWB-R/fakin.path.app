@@ -39,7 +39,7 @@ explore <- function(input, output, session, path_list)
     types <- kwb.utils::selectColumns(pl@data, "type")
 
     # Keep only the files. Empty directories would otherwise be shown as files
-    keep <- types == "file" & pl@depths <= input$max_depth
+    keep <- types == "file" & pathlist::depth(pl) <= input$max_depth
 
     if (! any(keep)) {
       return(".")
@@ -48,7 +48,7 @@ explore <- function(input, output, session, path_list)
     # Return the path strings
     result <- as.character(pl[keep])
     
-    kwb.utils::printIf(TRUE, head(result))
+    kwb.utils::printIf(TRUE, utils::head(result))
     
     result
   })

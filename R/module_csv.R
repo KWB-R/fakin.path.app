@@ -110,7 +110,7 @@ csvFile <- function(input, output, session, read_function)
     is_file <- x$type == "file"
     x$extension[is_file] <- kwb.utils::fileExtension(x$filename[is_file])
     x$extension <- factor(x$extension)
-    x$depth <- path_list()@depths
+    x$depth <- pathlist::depth(path_list())
 
     x <- kwb.utils::moveColumnsToFront(kwb.utils::removeColumns(x, "path"), c(
       "toplevel", "folder", "filename", "extension"

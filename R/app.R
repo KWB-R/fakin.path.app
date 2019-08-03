@@ -1,44 +1,43 @@
 # Define UI for application ----------------------------------------------------
-get_ui <- function() shiny::fluidPage(
-  
-  # Application title
-  shiny::titlePanel("Analyse Paths"),
-  
-  # Sidebar with a slider input for number of bins 
-  shiny::verticalLayout(
-    shiny::mainPanel(
-      width = 12,
-      shiny::tabsetPanel(
-        shiny::tabPanel("Table", fileDataUI("id_fileData")),
-        shiny::tabPanel("Statistics", statsUI("id_stats")),
-        shiny::tabPanel("Sankey", sankeyUI("id_sankey")),
-        shiny::tabPanel("Treemap", treemapUI("id_treemap")),
-        shiny::tabPanel("Scatter", depthUI("id_depth")),
-        shiny::tabPanel("Frequencies", wordcloudUI("id_wordcloud")),
-        shiny::tabPanel("Explore", exploreUI("id_explore"))
+get_ui <- function() 
+{
+  shiny::fluidPage(
+    
+    # Application title
+    shiny::titlePanel("Analyse Paths"),
+    
+    # Sidebar with a slider input for number of bins 
+    shiny::verticalLayout(
+      shiny::mainPanel(
+        width = 12, shiny::tabsetPanel(
+          shiny::tabPanel("Table", fileDataUI("fileData")),
+          shiny::tabPanel("Statistics", statsUI("stats")),
+          shiny::tabPanel("Sankey", sankeyUI("sankey")),
+          shiny::tabPanel("Treemap", treemapUI("treemap")),
+          shiny::tabPanel("Scatter", depthUI("depth")),
+          shiny::tabPanel("Frequencies", wordcloudUI("wordcloud")),
+          shiny::tabPanel("Explore", exploreUI("explore"))
+        )
       )
     )
   )
-)
+}
 
 # Define server logic ----------------------------------------------------------
 server <- function(input, output)
 {
-  path_list <- shiny::callModule(fileData, "id_fileData")
+  path_list <- shiny::callModule(fileData, "fileData")
   
   # Call the sankey module. The id needs to be passed to the server function.
   # It is required to name the output that is generated dynamically.
   # Take care: do not use a helper variable to pass the id but a constant 
   # string, as in the following 
-  shiny::callModule(
-    sankey, "id_sankey", path_list = path_list, id = "id_sankey"
-  )
-  
-  shiny::callModule(explore, "id_explore", path_list = path_list)
-  shiny::callModule(mytreemap, "id_treemap", path_list = path_list)
-  shiny::callModule(depth, "id_depth", path_list = path_list)
-  shiny::callModule(stats, "id_stats", path_list = path_list)
-  shiny::callModule(wordcloud, "id_wordcloud", path_list = path_list)
+  shiny::callModule(sankey, "sankey", path_list = path_list, id = "sankey")
+  shiny::callModule(explore, "explore", path_list = path_list)
+  shiny::callModule(mytreemap, "treemap", path_list = path_list)
+  shiny::callModule(depth, "depth", path_list = path_list)
+  shiny::callModule(stats, "stats", path_list = path_list)
+  shiny::callModule(wordcloud, "wordcloud", path_list = path_list)
 }
 
 # run_app(): Run the application -----------------------------------------------
@@ -58,10 +57,10 @@ run_app <- function(path_database = NULL, ...)
   if (! is.null(path_database)) {
     set_global(path_database = path_database)
   }
-
+  
   if (length(list(...))) {
     set_global(...)
   }  
-
+  
   shiny::shinyApp(ui = get_ui(), server = server)
 }

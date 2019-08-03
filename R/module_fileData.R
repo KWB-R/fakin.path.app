@@ -4,7 +4,7 @@ fileDataUI <- function(id)
   ns <- shiny::NS(id)
   
   shiny::tagList(
-    csvFileUI(ns("id_csvFile"), get_global("path_database")),
+    csvFileUI(ns("csvFile"), get_global("path_database")),
     shiny::textOutput(ns("text")),
     DT::dataTableOutput(ns("table"))
   )
@@ -13,7 +13,7 @@ fileDataUI <- function(id)
 # fileData ---------------------------------------------------------------------
 fileData <- function(input, output, session)
 {
-  myCsvFile <- shiny::callModule(csvFile, "id_csvFile")
+  myCsvFile <- shiny::callModule(csvFile, "csvFile")
   
   file_data <- shiny::reactive({
     

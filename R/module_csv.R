@@ -32,37 +32,38 @@ get_file_info_files <- function(path_database)
 # csvFile ----------------------------------------------------------------------
 csvFile <- function(input, output, session, read_function)
 {
+  # Path to CSV file
   csv_file <- shiny::reactive({
     input$file
   })
   
+  # Path to RDS file in the same folder
   rds_file <- shiny::reactive({
     gsub("\\.csv$", ".rds", csv_file())
   })
-  
+
+  # Does the RDS file already exist?  
   rds_file_exists <- shiny::reactive({
-    result <- file.exists(rds_file())
-    cat("rds file ", rds_file(), "exists:", result, "\n")
-    result
+    file.exists(rds_file())
   })
   
   raw_content <- shiny::reactive({
     
-    if (rds_file_exists()) {
-      return(function(...) NULL)
+    if (! rds_file_exists()) {
+      
+      x <- run_with_modal(
+        text = paste("Reading", basename(csv_file())), {
+          kwb.fakin::read_file_paths(csv_file())
+        })
+      
+      x <- kwb.utils::renameColumns(x, list(
+        modification_time = "modified", 
+        last_access = "modified",
+        LastWriteTimeUtc = "modified"
+      ))
+      kwb.utils::selectColumns(x, c("path", "type", "size", "modified"))
     } 
 
-    x <- run_with_modal(
-      text = paste("Reading", basename(csv_file())), {
-      kwb.fakin::read_file_paths(csv_file())
-    })
-    
-    x <- kwb.utils::renameColumns(x, list(
-      modification_time = "modified", 
-      last_access = "modified",
-      LastWriteTimeUtc = "modified"
-    ))
-    kwb.utils::selectColumns(x, c("path", "type", "size", "modified"))
   })
 
   rds_content <- shiny::reactive({

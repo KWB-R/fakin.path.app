@@ -2,11 +2,7 @@
 get_ui <- function() 
 {
   shiny::fluidPage(
-    
-    # Application title
     shiny::titlePanel("Analyse Paths"),
-    
-    # Sidebar with a slider input for number of bins 
     shiny::verticalLayout(
       shiny::mainPanel(
         width = 12, shiny::tabsetPanel(

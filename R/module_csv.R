@@ -32,10 +32,12 @@ get_file_info_files <- function(path_database)
 # csvFile ----------------------------------------------------------------------
 csvFile <- function(input, output, session, read_function)
 {
-  file_path <- shiny::reactive(input$file)
-
+  csv_file <- shiny::reactive({
+    input$file
+  })
+  
   rds_file <- shiny::reactive({
-    gsub("\\.csv$", ".rds", input$file)
+    gsub("\\.csv$", ".rds", csv_file())
   })
   
   rds_file_exists <- shiny::reactive({
@@ -50,11 +52,11 @@ csvFile <- function(input, output, session, read_function)
       return(function(...) NULL)
     } 
 
-    file <- file_path()
     x <- run_with_modal(
-      text = paste("Reading", basename(file)), {
-      kwb.fakin::read_file_paths(file)
+      text = paste("Reading", basename(csv_file())), {
+      kwb.fakin::read_file_paths(csv_file())
     })
+    
     x <- kwb.utils::renameColumns(x, list(
       modification_time = "modified", 
       last_access = "modified",
@@ -130,5 +132,5 @@ csvFile <- function(input, output, session, read_function)
   
   shiny::removeModal()
   
-  list(file = file_path, content = content, path_list = path_list)
+  list(file = csv_file, content = content, path_list = path_list)
 }

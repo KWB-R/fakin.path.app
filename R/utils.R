@@ -1,3 +1,15 @@
+# get_environment_vars ---------------------------------------------------------
+get_environment_vars <- function(pattern)
+{
+  var_names <- grep(pattern, names(Sys.getenv()), value = TRUE)
+  
+  if (length(var_names) == 0) {
+    return(list())
+  }  
+  
+  stats::setNames(as.list(Sys.getenv(var_names)), gsub(pattern, "", var_names))
+}
+
 # hide_server ------------------------------------------------------------------
 hide_server <- function(root, for_js_tree = FALSE)
 {

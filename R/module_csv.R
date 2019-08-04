@@ -16,17 +16,19 @@ csvFileUI <- function(id, path_database)
 get_file_info_files <- function(path_database)
 {
   files <- c(
-    kwb.file::dir_full(kwb.fakin::extdata_file(""), "^example_file_info"),
-    kwb.file::dir_full(path_database, "csv$")
+    dir_or_stop(kwb.fakin::extdata_file(""), "^example_file_info.*\\.csv$"),
+    dir_or_stop(path_database, "\\.csv$")
   )
+
+  # Give user friendly labels to the files to appear in the dropdown list 
+  file_labels <- kwb.utils::removeExtension(basename(files))
   
-  names <- kwb.utils::removeExtension(basename(files))
-  names <- kwb.utils::multiSubstitute(names, list(
-    "path-info(-ps-1)?_" = "",
+  replacements <- list(
+    "^path-info(-ps-1)?_" = "",
     "(\\d{2})_\\d{4}" = "\\2"
-  ))
-  
-  stats::setNames(files, names)
+  )
+
+  stats::setNames(files, kwb.utils::multiSubstitute(file_labels, replacements))
 }
 
 # csvFile ----------------------------------------------------------------------
@@ -41,7 +43,7 @@ csvFile <- function(input, output, session, read_function)
   rds_file <- shiny::reactive({
     gsub("\\.csv$", ".rds", csv_file())
   })
-
+  
   # Does the RDS file already exist?  
   rds_file_exists <- shiny::reactive({
     file.exists(rds_file())
@@ -49,30 +51,31 @@ csvFile <- function(input, output, session, read_function)
   
   raw_content <- shiny::reactive({
     
-    if (! rds_file_exists()) {
+    if (rds_file_exists()) {
+      return(NULL)
+    }
       
-      x <- run_with_modal(
-        text = paste("Reading", basename(csv_file())),
-        expr = kwb.fakin::read_file_paths(csv_file())
-      )
-
-      kwb.utils::selectColumns(
-        x = normalise_column_names(x), 
-        columns = c("path", "type", "size", "modified")
-      )
-      
-    } # else {NULL}    
+    x <- run_with_modal(
+      text = paste("Reading", basename(csv_file())),
+      expr = kwb.fakin::read_file_paths(csv_file())
+    )
+    
+    kwb.utils::selectColumns(
+      x = normalise_column_names(x), 
+      columns = c("path", "type", "size", "modified")
+    )
   })
   
   rds_content <- shiny::reactive({
-    if (rds_file_exists()) {
-      run_with_modal(
-        text = paste("Loading", basename(rds_file())), {
-        readRDS(rds_file())
-      })
-    } else {
-      NULL
+    
+    if (! rds_file_exists()) {
+      return(NULL)
     }
+      
+    run_with_modal(
+      text = paste("Loading", basename(rds_file())),
+      expr =readRDS(rds_file())
+    )
   })
   
   path_list <- shiny::reactive({
@@ -80,14 +83,14 @@ csvFile <- function(input, output, session, read_function)
     if (! is.null(rds_content())) {
       return(rds_content()$path_list)
     }
-
+    
     pl <- run_with_modal(
       text = "Providing table data", {
-      pathlist::pathlist(
-        paths = raw_content()$path, 
-        data = raw_content()[, c("type", "size")]
-      )
-    })
+        pathlist::pathlist(
+          paths = raw_content()$path, 
+          data = raw_content()[, c("type", "size")]
+        )
+      })
     
     pl@root <- hide_server(pl@root)
     
@@ -112,19 +115,19 @@ csvFile <- function(input, output, session, read_function)
     x$extension[is_file] <- kwb.utils::fileExtension(x$filename[is_file])
     x$extension <- factor(x$extension)
     x$depth <- pathlist::depth(path_list())
-
+    
     x <- kwb.utils::moveColumnsToFront(kwb.utils::removeColumns(x, "path"), c(
       "toplevel", "folder", "filename", "extension"
     ))
     
     content <- structure(x, root = path_list()@root)
-
+    
     rds_content <- list(content = content, path_list = path_list())
     
     run_with_modal(
       text = paste("Caching data in", basename(rds_file())), {
-      saveRDS(rds_content, file = rds_file())
-    })
+        saveRDS(rds_content, file = rds_file())
+      })
     
     content
   })

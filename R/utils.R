@@ -1,3 +1,17 @@
+# dir_or_stop ------------------------------------------------------------------
+dir_or_stop <- function(path, pattern)
+{
+  if (! nzchar(path)) {
+    return(NULL)
+  }
+  
+  if (! dir.exists(path)) {
+    stop("No such directory: '", path, "'", call. = FALSE)
+  }
+  
+  dir(path, pattern, full.names = TRUE)
+}
+
 # get_environment_vars ---------------------------------------------------------
 get_environment_vars <- function(pattern)
 {

@@ -12,6 +12,7 @@ get_ui <- function()
         width = 12, shiny::tabsetPanel(
           shiny::tabPanel("Table", fileDataUI("fileData")),
           shiny::tabPanel("Statistics", statsUI("stats")),
+          shiny::tabPanel("Duplicates", duplicatesUI("duplicates")),
           shiny::tabPanel("Sankey", sankeyUI("sankey")),
           shiny::tabPanel("Treemap", treemapUI("treemap")),
           shiny::tabPanel("Scatter", depthUI("depth")),
@@ -40,6 +41,7 @@ server <- function(input, output)
   shiny::callModule(mytreemap, "treemap", path_list = path_list)
   shiny::callModule(depth, "depth", path_list = path_list)
   shiny::callModule(stats, "stats", path_list = path_list)
+  shiny::callModule(duplicates, "duplicates", path_list = path_list)
   shiny::callModule(wordcloud, "wordcloud", path_list = path_list)
 }
 

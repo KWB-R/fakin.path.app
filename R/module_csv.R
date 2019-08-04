@@ -102,7 +102,9 @@ csvFile <- function(input, output, session, read_function)
       text = "Providing table data",
       expr = pathlist::hide_server(pathlist::pathlist(
         paths = raw_content()$path, 
-        data = raw_content()[, c("type", "size")]
+        data = kwb.utils::selectColumns(
+          raw_content(), c("type", "size", "modified")
+        )
       ))
     )
   })

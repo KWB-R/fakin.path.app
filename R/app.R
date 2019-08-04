@@ -1,4 +1,8 @@
 # Define UI for application ----------------------------------------------------
+
+#' @importFrom shiny fluidPage titlePanel verticalLayout mainPanel tabsetPanel
+#' @importFrom shiny tabPanel
+#' @keywords internal
 get_ui <- function() 
 {
   shiny::fluidPage(
@@ -20,6 +24,9 @@ get_ui <- function()
 }
 
 # Define server logic ----------------------------------------------------------
+
+#' @importFrom shiny callModule
+#' @keywords internal
 server <- function(input, output)
 {
   path_list <- shiny::callModule(fileData, "fileData")
@@ -43,6 +50,7 @@ server <- function(input, output)
 #' @param path_database if not \code{NULL} the path to a folder containing 
 #'   text files with path information
 #' @param \dots further \code{key = value} pairs to be used as global variables
+#' @importFrom shiny shinyApp
 #' @export
 run_app <- function(path_database = NULL, ...)
 {

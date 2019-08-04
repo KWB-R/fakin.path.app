@@ -1,25 +1,27 @@
 # statsUI ----------------------------------------------------------------------
+
+#' @importFrom shiny NS tableOutput tagList
+#' @keywords internal
 statsUI <- function(id)
 {
   ns <- shiny::NS(id)
   
-  header_fun <- shiny::h4
-  
   shiny::tagList(
-    #header_fun("Compliance"),
     shiny::tableOutput(ns("compliance")),
-    #header_fun("Longest paths"),
     shiny::tableOutput(ns("longest_paths")),
-    #header_fun("Longest filenames"),
     shiny::tableOutput(ns("longest_files")),
-    #header_fun("Longest folder names"),
     shiny::tableOutput(ns("longest_folders")),
-    #header_fun("Biggest files"),
     shiny::tableOutput(ns("biggest_files"))
   )
 }
 
 # stats ------------------------------------------------------------------------
+
+#' @importFrom shiny reactive renderTable
+#' @importFrom pathlist filename
+#' @importFrom kwb.utils getAttribute noFactorDataFrame
+#' @importFrom stats setNames
+#' @keywords internal
 stats <- function(input, output, session, path_list)
 {
   path_summary <- shiny::reactive({

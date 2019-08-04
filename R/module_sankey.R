@@ -1,4 +1,10 @@
 # sankeyUI ---------------------------------------------------------------------
+
+#' @importFrom kwb.utils defaultIfNULL
+#' @importFrom shiny mainPanel NS selectInput sidebarLayout sidebarPanel
+#' @importFrom shiny sliderInput uiOutput
+#' @importFrom stats setNames
+#' @keywords internal
 sankeyUI <- function(id)
 {
   ns <- shiny::NS(id)
@@ -38,6 +44,12 @@ sankeyUI <- function(id)
 }
 
 # sankey -----------------------------------------------------------------------
+
+#' @importFrom kwb.fakin plot_path_network
+#' @importFrom kwb.utils defaultIfNULL selectColumns
+#' @importFrom networkD3 renderSankeyNetwork sankeyNetworkOutput
+#' @importFrom shiny NS renderUI
+#' @keywords internal
 sankey <- function(input, output, session, path_list, id = NULL)
 {
   default_on_null <- kwb.utils::defaultIfNULL

@@ -1,4 +1,8 @@
 # treemapUI --------------------------------------------------------------------
+
+#' @importFrom shiny mainPanel NS plotOutput radioButtons sidebarLayout 
+#' @importFrom shiny sidebarPanel sliderInput
+#' @keywords internal
 treemapUI <- function(id)
 {
   ns <- shiny::NS(id)
@@ -24,6 +28,11 @@ treemapUI <- function(id)
 }
 
 # mytreemap --------------------------------------------------------------------
+
+#' @importFrom kwb.fakin plot_treemaps_from_path_data
+#' @importFrom kwb.utils selectColumns
+#' @importFrom shiny renderPlot
+#' @keywords internal
 mytreemap <- function(input, output, session, path_list)
 {
   output$plot <- shiny::renderPlot({

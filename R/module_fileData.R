@@ -1,4 +1,8 @@
 # fileDataUI -------------------------------------------------------------------
+
+#' @importFrom DT dataTableOutput
+#' @importFrom shiny NS tagList textOutput
+#' @keywords internal
 fileDataUI <- function(id)
 {
   ns <- shiny::NS(id)
@@ -11,6 +15,11 @@ fileDataUI <- function(id)
 }
 
 # fileData ---------------------------------------------------------------------
+
+#' @importFrom DT renderDataTable
+#' @importFrom kwb.utils getAttribute
+#' @importFrom shiny callModule observe reactive renderText
+#' @keywords internal
 fileData <- function(input, output, session)
 {
   myCsvFile <- shiny::callModule(csvFile, "csvFile")

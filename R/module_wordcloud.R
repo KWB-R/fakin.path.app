@@ -1,12 +1,14 @@
 # wordcloudUI ------------------------------------------------------------------
+
+#' @importFrom shiny column fluidRow mainPanel NS plotOutput sidebarLayout 
+#' @importFrom shiny sidebarPanel sliderInput tableOutput
+#' @keywords internal
 wordcloudUI <- function(id)
 {
   ns <- shiny::NS(id)
   
   right_border_column <- function(width, output) {
-    shiny::column(width, output, align = "center"
-      #, style = 'border-right: 1px solid red'
-    )
+    shiny::column(width, output, align = "center")
   }
   
   shiny::sidebarLayout(
@@ -34,6 +36,15 @@ wordcloudUI <- function(id)
 }
 
 # wordcloud --------------------------------------------------------------------
+
+#' @importFrom graphics par
+#' @importFrom kwb.utils asNoFactorDataFrame fileExtension isNaOrEmpty 
+#' @importFrom kwb.utils noFactorDataFrame removeExtension selectColumns
+#' @importFrom pathlist filename
+#' @importFrom shiny reactive renderPlot renderTable
+#' @importFrom stats setNames
+#' @importFrom utils head
+#' @keywords internal
 wordcloud <- function(input, output, session, path_list)
 {
   dummy_data_frame <- kwb.utils::noFactorDataFrame(
@@ -139,6 +150,10 @@ wordcloud <- function(input, output, session, path_list)
 }
 
 # plot_wordcloud_or_message ----------------------------------------------------
+
+#' @importFrom graphics title 
+#' @importFrom wordcloud wordcloud
+#' @keywords internal
 plot_wordcloud_or_message <- function(
   freq, main = "Wordcloud", scale = c(10, 0.5), failure_text = "Nothing to plot"
 )

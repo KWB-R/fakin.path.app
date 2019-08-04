@@ -1,4 +1,8 @@
 # depthUI ----------------------------------------------------------------------
+
+#' @importFrom plotly plotlyOutput
+#' @importFrom shiny mainPanel NS sidebarLayout sidebarPanel sliderInput 
+#' @keywords internal
 depthUI <- function(id)
 {
   ns <- shiny::NS(id)
@@ -22,6 +26,14 @@ depthUI <- function(id)
 }
 
 # depth ------------------------------------------------------------------------
+
+#' @importFrom ggplot2 ggtitle
+#' @importFrom kwb.file split_paths
+#' @importFrom kwb.utils catAndRun checkForMissingColumns
+#' @importFrom pathlist as.list pathlist
+#' @importFrom plotly ggplotly renderPlotly
+#' @importFrom shiny showNotification
+#' @keywords internal
 depth <- function(input, output, session, path_list)
 {
   output$plot <- plotly::renderPlotly({
@@ -81,9 +93,7 @@ depth <- function(input, output, session, path_list)
     })
     
     g <- kwb.utils::catAndRun("Setting the plot title", {
-      g + ggplot2::ggtitle(sprintf(
-        "Root path: %s", gsub("//medusa", "//server", pl@root)
-      ))
+      g + ggplot2::ggtitle(sprintf("Root path: %s", pl@root))
     })
     
     plotly::ggplotly(g, tooltip = "label")
@@ -91,6 +101,10 @@ depth <- function(input, output, session, path_list)
 }
 
 # prepare_depth_size_data_for_plotly -------------------------------------------
+
+#' @importFrom kwb.utils fileExtension noFactorDataFrame
+#' @importFrom pathlist depth filename folder toplevel
+#' @keywords internal
 prepare_depth_size_data_for_plotly <- function(pl)
 {
   stopifnot(inherits(pl, "pathlist"))
@@ -110,14 +124,14 @@ prepare_depth_size_data_for_plotly <- function(pl)
 }
 
 # get_folder_file_size_labels --------------------------------------------------
+
+#' @importFrom gdata humanReadable
+#' @importFrom kwb.utils selectColumns
+#' @keywords internal
 get_folder_file_size_labels <- function(df)
 {
-  #df_bak <- kwb.utils::loadObject("~/Desktop/tmp/df.RData", "df")
-  #df <- df_bak
-  
   sizes <- kwb.utils::selectColumns(df, "size")
-  #df[is.na(sizes), ]
-  
+
   size_text <- rep("not available!", nrow(df))
   ok <- ! is.na(sizes)
   size_text[ok] <- gdata::humanReadable(

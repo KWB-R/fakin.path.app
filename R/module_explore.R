@@ -1,4 +1,9 @@
 # exploreUI --------------------------------------------------------------------
+
+#' @importFrom jsTree jsTreeOutput
+#' @importFrom shiny column fluidRow mainPanel NS sidebarLayout sidebarPanel 
+#' @importFrom shiny sliderInput 
+#' @keywords internal
 exploreUI <- function(id)
 {
   ns <- shiny::NS(id)
@@ -17,13 +22,19 @@ exploreUI <- function(id)
       width = 12 - get_global("sidebar_width"),
       shiny::fluidRow(
         tree_output_column(ns("jstree1"))
-        #, tree_output_column(ns("jstree2"))
       )
     )
   )
 }
 
 # explore ----------------------------------------------------------------------
+
+#' @importFrom jsTree jsTree renderJsTree
+#' @importFrom kwb.utils printIf selectColumns
+#' @importFrom pathlist depth hide_server
+#' @importFrom shiny reactive
+#' @importFrom utils head
+#' @keywords internal
 explore <- function(input, output, session, path_list)
 {
   paths <- shiny::reactive({
@@ -57,9 +68,4 @@ explore <- function(input, output, session, path_list)
   output$jstree1 <- jsTree::renderJsTree({
     jsTree::jsTree(paths(), height = "100%")
   }) 
-  
-  # output$jstree2 <- jsTree::renderJsTree({
-  #   jsTree::jsTree(paths(), height = "100%")
-  # }) 
-  
 }

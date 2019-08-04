@@ -41,11 +41,10 @@ get_file_info_files <- function(path_database)
 
 # csvFile ----------------------------------------------------------------------
 
-#' @importFrom shiny reactive removeModal
+#' @importFrom shiny reactive
 #' @importFrom kwb.fakin read_file_paths
-#' @importFrom kwb.utils selectColumns fileExtension moveColumnsToFront
-#' @importFrom kwb.utils removeColumns
-#' @importFrom pathlist pathlist hide_server toplevel folder filename depth
+#' @importFrom kwb.utils selectColumns
+#' @importFrom pathlist pathlist hide_server
 #' @keywords internal
 csvFile <- function(input, output, session, read_function)
 {
@@ -114,22 +113,7 @@ csvFile <- function(input, output, session, read_function)
       return(rds_content()$content)
     }
     
-    x <- raw_content()
-    dates <- as.Date(as.POSIXct(x$modified, "%Y-%m-%dT%H:%M:%S", tz = "UTC"))
-    x$modified <- dates
-    x$size <- round(x$size, 6)
-    x$toplevel <- factor(pathlist::toplevel(path_list()))
-    x$folder <- pathlist::folder(path_list())
-    x$filename <- pathlist::filename(path_list())
-    x$extension <- ""
-    is_file <- x$type == "file"
-    x$extension[is_file] <- kwb.utils::fileExtension(x$filename[is_file])
-    x$extension <- factor(x$extension)
-    x$depth <- pathlist::depth(path_list())
-    
-    x <- kwb.utils::moveColumnsToFront(kwb.utils::removeColumns(x, "path"), c(
-      "toplevel", "folder", "filename", "extension"
-    ))
+    x <- prepare_full_path_table(x = raw_content(), pl = path_list())
     
     content <- structure(x, root = path_list()@root)
     
@@ -144,4 +128,37 @@ csvFile <- function(input, output, session, read_function)
   })
   
   list(file = csv_file, content = content, path_list = path_list)
+}
+
+# prepare_full_path_table ------------------------------------------------------
+
+#' @importFrom kwb.utils fileExtension moveColumnsToFront removeColumns 
+#' @importFrom kwb.utils selectColumns
+#' @importFrom pathlist depth filename folder toplevel
+#' @keywords internal
+prepare_full_path_table <- function(x, pl)
+{
+  # Convert column "modified" to POSIXct
+  timestamps <- kwb.utils::selectColumns(x, "modified")
+  x$modified <- as.Date(as.POSIXct(timestamps, "%Y-%m-%dT%H:%M:%S", tz = "UTC"))
+
+  # Provide/format columns "size", "toplevel", "folder", "filename"  
+  x$size <- round(x$size, 6)
+  x$toplevel <- factor(pathlist::toplevel(pl))
+  x$folder <- pathlist::folder(pl)
+  x$filename <- pathlist::filename(pl)
+
+  # Provide column "extension"  
+  x$extension <- ""
+  is_file <- x$type == "file"
+  x$extension[is_file] <- kwb.utils::fileExtension(x$filename[is_file])
+  x$extension <- factor(x$extension)
+
+  # Provide column "depth"  
+  x$depth <- pathlist::depth(pl)
+
+  # Remove column "path" and move main columns to the left
+  x <- kwb.utils::removeColumns(x, "path")
+  main_columns <- c("toplevel", "folder", "filename", "extension")
+  kwb.utils::moveColumnsToFront(x, main_columns)
 }

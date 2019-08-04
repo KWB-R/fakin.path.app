@@ -99,15 +99,13 @@ csvFile <- function(input, output, session, read_function)
       return(rds_content()$path_list)
     }
     
-    pl <- run_with_modal(
-      text = "Providing table data", {
-        pathlist::pathlist(
-          paths = raw_content()$path, 
-          data = raw_content()[, c("type", "size")]
-        )
-      })
-    
-    pathlist::hide_server(pl)
+    run_with_modal(
+      text = "Providing table data",
+      expr = pathlist::hide_server(pathlist::pathlist(
+        paths = raw_content()$path, 
+        data = raw_content()[, c("type", "size")]
+      ))
+    )
   })
   
   content <- shiny::reactive({
@@ -138,14 +136,12 @@ csvFile <- function(input, output, session, read_function)
     rds_content <- list(content = content, path_list = path_list())
     
     run_with_modal(
-      text = paste("Caching data in", basename(rds_file())), {
-        saveRDS(rds_content, file = rds_file())
-      })
+      text = paste("Caching data in", basename(rds_file())),
+      expr = saveRDS(rds_content, file = rds_file())
+    )
     
     content
   })
-  
-  shiny::removeModal()
   
   list(file = csv_file, content = content, path_list = path_list)
 }

@@ -24,27 +24,19 @@ get_environment_vars <- function(pattern)
   stats::setNames(as.list(Sys.getenv(var_names)), gsub(pattern, "", var_names))
 }
 
-# hide_server ------------------------------------------------------------------
-hide_server <- function(root, for_js_tree = FALSE)
+# prepare_root_for_jsTree ------------------------------------------------------
+prepare_root_for_jsTree <- function(root)
 {
   if (! nzchar(root)) {
-    return(ifelse(for_js_tree, ".", ""))
+    return(".")
   }
   
-  replacements <- c(
-    list(
-      # Replace real server name with "server"
-      "^//[^/]+" = "//server", 
-      # Remove dollar character
-      "\\$" = ""
-    ), 
-    if (for_js_tree) list(
-      # Remove slashes at start
-      "^/+" = "",
-      # Replace slash with backslash so that jsTree does not create levels but 
-      # keeps the full root path as the root element of the tree
-      "/" = "\\\\" 
-    )
+  replacements <- list(
+    # Remove slashes at start
+    "^/+" = "",
+    # Replace slash with backslash so that jsTree does not create levels but 
+    # keeps the full root path as the root element of the tree
+    "/" = "\\\\" 
   )
   
   kwb.utils::multiSubstitute(root, replacements)

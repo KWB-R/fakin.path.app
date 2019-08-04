@@ -33,6 +33,7 @@ depth <- function(input, output, session, path_list)
     kwb.utils::checkForMissingColumns(pl@data, c("type", "size"))
 
     # Filter for files, discarding directories    
+    cat("Evaluating pl[pl@data$type == 'file']\n")
     pl <- pl[pl@data$type == "file"]
     
     if (length(pl) == 0) {

@@ -33,7 +33,7 @@ explore <- function(input, output, session, path_list)
     
     stopifnot(inherits(pl, "pathlist"))
 
-    pl@root <- hide_server(pl@root, for_js_tree = TRUE)
+    pl@root <- prepare_root_for_jsTree(pathlist::hide_server(pl)@root)
 
     # Provide file types and depth levels
     types <- kwb.utils::selectColumns(pl@data, "type")
@@ -46,6 +46,7 @@ explore <- function(input, output, session, path_list)
     }
     
     # Return the path strings
+    cat("Evaluating pl[keep]\n")
     result <- as.character(pl[keep])
     
     kwb.utils::printIf(TRUE, utils::head(result))

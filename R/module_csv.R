@@ -1,4 +1,7 @@
 # csvFileUI --------------------------------------------------------------------
+
+#' @importFrom shiny NS tagList selectInput
+#' @keywords internal
 csvFileUI <- function(id, path_database)
 {
   ns <- shiny::NS(id)
@@ -13,6 +16,11 @@ csvFileUI <- function(id, path_database)
 }
 
 # get_file_info_files ----------------------------------------------------------
+
+#' @importFrom kwb.fakin extdata_file
+#' @importFrom kwb.utils removeExtension multiSubstitute
+#' @importFrom stats setNames
+#' @keywords internal
 get_file_info_files <- function(path_database)
 {
   files <- c(
@@ -32,6 +40,13 @@ get_file_info_files <- function(path_database)
 }
 
 # csvFile ----------------------------------------------------------------------
+
+#' @importFrom shiny reactive removeModal
+#' @importFrom kwb.fakin read_file_paths
+#' @importFrom kwb.utils selectColumns fileExtension moveColumnsToFront
+#' @importFrom kwb.utils removeColumns
+#' @importFrom pathlist pathlist hide_server toplevel folder filename depth
+#' @keywords internal
 csvFile <- function(input, output, session, read_function)
 {
   # Path to CSV file
@@ -92,9 +107,7 @@ csvFile <- function(input, output, session, read_function)
         )
       })
     
-    pl@root <- hide_server(pl@root)
-    
-    pl
+    pathlist::hide_server(pl)
   })
   
   content <- shiny::reactive({

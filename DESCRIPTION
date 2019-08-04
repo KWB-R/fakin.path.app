@@ -1,6 +1,6 @@
 Package: fakin.path.app
 Title: Shiny App to Visialise File Paths
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     c(person(given = "Hauke",
              family = "Sonnenberg",
@@ -26,17 +26,16 @@ Imports:
     gdata (>= 2.18.0),
     ggplot2 (>= 3.2.0),
     jsTree (>= 1.0.1),
-    kwb.fakin (>= 0.3.0.9000),
-    kwb.file (>= 0.0.0.9000),
-    kwb.utils (>= 0.4.2.9000),
+    kwb.fakin (>= 0.4.0),
+    kwb.file (>= 0.2.0),
+    kwb.utils (>= 0.4.3),
     networkD3 (>= 0.4),
     pathlist (>= 0.2.0),
     plotly (>= 4.9.0),
     shiny (>= 1.3.2),
-    wordcloud (>= 2.6),
-    wordcloud2 (>= 0.2.1)
+    wordcloud (>= 2.6)
 Remotes:
-    github::hsonne/pathlist@v0.2.0,
-    github::kwb-r/kwb.fakin@dev,
+    github::hsonne/pathlist,
+    github::kwb-r/kwb.fakin,
     github::kwb-r/kwb.file,
-    github::kwb-r/kwb.utils@dev
+    github::kwb-r/kwb.utils

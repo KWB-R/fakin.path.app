@@ -59,9 +59,10 @@ fileData <- function(input, output, session)
   
   dt_options <- list(scrollX = TRUE, searching = TRUE, lengthChange = FALSE)
   
-  output$table <- DT::renderDataTable(
-    file_data(), options = dt_options, filter = "top"
-  )
+  output$table <- DT::renderDataTable(options = dt_options, filter = "top", {
+    DT::datatable(file_data()) %>%
+      DT::formatRound(columns = c("size"), digits = 3)
+  })
   
   shiny::reactive({
     myCsvFile$path_list()[filtered_indices()]

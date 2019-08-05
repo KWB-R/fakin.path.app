@@ -33,7 +33,7 @@ stats <- function(input, output, session, path_list)
   pattern_counts <- shiny::reactive({
     filenames <- pathlist::filename(path_list())
     patterns <- c(
-      "^(Dok1|Mappe1|Pr.sentation1)", "^Kopie von", "gdalwmscache", 
+      "^Dok1", "^Mappe1", "^Pr.sentation1", "^Kopie von", "gdalwmscache", 
       "win-library", "^README\\.txt$", "^README\\.yml$"
     )
     kwb.utils::noFactorDataFrame(

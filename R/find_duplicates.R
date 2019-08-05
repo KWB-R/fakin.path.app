@@ -17,13 +17,33 @@ find_duplicates <- function(path_list, min_size = 10, time_column = "modified")
     folder = pathlist::folder(pl)
   )
 
-  cols <- 1:3
+  j <- 1:3
 
-  is_duplicate <- duplicated(x[, cols])
+  x_left <- unique(x[duplicated(x[, j]), j])
 
-  x_left <- unique(x[is_duplicate, cols])
+  result <- merge(x_left, x, by = names(x)[j], all.x = TRUE)
 
-  result <- merge(x_left, x, by = names(x)[cols], all.x = TRUE)
+  columns <- c("size", "folder", "filename", time_column)
+  
+  duplicates <- result[order(result$size, decreasing = TRUE), columns]
+  
+  duplicates
+}
 
-  result[order(result$size, decreasing = TRUE), c("size", "folder", "filename")]
+# duplicates_to_saving_potential -----------------------------------------------
+
+#' @importFrom magrittr "%>%"
+#' @importFrom rlang .data
+#' @importFrom dplyr arrange group_by mutate n select summarise ungroup 
+#' @keywords internal
+duplicates_to_saving_potential <- function(duplicates, time_column = "modified")
+{
+  duplicates %>%
+    dplyr::group_by(.data$size, .data[[time_column]], .data$filename) %>%
+    dplyr::summarise(count = dplyr::n(), total_size = sum(.data$size)) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(potential = round(.data$total_size - .data$size, 3)) %>%
+    dplyr::select(.data$filename, .data$size, .data$count, .data$potential) %>%
+    dplyr::arrange(- .data$potential) %>%
+    as.data.frame()
 }

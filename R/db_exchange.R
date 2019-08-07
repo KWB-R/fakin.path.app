@@ -1,3 +1,17 @@
+# get_available_database_entries -----------------------------------------------
+get_available_database_entries <- function()
+{
+  if (length(get_environment_vars("PATHANA_mysql")) == 0) {
+    return(NULL)
+  }
+  
+  paste0("db|", kwb.utils::pasteColumns(
+    x = get_path_summary_from_database(), 
+    columns = c("scanned", "keyword"),
+    sep = "|"
+  ))
+}
+
 # extract_date -----------------------------------------------------------------
 extract_date <- function(path_file)
 {
@@ -35,7 +49,7 @@ get_path_summary_from_database <- function()
 # get_path_data_from_database --------------------------------------------------
 get_path_data_from_database <- function(scan_date = NULL, keyword = NULL)
 {
-  args <- stats::setNames(list(scan_date, keyword), c("scan_date", "keyword"))
+  args <- stats::setNames(list(scan_date, keyword), c("scanned", "keyword"))
   args <- kwb.utils::excludeNULL(args, dbg = FALSE)
 
   condition <- if (length(args)) {

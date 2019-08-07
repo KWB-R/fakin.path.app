@@ -34,20 +34,6 @@ fileData <- function(input, output, session)
 
   filtered_indices <- shiny::reactive(input$table_rows_all)
   
-  shiny::observe({
-    cat(paste(collapse = "\n", c(
-      sprintf("Paths read from %s in\n%s", 
-              basename(myCsvFile$file()), 
-              dirname(myCsvFile$file())),
-      sprintf("Rows: %d, Columns: %d", 
-              nrow(myCsvFile$content()), 
-              ncol(myCsvFile$content())),
-      sprintf("length(all): %d", length(filtered_indices())),
-      sprintf("length(current): %d", length(input$table_rows_current)),
-      sprintf("length(selected): %d", length(input$table_rows_selected))
-    )))
-  })
-  
   output$text <- shiny::renderText({
     root <- kwb.utils::getAttribute(file_data(), "root")
     if (root != "") {
@@ -58,9 +44,9 @@ fileData <- function(input, output, session)
   })
   
   dt_options <- list(scrollX = TRUE, searching = TRUE, lengthChange = FALSE)
-  
-  output$table <- DT::renderDataTable(options = dt_options, filter = "top", {
-    DT::datatable(file_data()) %>%
+
+  output$table <- DT::renderDataTable({
+    DT::datatable(file_data(), options = dt_options, filter = "top") %>%
       DT::formatRound(columns = c("size"), digits = 3)
   })
   

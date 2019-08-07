@@ -32,7 +32,7 @@ duplicates <- function(input, output, session, path_list)
     
     duplicates <- find_duplicates(path_list(), input$min_size)
     
-    potential <- fakin.path.app:::duplicates_to_saving_potential(duplicates)
+    potential <- duplicates_to_saving_potential(duplicates)
     
     DT::datatable(potential) %>%
       DT::formatRound(columns = c("size", "potential"), digits = 3)

@@ -5,8 +5,14 @@ get_available_database_entries <- function()
     return(NULL)
   }
   
+  datasets <- get_path_summary_from_database()
+  
+  if (nrow(datasets) == 0) {
+    return(NULL)
+  }
+  
   paste0("db|", kwb.utils::pasteColumns(
-    x = get_path_summary_from_database(), 
+    x = datasets, 
     columns = c("scanned", "keyword"),
     sep = "|"
   ))

@@ -6,6 +6,7 @@ csvFileUI <- function(id, path_database)
 {
   ns <- shiny::NS(id)
   
+  #kwb.utils::assignPackageObjects("fakin.path.app")
   shiny::tagList(
     shiny::selectInput(
       inputId = ns("file"), 
@@ -51,6 +52,8 @@ get_file_info_files <- function(path_database)
 #' @keywords internal
 csvFile <- function(input, output, session, read_function)
 {
+  db_split_pattern <- "\\s*\\|\\s*"
+  
   # Path to CSV file
   csv_file <- shiny::reactive({
     input$file
@@ -61,7 +64,7 @@ csvFile <- function(input, output, session, read_function)
     if (grepl("^db", csv_file())) {
       file.path(
         get_global("path_database"),
-        paste0(gsub("\\|", "_", csv_file()), ".rds")
+        paste0(gsub(db_split_pattern, "_", csv_file()), ".rds")
       )
     } else {
       gsub("\\.csv$", ".rds", csv_file())
@@ -83,7 +86,7 @@ csvFile <- function(input, output, session, read_function)
       text = paste("Reading", basename(csv_file())), 
       expr = {
         if (grepl("^db", csv_file())) {
-          date_key <- strsplit(csv_file(), "\\|")[[1]][-1]
+          date_key <- strsplit(csv_file(), db_split_pattern)[[1]][-1]
           get_path_data_from_database(date_key[1], date_key[2])
         } else {
           kwb.fakin::read_file_paths(csv_file())

@@ -11,10 +11,10 @@ get_available_database_entries <- function()
     return(NULL)
   }
   
-  paste0("db|", kwb.utils::pasteColumns(
+  paste0("db | ", kwb.utils::pasteColumns(
     x = datasets, 
     columns = c("scanned", "keyword"),
-    sep = "|"
+    sep = " | "
   ))
 }
 

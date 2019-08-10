@@ -12,6 +12,12 @@ dir_or_stop <- function(path, pattern)
   dir(path, pattern, full.names = TRUE)
 }
 
+# extdata_file -----------------------------------------------------------------
+extdata_file <- function(...)
+{
+  system.file("extdata", ..., package = "fakin.path.app")
+}
+
 # get_environment_vars ---------------------------------------------------------
 get_environment_vars <- function(pattern)
 {

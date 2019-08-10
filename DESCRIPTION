@@ -20,6 +20,7 @@ Encoding: UTF-8
 LazyData: true
 Suggests: 
     covr (>= 3.2.1),
+    kwb.db (>= 0.3.0),
     RMySQL (>= 0.10.17)
 RoxygenNote: 6.1.1
 Imports: 
@@ -40,6 +41,7 @@ Imports:
     wordcloud (>= 2.6)
 Remotes:
     github::hsonne/pathlist,
+    github::kwb-r/kwb.db,
     github::kwb-r/kwb.fakin,
     github::kwb-r/kwb.file,
     github::kwb-r/kwb.utils

@@ -33,26 +33,17 @@ extract_keyword <- function(path_file)
 # get_path_summary_from_database -----------------------------------------------
 get_path_summary_from_database <- function()
 {
-  select_from_fakin_database(
-    statement = "SELECT 
-      keyword, scanned, sum(size) as size_mib, count(*) as n_files 
-      FROM paths GROUP BY keyword, scanned;"
-  )
+  select_from_fakin_database(paste(
+    "SELECT scanned, keyword FROM pathana_summary", 
+    "ORDER BY scanned DESC, keyword"
+  ))
 }
 
 # get_path_data_from_database --------------------------------------------------
 get_path_data_from_database <- function(scan_date = NULL, keyword = NULL)
 {
-  args <- stats::setNames(list(scan_date, keyword), c("scanned", "keyword"))
-  args <- kwb.utils::excludeNULL(args, dbg = FALSE)
-
-  condition <- if (length(args)) {
-    paste(collapse = " AND ", sprintf("%s = '%s'", names(args), unlist(args)))
-  } else {
-    TRUE
-  }
-  
-  select_from_fakin_database(statement = sprintf(
-    "SELECT * FROM paths WHERE %s;", condition
+  result <- select_from_fakin_database(statement = sprintf(
+    "SELECT * FROM pathana WHERE keyword = '%s' AND scanned = '%s'", 
+    keyword, scan_date
   ))
 }

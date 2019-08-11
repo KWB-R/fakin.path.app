@@ -108,7 +108,7 @@ csvFile <- function(input, output, session, read_function)
       
     run_with_modal(
       text = paste("Loading", basename(rds_file())),
-      expr =readRDS(rds_file())
+      expr = readRDS(rds_file())
     )
   })
   
@@ -165,7 +165,7 @@ prepare_full_path_table <- function(x, pl)
   x$modified <- as.Date(as.POSIXct(timestamps, "%Y-%m-%dT%H:%M:%S", tz = "UTC"))
 
   # Provide/format columns "size", "toplevel", "folder", "filename"  
-  x$size <- round(x$size, 6)
+  #x$size <- round(x$size, 6)
   x$toplevel <- factor(pathlist::toplevel(pl))
   x$folder <- pathlist::folder(pl)
   x$filename <- pathlist::filename(pl)

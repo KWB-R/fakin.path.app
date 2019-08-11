@@ -56,11 +56,3 @@ get_path_data_from_database <- function(scan_date = NULL, keyword = NULL)
     "SELECT * FROM paths WHERE %s;", condition
   ))
 }
-
-# create_path_table_in_database ------------------------------------------------
-create_path_table_in_database <- function()
-{
-  sql_file <- extdata_file("sql_create-table_paths.sql")
-  statement <- kwb.db::readSqlCommandsFromFile(sql_file)
-  run_in_fakin_database(statement)
-}

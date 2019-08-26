@@ -1,0 +1,35 @@
+---
+title: "Using the FAKIN Path Analysator"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Once you have installed the package fakin.path.app and all related packages, 
+you are set up to 
+
+1. Scan your file system for file paths and file properties and save them to 
+CSV files (CSV = Comma Separated Values),
+
+2. Run the Web Application to analyse the path information produced in the
+first step.
+
+## Step 1: Scan your file system
+
+## Step 2: Run the Web Application
+
+```{r}
+# Set the path to your personal "path database" (a folder containing files as
+# e.g. generated )
+
+fakin.path.app::run_app(path_database)
+```

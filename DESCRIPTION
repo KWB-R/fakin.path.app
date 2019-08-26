@@ -21,7 +21,9 @@ LazyData: true
 Suggests: 
     covr (>= 3.2.1),
     kwb.db (>= 0.3.0),
-    RMySQL (>= 0.10.17)
+    RMySQL (>= 0.10.17),
+    knitr,
+    rmarkdown
 RoxygenNote: 6.1.1
 Imports: 
     dplyr (>= 0.8.1),
@@ -45,3 +47,4 @@ Remotes:
     github::kwb-r/kwb.fakin,
     github::kwb-r/kwb.file,
     github::kwb-r/kwb.utils
+VignetteBuilder: knitr

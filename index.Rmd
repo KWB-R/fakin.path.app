@@ -68,4 +68,3 @@ Call the app by giving the path to the target folder:
 ```{r eval = FALSE}
 fakin.path.app::run_app(path_database = target_dir)
 ```
-

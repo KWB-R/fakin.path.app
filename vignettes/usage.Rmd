@@ -27,9 +27,9 @@ first step.
 
 ## Step 2: Run the Web Application
 
-```{r}
+```{r eval = FALSE}
 # Set the path to your personal "path database" (a folder containing files as
 # e.g. generated )
 
-fakin.path.app::run_app(path_database)
+fakin.path.app::run_app()
 ```

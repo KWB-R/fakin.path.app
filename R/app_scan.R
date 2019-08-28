@@ -74,24 +74,28 @@ server_app_scan <- function(input, output, session) {
       return() 
     }
 
-    for (root_dir in paths[is_ok]) {
+    if (! any(is_ok)) {
+      return()
+    }
+    
+    files_created <- sapply(paths[is_ok], function(root_dir) {
 
       run_with_modal(
-        text = paste("Scanning files below", root_dir), {
-          kwb.fakin::get_and_save_file_info(
+        text = paste("Scanning files below", root_dir), 
+        expr = {
+          file_created <- kwb.fakin::get_and_save_file_info(
             root_dir, output_dir, check_dirs = TRUE, format = "%Y-%m-%d",
             fail = FALSE
           )
         }
       )
-    }
+      
+      file_created
+    })
     
     shiny::showModal(shiny::modalDialog(
-      shiny::HTML("The following files can now be inspected:<br><br>\n"),
-      shiny::HTML(paste(
-        dir(output_dir, pattern = as.character(Sys.Date())),
-        collapse = "<br>\n"
-      ))
+      shiny::HTML("The following files have been created:<br><br>\n"),
+      shiny::HTML(paste(files_created, collapse = "<br>\n"))
     ))
   })
 }

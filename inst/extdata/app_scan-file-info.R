@@ -1,54 +1,5 @@
-# default_targetdir ------------------------------------------------------------
-default_targetdir <- function()
-{
-  kwb.utils::createDirectory(file.path(Sys.getenv("HOME"), "pathana-db"))
-}
-
-# Define elements of the user interface ----------------------------------------
-button_browse <- shinyFiles::shinyDirButton(
-  "browse", "Add root directory...", "Select a root directory"
-)
-
-button_remove <- shiny::actionButton(
-  "remove", "Remove selected root directories"
-)
-
-button_scan <- shiny::actionButton(
-  "scan", "Scan root directories"
-)
-
-width <- "400px"
-
-input_root_dirs <- shiny::selectInput(
-  "root_dirs", label = NULL, width = width, 
-  choices = fakin.path.app:::read_root_dirs(), 
-  multiple = TRUE, selectize = FALSE
-)
-
-input_target_dir <- shiny::textInput(
-  "targetdir", label = NULL, value = default_targetdir(), width = width
-)
-
-button_browse_target <- shinyFiles::shinyDirButton(
-  "browse_target", "Change output directory...", "Select the output directory"
-)
-
-# Define the user interface ----------------------------------------------------
-ui <- shiny::fluidPage(
-  shinyjs::useShinyjs(),
-  shiny::tags$head(shiny::tags$script(src = "message-handler.js")),
-  h3("1. Define root directories"),
-  input_root_dirs,
-  shiny::fluidRow(column(width = 12, button_browse, button_remove)),
-  h3("2. Define output directory"),
-  shinyjs::disabled(input_target_dir),
-  button_browse_target,
-  h3("3. Scan root directories"),
-  button_scan
-)
-
-# Server Logic -----------------------------------------------------------------
-server <- function(input, output, session) {
+# server_app_scan --------------------------------------------------------------
+server_app_scan <- function(input, output, session) {
 
   # Helper function to update the list of root directories  
   update_root_dirs <- function(root_dirs) {
@@ -128,7 +79,8 @@ server <- function(input, output, session) {
       fakin.path.app:::run_with_modal(
         text = paste("Scanning files below", root_dir), {
           kwb.fakin::get_and_save_file_info(
-            root_dir, output_dir, check_dirs = TRUE, format = "%Y-%m-%d"
+            root_dir, output_dir, check_dirs = TRUE, format = "%Y-%m-%d",
+            fail = FALSE
           )
         }
       )
@@ -144,5 +96,13 @@ server <- function(input, output, session) {
   })
 }
 
-# Run the app
-shiny::shinyApp(ui, server)
+# run_app_scan -----------------------------------------------------------------
+
+#' Run the App that Stores File Information to CSV Files
+#' 
+#' @export
+run_app_scan <- function()
+{
+  # Run the app
+  shiny::shinyApp(ui = get_ui_app_scan(), server = server_app_scan)
+}

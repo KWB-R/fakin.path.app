@@ -3,7 +3,7 @@ server_app_scan <- function(input, output, session) {
 
   # Helper function to update the list of root directories  
   update_root_dirs <- function(root_dirs) {
-    fakin.path.app:::write_root_dirs(root_dirs)
+    write_root_dirs(root_dirs)
     shiny::updateSelectInput(session, "root_dirs", choices = root_dirs)
   }
 
@@ -20,18 +20,18 @@ server_app_scan <- function(input, output, session) {
   )
   
   # Update the list of root directories if a new path was selected
-  observeEvent(input$browse, {
+  shiny::observeEvent(input$browse, {
     new_dir <- shinyFiles::parseDirPath(volumes, input$browse)
     if (length(new_dir) == 0) {
       return()
     }
-    root_dirs <- fakin.path.app:::read_root_dirs()
+    root_dirs <- read_root_dirs()
     root_dirs <- sort(unique(c(root_dirs, new_dir)))
     update_root_dirs(root_dirs)
   })
 
   # Update the target directory if a new path was selected
-  observeEvent(input$browse_target, {
+  shiny::observeEvent(input$browse_target, {
     new_dir <- shinyFiles::parseDirPath(volumes, input$browse_target)
     if (length(new_dir) == 0) {
       return()
@@ -40,15 +40,15 @@ server_app_scan <- function(input, output, session) {
   })
 
   # Update the list of root directories if the "remove" button is clicked
-  observeEvent(input$remove, {
-    root_dirs <- fakin.path.app:::read_root_dirs()
+  shiny::observeEvent(input$remove, {
+    root_dirs <- read_root_dirs()
     root_dirs <- setdiff(root_dirs, input$root_dirs)
     update_root_dirs(root_dirs)
   })
 
   # Run the scanning of the root directories  
-  observeEvent(input$scan, {
-    paths <- fakin.path.app:::read_root_dirs()
+  shiny::observeEvent(input$scan, {
+    paths <- read_root_dirs()
     output_dir <- input$targetdir
 
     if (! file.exists(output_dir)) {
@@ -76,7 +76,7 @@ server_app_scan <- function(input, output, session) {
 
     for (root_dir in paths[is_ok]) {
 
-      fakin.path.app:::run_with_modal(
+      run_with_modal(
         text = paste("Scanning files below", root_dir), {
           kwb.fakin::get_and_save_file_info(
             root_dir, output_dir, check_dirs = TRUE, format = "%Y-%m-%d",

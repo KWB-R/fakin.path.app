@@ -6,11 +6,15 @@ csvFileUI <- function(id, path_database)
 {
   ns <- shiny::NS(id)
   
+  #kwb.utils::assignPackageObjects("fakin.path.app")
   shiny::tagList(
     shiny::selectInput(
       inputId = ns("file"), 
       label = "Load saved paths from",
-      choices = get_file_info_files(path_database)
+      choices = c(
+        get_file_info_files(path_database),
+        get_available_database_entries()
+      )
     )
   )
 }
@@ -48,6 +52,8 @@ get_file_info_files <- function(path_database)
 #' @keywords internal
 csvFile <- function(input, output, session, read_function)
 {
+  db_split_pattern <- "\\s*\\|\\s*"
+  
   # Path to CSV file
   csv_file <- shiny::reactive({
     input$file
@@ -55,7 +61,14 @@ csvFile <- function(input, output, session, read_function)
   
   # Path to RDS file in the same folder
   rds_file <- shiny::reactive({
-    gsub("\\.csv$", ".rds", csv_file())
+    if (grepl("^db", csv_file())) {
+      file.path(
+        get_global("path_database"),
+        paste0(gsub(db_split_pattern, "_", csv_file()), ".rds")
+      )
+    } else {
+      gsub("\\.csv$", ".rds", csv_file())
+    }
   })
   
   # Does the RDS file already exist?  
@@ -70,8 +83,15 @@ csvFile <- function(input, output, session, read_function)
     }
       
     x <- run_with_modal(
-      text = paste("Reading", basename(csv_file())),
-      expr = kwb.fakin::read_file_paths(csv_file())
+      text = paste("Reading", basename(csv_file())), 
+      expr = {
+        if (grepl("^db", csv_file())) {
+          date_key <- strsplit(csv_file(), db_split_pattern)[[1]][-1]
+          get_path_data_from_database(date_key[1], date_key[2])
+        } else {
+          kwb.fakin::read_file_paths(csv_file())
+        }
+      }
     )
     
     kwb.utils::selectColumns(
@@ -88,7 +108,7 @@ csvFile <- function(input, output, session, read_function)
       
     run_with_modal(
       text = paste("Loading", basename(rds_file())),
-      expr =readRDS(rds_file())
+      expr = readRDS(rds_file())
     )
   })
   
@@ -102,7 +122,9 @@ csvFile <- function(input, output, session, read_function)
       text = "Providing table data",
       expr = pathlist::hide_server(pathlist::pathlist(
         paths = raw_content()$path, 
-        data = raw_content()[, c("type", "size")]
+        data = kwb.utils::selectColumns(
+          raw_content(), c("type", "size", "modified")
+        )
       ))
     )
   })
@@ -143,7 +165,7 @@ prepare_full_path_table <- function(x, pl)
   x$modified <- as.Date(as.POSIXct(timestamps, "%Y-%m-%dT%H:%M:%S", tz = "UTC"))
 
   # Provide/format columns "size", "toplevel", "folder", "filename"  
-  x$size <- round(x$size, 6)
+  #x$size <- round(x$size, 6)
   x$toplevel <- factor(pathlist::toplevel(pl))
   x$folder <- pathlist::folder(pl)
   x$filename <- pathlist::filename(pl)

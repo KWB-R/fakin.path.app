@@ -32,7 +32,7 @@ Imports:
     ggplot2 (>= 3.2.0),
     htmltools (>= 0.3.6),
     jsTree (>= 1.0.1),
-    kwb.fakin (>= 0.4.0),
+    kwb.fakin (>= 0.4.1),
     kwb.file (>= 0.2.0),
     kwb.utils (>= 0.4.3),
     magrittr (>= 1.5),

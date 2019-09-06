@@ -22,7 +22,7 @@ extend the functionality of the R environment. Start by installing the package
 install.packages("remotes", repos = "https://cloud.r-project.org")
 ```
 
-Use the function `install_github()` from this package to install this package "fakin.path.app" and all other packages that this package depends on:
+Use the function `remotes::install_github()` from this package to install this package "fakin.path.app" and all other packages that this package depends on:
 
 ```r
 remotes::install_github("KWB-R/fakin.path.app")

@@ -85,23 +85,42 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-
-<div id="fakin-path-app" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#fakin-path-app" class="anchor"></a>fakin.path.app</h1></div>
-<p>This package contains an R Shiny App that loads file path information from a file and displays the paths in different ways. The aim of the app is to find weaknesses in the folder structure.</p>
+<p><a href="https://ci.appveyor.com/project/KWB-R/fakin-path-app/branch/master">[Appveyor build Status]((https://ci.appveyor.com/api/projects/status/ufb4myi4n730logd/branch/master?svg=true)</a> <a href="https://travis-ci.org/KWB-R/fakin.path.app"><img src="https://travis-ci.org/KWB-R/fakin.path.app.svg?branch=master" alt="Travis build Status"></a> <a href="https://codecov.io/github/KWB-R/fakin.path.app"><img src="https://codecov.io/github/KWB-R/fakin.path.app/branch/master/graphs/badge.svg" alt="codecov"></a> <a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Project Status"></a> <a href=""><embed src="https://www.r-pkg.org/badges/version/fakin.path.app"></embed></a></p>
+<p>This package contains an R Shiny App that loads file path information from a file and displays the paths in different ways. The aim of the app is to find weaknesses in given folder structures.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#install.packages("remotes", repos = "https://cloud.r-project.org")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"KWB-R/fakin.path.app"</span>)</a></code></pre></div>
-</div>
-<div id="documentation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
-<p>Release: <a href="https://kwb-r.github.io/fakin.path.app" class="uri">https://kwb-r.github.io/fakin.path.app</a></p>
-<p>Development: <a href="https://kwb-r.github.io/fakin.path.app/dev" class="uri">https://kwb-r.github.io/fakin.path.app/dev</a></p>
-</div>
+<p>You need to have R installed on your computer. R is a language and environment for statistical computing and graphics. The software is Open Source. For Windows, you find an installer file here: <a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a></p>
+<p>Once you have R installed, you need some additional so called R packages that extend the functionality of the R environment. Start by installing the package “remotes” that allows to directly install R packages from GitHub:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, <span class="dt">repos =</span> <span class="st">"https://cloud.r-project.org"</span>)</a></code></pre></div>
+<p>Use the function <code>install_github()</code> from this package to install this package “fakin.path.app” and all other packages that this package depends on:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"KWB-R/fakin.path.app"</span>)</a></code></pre></div>
+<p>If all packages are installed, you can run the application by:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">fakin.path.app<span class="op">::</span><span class="kw">run_app</span>()</a></code></pre></div>
+<p>This opens the main window with some example data being preloaded. You can play around with these data.</p>
+<p>For analysing your own folder structures, you need to provide path information. You may use a function from the package “kwb.fakin” to provide such a file:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Set the path to the root folder</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">root_dir &lt;-<span class="st"> "~/Documents"</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># Let R find all file paths below the root folder</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">file_info &lt;-<span class="st"> </span>kwb.fakin<span class="op">::</span><span class="kw">get_recursive_file_info</span>(root_dir)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># Get an impression of the information returned</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(file_info)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co"># Set the path to the directory in which to save path information files</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">target_dir &lt;-<span class="st"> "~/Documents/path_info_files"</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co"># Create the target directory</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(target_dir)</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co"># Create the path to the target file</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">filename &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span>(), <span class="dt">format =</span> <span class="st">"my-files_%Y%m%d.csv"</span>)</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co"># Write the path information to a file</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">kwb.fakin<span class="op">::</span><span class="kw">write_file_info</span>(file_info, <span class="dt">file =</span> <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(target_dir, filename))</a></code></pre></div>
+<p>Call the app by giving the path to the target folder:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">fakin.path.app<span class="op">::</span><span class="kw">run_app</span>(<span class="dt">path_database =</span> target_dir)</a></code></pre></div>
 </div>
 
   </div>
@@ -132,17 +151,7 @@
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://ci.appveyor.com/project/KWB-R/fakin-path-app/branch/master"><embed src="https://ci.appveyor.com/api/projects/status/github/KWB-R/fakin.path.app?branch=master&amp;svg=true"></embed></a></li>
-<li><a href="https://travis-ci.org/KWB-R/fakin.path.app"><img src="https://travis-ci.org/KWB-R/fakin.path.app.svg?branch=master" alt="Travis build Status"></a></li>
-<li><a href="https://codecov.io/github/KWB-R/fakin.path.app"><img src="https://codecov.io/github/KWB-R/fakin.path.app/branch/master/graphs/badge.svg" alt="codecov"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Project Status"></a></li>
-<li><a href=""><embed src="https://www.r-pkg.org/badges/version/fakin.path.app"></embed></a></li>
-</ul>
-</div>
-</div>
+  </div>
 </div>
 
 

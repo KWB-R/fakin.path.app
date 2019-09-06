@@ -1,4 +1,4 @@
-[![Appveyor build Status]((https://ci.appveyor.com/api/projects/status/ufb4myi4n730logd/branch/master?svg=true)](https://ci.appveyor.com/project/KWB-R/fakin-path-app/branch/master)
+[![Appveyor build Status](https://ci.appveyor.com/api/projects/status/ufb4myi4n730logd/branch/master?svg=true)](https://ci.appveyor.com/project/KWB-R/fakin-path-app/branch/master)
 [![Travis build Status](https://travis-ci.org/KWB-R/fakin.path.app.svg?branch=master)](https://travis-ci.org/KWB-R/fakin.path.app)
 [![codecov](https://codecov.io/github/KWB-R/fakin.path.app/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/fakin.path.app)
 [![Project Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)

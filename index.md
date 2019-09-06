@@ -18,19 +18,19 @@ Once you have R installed, you need some additional so called R packages that
 extend the functionality of the R environment. Start by installing the package
 "remotes" that allows to directly install R packages from GitHub:
 
-```{r eval = FALSE}
+```r
 install.packages("remotes", repos = "https://cloud.r-project.org")
 ```
 
 Use the function `install_github()` from this package to install this package "fakin.path.app" and all other packages that this package depends on:
 
-```{r eval = FALSE}
+```r
 remotes::install_github("KWB-R/fakin.path.app")
 ```
 
 If all packages are installed, you can run the application by:
 
-```{r eval = FALSE}
+```r
 fakin.path.app::run_app()
 ```
 
@@ -40,7 +40,7 @@ around with these data.
 For analysing your own folder structures, you need to provide path information.
 You may use a function from the package "kwb.fakin" to provide such a file:
 
-```{r eval = FALSE}
+```r
 # Set the path to the root folder
 root_dir <- "~/Documents"
 
@@ -65,6 +65,6 @@ kwb.fakin::write_file_info(file_info, file = file.path(target_dir, filename))
 
 Call the app by giving the path to the target folder:
 
-```{r eval = FALSE}
+```r
 fakin.path.app::run_app(path_database = target_dir)
 ```

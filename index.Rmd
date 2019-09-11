@@ -38,33 +38,25 @@ This opens the main window with some example data being preloaded. You can play
 around with these data.
 
 For analysing your own folder structures, you need to provide path information.
-You may use a function from the package "kwb.fakin" to provide such a file:
+You may use another small web application that is contained in this package to 
+provide path information about your own files. You run the application by
+running the following code in the R console:
 
 ```{r eval = FALSE}
-# Set the path to the root folder
-root_dir <- "~/Documents"
-
-# Let R find all file paths below the root folder
-file_info <- kwb.fakin::get_recursive_file_info(root_dir)
-
-# Get an impression of the information returned
-str(file_info)
-
-# Set the path to the directory in which to save path information files
-target_dir <- "~/Documents/path_info_files"
-
-# Create the target directory
-dir.create(target_dir)
-
-# Create the path to the target file
-filename <- format(Sys.Date(), format = "my-files_%Y%m%d.csv")
-
-# Write the path information to a file
-kwb.fakin::write_file_info(file_info, file = file.path(target_dir, filename))
+# Run web application to generate path information about your own files
+fakin.path.app::run_app_scan()
 ```
 
-Call the app by giving the path to the target folder:
+By default, the app writes path information files to a folder `"~/pathana-db"`.
+You can change this folder within the app. 
+
+Once path information files are available, call the main app by giving the path 
+to this folder:
 
 ```{r eval = FALSE}
-fakin.path.app::run_app(path_database = target_dir)
+# Set the path to the "path database"
+path_database <- "~/pathana-db"
+
+# Run the main app giving the path to the "path database"
+fakin.path.app::run_app(path_database)
 ```

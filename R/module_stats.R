@@ -26,7 +26,7 @@ stats <- function(input, output, session, path_list)
 {
   path_summary <- shiny::reactive({
     if (! is.null(path_list())) {
-      kwb.fakin:::get_path_summary(path_list(), n = 5)
+      get_path_summary(path_list(), n = 5)
     } # else NULL
   })
   

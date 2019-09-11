@@ -29,7 +29,6 @@ treemapUI <- function(id)
 
 # mytreemap --------------------------------------------------------------------
 
-#' @importFrom kwb.fakin plot_treemaps_from_path_data
 #' @importFrom kwb.utils selectColumns
 #' @importFrom shiny renderPlot
 #' @keywords internal
@@ -45,7 +44,7 @@ mytreemap <- function(input, output, session, path_list)
         "You may need to remove a filter on 'directories'"
       ))
     } else {
-      kwb.fakin::plot_treemaps_from_path_data(
+      plot_treemaps_from_path_data(
         path_list(),
         n_levels = input$n_levels, 
         types = input$treemap_type

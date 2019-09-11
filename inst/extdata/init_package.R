@@ -39,7 +39,7 @@ kwb.pkgbuild::use_pkg(
 )
 
 pkg_dependencies <- c(
-  "DT", "kwb.fakin", "kwb.file", "kwb.utils", "networkD3", "shiny"
+  "DT", "kwb.file", "kwb.utils", "networkD3", "shiny"
 )
 
 sapply(pkg_dependencies, usethis::use_package)

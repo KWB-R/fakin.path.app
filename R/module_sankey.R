@@ -45,7 +45,6 @@ sankeyUI <- function(id)
 
 # sankey -----------------------------------------------------------------------
 
-#' @importFrom kwb.fakin plot_path_network
 #' @importFrom kwb.utils defaultIfNULL selectColumns
 #' @importFrom networkD3 renderSankeyNetwork sankeyNetworkOutput
 #' @importFrom shiny NS renderUI
@@ -55,7 +54,7 @@ sankey <- function(input, output, session, path_list, id = NULL)
   default_on_null <- kwb.utils::defaultIfNULL
 
   output$graph_ <- networkD3::renderSankeyNetwork({
-    kwb.fakin::plot_path_network(
+    plot_path_network(
       paths = path_list(),
       max_depth = input$max_depth,
       nodePadding = default_on_null(input$nodePadding, 10),

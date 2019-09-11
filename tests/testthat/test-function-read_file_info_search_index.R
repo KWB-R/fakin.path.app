@@ -1,6 +1,6 @@
-test_that("read_file_info_libuv() works", {
+test_that("read_file_info_search_index() works", {
 
-  f <- read_file_info_libuv
+  f <- read_file_info_search_index
 
   expect_error(f())
 

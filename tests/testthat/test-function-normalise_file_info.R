@@ -1,6 +1,6 @@
 test_that("normalise_file_info() works", {
 
-  f <- kwb.fakin:::normalise_file_info
+  f <- normalise_file_info
 
   expect_error(f())
 

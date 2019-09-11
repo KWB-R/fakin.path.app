@@ -6,7 +6,7 @@
 ^.gitlab-ci\.yml$
 ^appveyor\.yml$
 ^codecov\.yml$
-^index\.Rmd$
+^index\.md$
 ^README\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$

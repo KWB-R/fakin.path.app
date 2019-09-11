@@ -1,4 +1,4 @@
-[![Appveyor build Status]((https://ci.appveyor.com/api/projects/status/ufb4myi4n730logd/branch/master?svg=true)](https://ci.appveyor.com/project/KWB-R/fakin-path-app/branch/master)
+[![Appveyor build Status](https://ci.appveyor.com/api/projects/status/ufb4myi4n730logd/branch/master?svg=true)](https://ci.appveyor.com/project/KWB-R/fakin-path-app/branch/master)
 [![Travis build Status](https://travis-ci.org/KWB-R/fakin.path.app.svg?branch=master)](https://travis-ci.org/KWB-R/fakin.path.app)
 [![codecov](https://codecov.io/github/KWB-R/fakin.path.app/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/fakin.path.app)
 [![Project Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -18,19 +18,19 @@ Once you have R installed, you need some additional so called R packages that
 extend the functionality of the R environment. Start by installing the package
 "remotes" that allows to directly install R packages from GitHub:
 
-```{r eval = FALSE}
+```r
 install.packages("remotes", repos = "https://cloud.r-project.org")
 ```
 
-Use the function `install_github()` from this package to install this package "fakin.path.app" and all other packages that this package depends on:
+Use the function `remotes::install_github()` from this package to install this package "fakin.path.app" and all other packages that this package depends on:
 
-```{r eval = FALSE}
+```r
 remotes::install_github("KWB-R/fakin.path.app")
 ```
 
 If all packages are installed, you can run the application by:
 
-```{r eval = FALSE}
+```r
 fakin.path.app::run_app()
 ```
 
@@ -42,7 +42,7 @@ You may use another small web application that is contained in this package to
 provide path information about your own files. You run the application by
 running the following code in the R console:
 
-```{r eval = FALSE}
+```r
 # Run web application to generate path information about your own files
 fakin.path.app::run_app_scan()
 ```
@@ -53,7 +53,7 @@ You can change this folder within the app.
 Once path information files are available, call the main app by giving the path 
 to this folder:
 
-```{r eval = FALSE}
+```r
 # Set the path to the "path database"
 path_database <- "~/pathana-db"
 

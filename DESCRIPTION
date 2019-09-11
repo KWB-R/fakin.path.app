@@ -1,12 +1,17 @@
 Package: fakin.path.app
-Title: Shiny App to Visialise File Paths
+Title: Shiny App to Visualise File Paths
 Version: 0.2.0
 Authors@R: 
     c(person(given = "Hauke",
              family = "Sonnenberg",
              role = c("aut", "cre"),
              email = "hauke.sonnenberg@kompetenz-wasser.de",
-             comment = structure("0000-0001-9134-2871", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0001-9134-2871")),
+      person(given = "Michael",
+             family = "Rustler",
+             role = "ctb",
+             email = "michael.rustler@kompetenz-wasser.de",
+             comment = c(ORCID = "0000-0003-0647-7726")),
       person(given = "Kompetenzzentrum Wasser Berlin gGmbH (KWB)",
              role = "cph"))
 Description: This package contains an R Shiny App that
@@ -49,9 +54,10 @@ Imports:
     shinyjs (>= 1.0),
     treemap (>= 2.4.2),
     wordcloud (>= 2.6)
+VignetteBuilder: 
+    knitr
 Remotes:
     github::hsonne/pathlist,
     github::kwb-r/kwb.db,
     github::kwb-r/kwb.file,
     github::kwb-r/kwb.utils
-VignetteBuilder: knitr

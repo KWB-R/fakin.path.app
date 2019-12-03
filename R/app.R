@@ -28,7 +28,7 @@ get_ui <- function()
 
 #' @importFrom shiny callModule
 #' @keywords internal
-server <- function(input, output)
+server <- function(input, output, session)
 {
   path_list <- shiny::callModule(fileData, "fileData")
   
@@ -43,6 +43,8 @@ server <- function(input, output)
   shiny::callModule(stats, "stats", path_list = path_list)
   shiny::callModule(duplicates, "duplicates", path_list = path_list)
   shiny::callModule(wordcloud, "wordcloud", path_list = path_list)
+  
+  session$onSessionEnded(shiny::stopApp)
 }
 
 # run_app(): Run the application -----------------------------------------------

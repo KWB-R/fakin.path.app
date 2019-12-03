@@ -83,7 +83,7 @@ server_app_scan <- function(input, output, session) {
       run_with_modal(
         text = paste("Scanning files below", root_dir), 
         expr = {
-          file_created <- kwb.fakin::get_and_save_file_info(
+          file_created <- get_and_save_file_info(
             root_dir, output_dir, check_dirs = TRUE, format = "%Y-%m-%d",
             fail = FALSE
           )

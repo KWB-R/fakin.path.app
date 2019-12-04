@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run the App that Stores File Information to CSV Files — run_app_scan • fakin.path.app</title>
+<title>Get and Save File Information — get_and_save_file_info • fakin.path.app</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Run the App that Stores File Information to CSV Files — run_app_scan" />
-<meta property="og:description" content="Run the App that Stores File Information to CSV Files" />
+<meta property="og:title" content="Get and Save File Information — get_and_save_file_info" />
+<meta property="og:description" content="Get and Save File Information" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,23 +120,64 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run the App that Stores File Information to CSV Files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/app_scan.R'><code>R/app_scan.R</code></a></small>
-    <div class="hidden name"><code>run_app_scan.Rd</code></div>
+    <h1>Get and Save File Information</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/get_and_save_file_info.R'><code>R/get_and_save_file_info.R</code></a></small>
+    <div class="hidden name"><code>get_and_save_file_info.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Run the App that Stores File Information to CSV Files</p>
+    <p>Get and Save File Information</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run_app_scan</span>()</pre>
+    <pre class="usage"><span class='fu'>get_and_save_file_info</span>(<span class='no'>root_dir</span>, <span class='no'>output_dir</span>, <span class='kw'>check_dirs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"%Y-%m-%d_%H%M"</span>, <span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>root_dir</th>
+      <td><p>path to the directory from which to start searching for
+files</p></td>
+    </tr>
+    <tr>
+      <th>output_dir</th>
+      <td><p>path to the output directory. In this directory, a file
+"path-info_&lt;date-time&gt;_&lt;parent-folder&gt;.csv" will be generated with
+&lt;date-time&gt; being a date and time string in yyyy-mm-dd_HHMM format and
+&lt;parent-folder&gt; being the last path segment of <code>root_dir</code></p></td>
+    </tr>
+    <tr>
+      <th>check_dirs</th>
+      <td><p>if <code>TRUE</code> (default) it is checked in advance if both
+<code>root_dir</code> and <code>output_dir</code> exist. Switch this off if e.g.
+network paths are wrongly considered to be non-existing.</p></td>
+    </tr>
+    <tr>
+      <th>format</th>
+      <td><p>format string specifying how to format the part of the
+filename intended to contain date (and, if required, time) information.
+Default: "%Y-%m-%d_%H%M"</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments passed to
+<code><a href='get_recursive_file_info.html'>get_recursive_file_info</a></code> and finally to
+<code><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_info</a></code>. Set e.g. <code>fail = FALSE</code> to avoid failure
+due to insufficient access permissions.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>full path to the file to which all file information were written</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run the App that Stores File Information to CSV Files — run_app_scan • fakin.path.app</title>
+<title>Get Traffic Light Colours for Names — name_to_traffic_light • fakin.path.app</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Run the App that Stores File Information to CSV Files — run_app_scan" />
-<meta property="og:description" content="Run the App that Stores File Information to CSV Files" />
+<meta property="og:title" content="Get Traffic Light Colours for Names — name_to_traffic_light" />
+<meta property="og:description" content="Get Traffic Light Colours for Names" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,23 +120,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run the App that Stores File Information to CSV Files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/app_scan.R'><code>R/app_scan.R</code></a></small>
-    <div class="hidden name"><code>run_app_scan.Rd</code></div>
+    <h1>Get Traffic Light Colours for Names</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/plot_path_network.R'><code>R/plot_path_network.R</code></a></small>
+    <div class="hidden name"><code>name_to_traffic_light.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Run the App that Stores File Information to CSV Files</p>
+    <p>Get Traffic Light Colours for Names</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run_app_scan</span>()</pre>
+    <pre class="usage"><span class='fu'>name_to_traffic_light</span>(<span class='no'>x</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>character of (file or folder) names, e.g. as they appear as
+node labels in the plot generated with <code><a href='plot_path_network.html'>plot_path_network</a></code></p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>vector of colour strings each of which is <code>green</code> (name does
+  comply with naming convention), <code>yellow</code> (name does almost comply with
+  naming convention), <code>red</code> (name does not comply with naming
+  convention).</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Define a vector of names</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"has_speci&amp;l"</span>, <span class='st'>"has space"</span>, <span class='st'>"is_ok"</span>)
+
+<span class='co'># Colour names by their compliance with naming convention</span>
+<span class='fu'>name_to_traffic_light</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "red"    "yellow" "green" </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

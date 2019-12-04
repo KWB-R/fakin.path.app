@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run the App that Stores File Information to CSV Files — run_app_scan • fakin.path.app</title>
+<title>Read File Paths from a File — read_file_paths • fakin.path.app</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Run the App that Stores File Information to CSV Files — run_app_scan" />
-<meta property="og:description" content="Run the App that Stores File Information to CSV Files" />
+<meta property="og:title" content="Read File Paths from a File — read_file_paths" />
+<meta property="og:description" content="The function tries to guess what type of file is given to the function and
+calls the appropriate function to read the file. The aim of this function is
+to provide a common result format independent from the type of file that was
+read." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,23 +123,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run the App that Stores File Information to CSV Files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/app_scan.R'><code>R/app_scan.R</code></a></small>
-    <div class="hidden name"><code>run_app_scan.Rd</code></div>
+    <h1>Read File Paths from a File</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/read_file_paths.R'><code>R/read_file_paths.R</code></a></small>
+    <div class="hidden name"><code>read_file_paths.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Run the App that Stores File Information to CSV Files</p>
+    <p>The function tries to guess what type of file is given to the function and
+calls the appropriate function to read the file. The aim of this function is
+to provide a common result format independent from the type of file that was
+read.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run_app_scan</span>()</pre>
+    <pre class="usage"><span class='fu'>read_file_paths</span>(<span class='no'>file</span>, <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>file</th>
+      <td><p>file containing file path information (path only or additional
+information such as file type, size or creation/modification time, etc.)</p></td>
+    </tr>
+    <tr>
+      <th>metadata</th>
+      <td><p>data frame containing metadata about the file. If given, it
+must look as what <code><a href='guess_file_metadata.html'>guess_file_metadata</a></code> returns. If <code>NULL</code>
+the same function is called to guess metadata about the file.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>data frame with columns...</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

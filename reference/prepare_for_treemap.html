@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run the App that Stores File Information to CSV Files — run_app_scan • fakin.path.app</title>
+<title>Prepare and Filter Path Data for Treemap Plot — prepare_for_treemap • fakin.path.app</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Run the App that Stores File Information to CSV Files — run_app_scan" />
-<meta property="og:description" content="Run the App that Stores File Information to CSV Files" />
+<meta property="og:title" content="Prepare and Filter Path Data for Treemap Plot — prepare_for_treemap" />
+<meta property="og:description" content="Prepare and Filter Path Data for Treemap Plot" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,23 +120,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run the App that Stores File Information to CSV Files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/app_scan.R'><code>R/app_scan.R</code></a></small>
-    <div class="hidden name"><code>run_app_scan.Rd</code></div>
+    <h1>Prepare and Filter Path Data for Treemap Plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/plot_treemaps.R'><code>R/plot_treemaps.R</code></a></small>
+    <div class="hidden name"><code>prepare_for_treemap.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Run the App that Stores File Information to CSV Files</p>
+    <p>Prepare and Filter Path Data for Treemap Plot</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run_app_scan</span>()</pre>
+    <pre class="usage"><span class='fu'>prepare_for_treemap</span>(<span class='no'>path_data</span>, <span class='kw'>root_path</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>variable</span> <span class='kw'>=</span> <span class='st'>"size"</span>, <span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>path_data</th>
+      <td><p>data frame as returned by <code><a href='read_file_info.html'>read_file_info</a></code></p></td>
+    </tr>
+    <tr>
+      <th>root_path</th>
+      <td><p>path to the folder that contains all paths to be considered.
+By setting the root path to "/path/to/root" you can "zoom into" the
+treeplot, showing the contents below "/path/to/root" only. If
+<code>root_path</code> is <code>""</code> (default) all paths in <code>path_data</code> are
+considered.</p></td>
+    </tr>
+    <tr>
+      <th>variable</th>
+      <td><p>name(s) of variable(s) to be selected. Default: "size"</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments passed to
+<code><a href='https://rdrr.io/pkg/kwb.file/man/remove_common_root.html'>remove_common_root</a></code>, such as <code>n_keep</code> (number
+of last segments to be kept from the common first part of all paths)</p></td>
+    </tr>
+    </table>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

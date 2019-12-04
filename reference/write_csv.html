@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run the App that Stores File Information to CSV Files — run_app_scan • fakin.path.app</title>
+<title>Write Data Frame to CSV File — write_csv • fakin.path.app</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Run the App that Stores File Information to CSV Files — run_app_scan" />
-<meta property="og:description" content="Run the App that Stores File Information to CSV Files" />
+<meta property="og:title" content="Write Data Frame to CSV File — write_csv" />
+<meta property="og:description" content="Write Data Frame to CSV File" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,23 +120,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run the App that Stores File Information to CSV Files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/app_scan.R'><code>R/app_scan.R</code></a></small>
-    <div class="hidden name"><code>run_app_scan.Rd</code></div>
+    <h1>Write Data Frame to CSV File</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>write_csv.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Run the App that Stores File Information to CSV Files</p>
+    <p>Write Data Frame to CSV File</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run_app_scan</span>()</pre>
+    <pre class="usage"><span class='fu'>write_csv</span>(<span class='no'>data</span>, <span class='no'>file</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>";"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>data frame</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>path to CSV file to be written</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>column separator</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>determines which function to use for writing the CSV file
+1: <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code>, 2: <code><a href='https://Rdatatable.gitlab.io/data.table/reference/fwrite.html'>fwrite</a></code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments passed to <code><a href='https://rdrr.io/r/utils/write.table.html'>write.table</a></code> or
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/fwrite.html'>fwrite</a></code></p></td>
+    </tr>
+    </table>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

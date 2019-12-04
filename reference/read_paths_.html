@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run the App that Stores File Information to CSV Files — run_app_scan • fakin.path.app</title>
+<title>Read Paths From File — read_paths_ • fakin.path.app</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Run the App that Stores File Information to CSV Files — run_app_scan" />
-<meta property="og:description" content="Run the App that Stores File Information to CSV Files" />
+<meta property="og:title" content="Read Paths From File — read_paths_" />
+<meta property="og:description" content="Read paths from a file that contains one path per line. Convert backslashes
+to slashes and sort the paths (by default)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -120,23 +121,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run the App that Stores File Information to CSV Files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/app_scan.R'><code>R/app_scan.R</code></a></small>
-    <div class="hidden name"><code>run_app_scan.Rd</code></div>
+    <h1>Read Paths From File</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/read_paths.R'><code>R/read_paths.R</code></a></small>
+    <div class="hidden name"><code>read_paths_.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Run the App that Stores File Information to CSV Files</p>
+    <p>Read paths from a file that contains one path per line. Convert backslashes
+to slashes and sort the paths (by default)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run_app_scan</span>()</pre>
+    <pre class="usage"><span class='fu'>read_paths_</span>(<span class='no'>file</span>, <span class='kw'>fileEncoding</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>encoding</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>,
+  <span class='kw'>do_sort</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>expected_encodings</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"windows-1252"</span>, <span class='st'>"ISO-8859-1"</span>))</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>file</th>
+      <td><p>full path to the text file containing paths</p></td>
+    </tr>
+    <tr>
+      <th>fileEncoding</th>
+      <td><p>The name of the encoding to be assumed. Passed as
+<code>encoding</code> to <code><a href='https://rdrr.io/r/base/connections.html'>file</a></code>, see there.</p></td>
+    </tr>
+    <tr>
+      <th>encoding</th>
+      <td><p>passed to <code><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments passed to <code>fakin.path.app:::read_lines</code>,
+such as <code>n</code></p></td>
+    </tr>
+    <tr>
+      <th>do_sort</th>
+      <td><p>if <code>TRUE</code> (default), the vector of paths is sorted
+alphanumerically.</p></td>
+    </tr>
+    <tr>
+      <th>expected_encodings</th>
+      <td><p>vector of names of file encodings that are
+expected to occur. Expected encodings will be preferred.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>vector of character</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

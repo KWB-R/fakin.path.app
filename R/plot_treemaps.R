@@ -78,7 +78,8 @@ plot_all_treemaps <- function(path_infos, as_png = TRUE, ...)
 #' @param types type(s) of treeplots: one or both of \code{c("size", "files")}
 #'   (the default).
 #' @export
-#'
+#' @importFrom kwb.utils assertFinalSlash callWith catAndRun getAttribute
+#' 
 plot_treemaps_from_path_data <- function(
   path_data, root_path = "", name = "root", as_png = FALSE, n_levels = 2,
   output_dir = tempdir(), type = "value", args_png = list(), n_biggest = -1,
@@ -143,7 +144,9 @@ plot_treemaps_from_path_data <- function(
         messageText = sprintf("Creating subplot %d/%d", i, length(biggest)),
         plot_treemaps_from_path_data(
           path_data,
-          root_path = paste0(check_or_set_ending_slash(root_path), biggest[i]),
+          root_path = paste0(
+            kwb.utils::assertFinalSlash(root_path), biggest[i]
+          ),
           name = sprintf("%02d_%s", depth + 1, biggest[i]),
           as_png = as_png, n_levels = n_levels, output_dir = output_dir,
           type = type, args_png = args_png, depth = depth + 1,

@@ -10,13 +10,6 @@ cat_elapsed <- function(time_info)
   cat("Elapsed:", time_info["elapsed"], "\n")
 }
 
-# check_or_set_ending_slash ----------------------------------------------------
-check_or_set_ending_slash <- function(x)
-{
-  # Add slash to the end and replace multiple occurrences of slash at the end
-  gsub("/+$", "/", paste0(x, "/"))
-}
-
 # dir_or_stop ------------------------------------------------------------------
 dir_or_stop <- function(path, pattern)
 {

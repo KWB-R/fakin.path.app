@@ -1,6 +1,6 @@
 Package: fakin.path.app
 Title: Shiny App to Visualise File Paths
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: 
     c(person(given = "Hauke",
              family = "Sonnenberg",
@@ -41,7 +41,7 @@ Imports:
     htmltools (>= 0.3.6),
     jsTree (>= 1.0.1),
     kwb.file (>= 0.2.0),
-    kwb.utils (>= 0.4.3),
+    kwb.utils (>= 0.5.0),
     lubridate (>= 1.7.4),
     magrittr (>= 1.5),
     networkD3 (>= 0.4),

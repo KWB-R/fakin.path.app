@@ -100,8 +100,7 @@ is_valid_path_file <- function(metadata)
 guess_file_path_type <- function(x)
 {
   kwb.utils::catAndRun("Guessing file path type", {
-    has_final_slash <- grepl_bytes("/$", x)
     has_extension <- kwb.utils::fileExtension(x) != ""
-    ifelse(has_final_slash | ! has_extension, "directory", "file")
+    ifelse(has_final_slash(x) | ! has_extension, "directory", "file")
   })
 }

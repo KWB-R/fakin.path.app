@@ -48,6 +48,14 @@ grepl_bytes <- function(...)
   grepl(..., useBytes = TRUE)
 }
 
+# has_final_slash --------------------------------------------------------------
+has_final_slash <- function(x)
+{
+  #grepl_bytes("/$", x)
+  n <- nchar(x)
+  substr(x, n, n) == "/"
+}
+
 # prepare_root_for_jsTree ------------------------------------------------------
 prepare_root_for_jsTree <- function(root)
 {

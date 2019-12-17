@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>License • fakin.path.app</title>
+<title>Prepare and Filter Path Data for Treemap Plot — prepare_for_treemap • fakin.path.app</title>
 
 
 <!-- jquery -->
@@ -29,13 +29,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="License" />
+<meta property="og:title" content="Prepare and Filter Path Data for Treemap Plot — prepare_for_treemap" />
+<meta property="og:description" content="Prepare and Filter Path Data for Treemap Plot" />
+<meta name="twitter:card" content="summary" />
 
 
 <meta name="robots" content="noindex">
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -66,7 +68,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">fakin.path.app</a>
+        <a class="navbar-link" href="../index.html">fakin.path.app</a>
         <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
       </span>
     </div>
@@ -74,13 +76,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -90,12 +92,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/usage.html">Using the FAKIN Path Analysator</a>
+      <a href="../articles/usage.html">Using the FAKIN Path Analysator</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -116,38 +118,56 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>License</h1>
+    <h1>Prepare and Filter Path Data for Treemap Plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/fakin.path.app/blob/master/R/plot_treemaps.R'><code>R/plot_treemaps.R</code></a></small>
+    <div class="hidden name"><code>prepare_for_treemap.Rd</code></div>
     </div>
 
-<pre># MIT License
+    <div class="ref-description">
+    <p>Prepare and Filter Path Data for Treemap Plot</p>
+    </div>
 
-Copyright (c) 2019 Kompetenzzentrum Wasser Berlin gGmbH (KWB)
+    <pre class="usage"><span class='fu'>prepare_for_treemap</span>(<span class='no'>path_data</span>, <span class='kw'>root_path</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>variable</span> <span class='kw'>=</span> <span class='st'>"size"</span>, <span class='no'>...</span>)</pre>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>path_data</th>
+      <td><p>data frame as returned by <code><a href='read_file_info.html'>read_file_info</a></code></p></td>
+    </tr>
+    <tr>
+      <th>root_path</th>
+      <td><p>path to the folder that contains all paths to be considered.
+By setting the root path to "/path/to/root" you can "zoom into" the
+treeplot, showing the contents below "/path/to/root" only. If
+<code>root_path</code> is <code>""</code> (default) all paths in <code>path_data</code> are
+considered.</p></td>
+    </tr>
+    <tr>
+      <th>variable</th>
+      <td><p>name(s) of variable(s) to be selected. Default: "size"</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments passed to
+<code><a href='https://rdrr.io/pkg/kwb.file/man/remove_common_root.html'>remove_common_root</a></code>, such as <code>n_keep</code> (number
+of last segments to be kept from the common first part of all paths)</p></td>
+    </tr>
+    </table>
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-</pre>
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+    </ul>
 
+  </div>
 </div>
-
 
 
       <footer>

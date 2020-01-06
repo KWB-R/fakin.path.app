@@ -1,11 +1,8 @@
 # normalise_file_info ----------------------------------------------------------
 normalise_file_info <- function(file_info)
 {
-  # Provide the column names
-  columns <- names(file_info)
-
   # If the file has been created with PowerShell, adapt the format
-  if ("FullName" %in% columns) {
+  if ("FullName" %in% names(file_info)) {
 
     file_info <- kwb.utils::catAndRun("Reformatting the file info table", {
       reformat_file_info(file_info)
@@ -23,7 +20,6 @@ normalise_file_info <- function(file_info)
 # reformat_file_info -----------------------------------------------------------
 
 #' @importFrom kwb.utils defaultIfNA renameColumns rStylePath selectColumns
-#' @importFrom lubridate dmy_hms
 #' @keywords internal
 #'
 reformat_file_info <- function(file_info)
@@ -32,8 +28,10 @@ reformat_file_info <- function(file_info)
   is_time <- grepl("Utc$", names(file_info))
 
   # Convert character timestamps to POSIXct
-  file_info[is_time] <- lapply(file_info[is_time], lubridate::dmy_hms)
-
+  file_info[is_time] <- lapply(
+    file_info[is_time], as.POSIXct, tz = "UTC", format = "%d.%m.%Y %H:%M:%S"
+  )
+  
   # Set column "type" to either "file" or "directory"
   attribs <- kwb.utils::selectColumns(file_info, "Attributes")
   file_info$type <- ifelse(grepl("Directory", attribs), "directory", "file")

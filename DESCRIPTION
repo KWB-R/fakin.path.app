@@ -32,6 +32,7 @@ Suggests:
     testthat (>= 2.2.1)
 RoxygenNote: 6.1.1
 Imports: 
+    bit64 (>= 0.9.7),
     data.table (>= 1.11.8),
     dplyr (>= 0.8.1),
     DT (>= 0.7),
@@ -42,7 +43,6 @@ Imports:
     jsTree (>= 1.0.1),
     kwb.file (>= 0.2.0),
     kwb.utils (>= 0.5.0),
-    lubridate (>= 1.7.4),
     magrittr (>= 1.5),
     networkD3 (>= 0.4),
     pathlist (>= 0.2.0),

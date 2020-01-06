@@ -16,7 +16,7 @@
 #'   Default: "\%Y-\%m-\%d_\%H\%M"
 #' @param \dots further arguments passed to
 #'   \code{\link{get_recursive_file_info}} and finally to
-#'   \code{\link[fs]{dir_info}}. Set e.g. \code{fail = FALSE} to avoid failure
+#'   \code{fs::dir_info}. Set e.g. \code{fail = FALSE} to avoid failure
 #'   due to insufficient access permissions.
 #' @export
 #' @return full path to the file to which all file information were written
@@ -62,7 +62,7 @@ get_and_save_file_info <- function(
 #' @param pattern regular expression matching the names of the files to be
 #'   considered. By default, all files are considered.
 #' @param all if \code{TRUE} (default) hidden files are also returned
-#' @param \dots further arguments passed to \code{\link[fs]{dir_info}}
+#' @param \dots further arguments passed to \code{fs::dir_info}
 #' @param dbg if \code{TRUE} (default) progress messages are shown
 #'
 #' @export

@@ -16,7 +16,7 @@ considered. By default, all files are considered.}
 
 \item{all}{if \code{TRUE} (default) hidden files are also returned}
 
-\item{\dots}{further arguments passed to \code{\link[fs]{dir_info}}}
+\item{\dots}{further arguments passed to \code{fs::dir_info}}
 
 \item{dbg}{if \code{TRUE} (default) progress messages are shown}
 }

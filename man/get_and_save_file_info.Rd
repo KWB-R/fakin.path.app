@@ -26,7 +26,7 @@ Default: "\%Y-\%m-\%d_\%H\%M"}
 
 \item{\dots}{further arguments passed to
 \code{\link{get_recursive_file_info}} and finally to
-\code{\link[fs]{dir_info}}. Set e.g. \code{fail = FALSE} to avoid failure
+\code{fs::dir_info}. Set e.g. \code{fail = FALSE} to avoid failure
 due to insufficient access permissions.}
 }
 \value{

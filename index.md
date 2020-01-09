@@ -1,4 +1,4 @@
-[![Appveyor build Status]((https://ci.appveyor.com/api/projects/status/ufb4myi4n730logd/branch/master?svg=true)](https://ci.appveyor.com/project/KWB-R/fakin-path-app/branch/master)
+[![Appveyor build Status](https://ci.appveyor.com/api/projects/status/ufb4myi4n730logd/branch/master?svg=true)](https://ci.appveyor.com/project/KWB-R/fakin-path-app/branch/master)
 [![Travis build Status](https://travis-ci.org/KWB-R/fakin.path.app.svg?branch=master)](https://travis-ci.org/KWB-R/fakin.path.app)
 [![codecov](https://codecov.io/github/KWB-R/fakin.path.app/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/fakin.path.app)
 [![Project Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -18,19 +18,19 @@ Once you have R installed, you need some additional so called R packages that
 extend the functionality of the R environment. Start by installing the package
 "remotes" that allows to directly install R packages from GitHub:
 
-```{r eval = FALSE}
+```r
 install.packages("remotes", repos = "https://cloud.r-project.org")
 ```
 
-Use the function `install_github()` from this package to install this package "fakin.path.app" and all other packages that this package depends on:
+Use the function `remotes::install_github()` from this package to install this package "fakin.path.app" and all other packages that this package depends on:
 
-```{r eval = FALSE}
+```r
 remotes::install_github("KWB-R/fakin.path.app")
 ```
 
 If all packages are installed, you can run the application by:
 
-```{r eval = FALSE}
+```r
 fakin.path.app::run_app()
 ```
 
@@ -38,33 +38,25 @@ This opens the main window with some example data being preloaded. You can play
 around with these data.
 
 For analysing your own folder structures, you need to provide path information.
-You may use a function from the package "kwb.fakin" to provide such a file:
+You may use another small web application that is contained in this package to 
+provide path information about your own files. You run the application by
+running the following code in the R console:
 
-```{r eval = FALSE}
-# Set the path to the root folder
-root_dir <- "~/Documents"
-
-# Let R find all file paths below the root folder
-file_info <- kwb.fakin::get_recursive_file_info(root_dir)
-
-# Get an impression of the information returned
-str(file_info)
-
-# Set the path to the directory in which to save path information files
-target_dir <- "~/Documents/path_info_files"
-
-# Create the target directory
-dir.create(target_dir)
-
-# Create the path to the target file
-filename <- format(Sys.Date(), format = "my-files_%Y%m%d.csv")
-
-# Write the path information to a file
-kwb.fakin::write_file_info(file_info, file = file.path(target_dir, filename))
+```r
+# Run web application to generate path information about your own files
+fakin.path.app::run_app_scan()
 ```
 
-Call the app by giving the path to the target folder:
+By default, the app writes path information files to a folder `"~/pathana-db"`.
+You can change this folder within the app. 
 
-```{r eval = FALSE}
-fakin.path.app::run_app(path_database = target_dir)
+Once path information files are available, call the main app by giving the path 
+to this folder:
+
+```r
+# Set the path to the "path database"
+path_database <- "~/pathana-db"
+
+# Run the main app giving the path to the "path database"
+fakin.path.app::run_app(path_database)
 ```

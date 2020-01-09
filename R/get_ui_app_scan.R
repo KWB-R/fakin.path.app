@@ -42,9 +42,3 @@ get_ui_app_scan <- function(width = "400px")
     button_scan
   )
 }
-
-# default_targetdir ------------------------------------------------------------
-default_targetdir <- function()
-{
-  kwb.utils::createDirectory(file.path(Sys.getenv("HOME"), "pathana-db"))
-}

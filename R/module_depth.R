@@ -83,13 +83,13 @@ depth <- function(input, output, session, path_list)
     df$size[is.na(df$size)] <- 1024
 
     kwb.utils::catAndRun("Setting columns 'group', 'label', 'depth'", {
-      df$group <- kwb.fakin:::to_top_n(df$toplevel, n = input$n_groups - 1L)
+      df$group <- to_top_n(df$toplevel, n = input$n_groups - 1L)
       df$label <- labels
       df$depth <- df$depth + length(kwb.file::split_paths(pl@root)[[1]]) - 1L
     })
         
     g <- kwb.utils::catAndRun("Creating gg-plot object", {
-      kwb.fakin:::plot_file_size_in_depth_gg(df)
+      plot_file_size_in_depth_gg(df)
     })
     
     g <- kwb.utils::catAndRun("Setting the plot title", {

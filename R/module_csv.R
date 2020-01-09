@@ -6,7 +6,6 @@ csvFileUI <- function(id, path_database)
 {
   ns <- shiny::NS(id)
   
-  #kwb.utils::assignPackageObjects("fakin.path.app")
   shiny::tagList(
     shiny::selectInput(
       inputId = ns("file"), 
@@ -21,14 +20,13 @@ csvFileUI <- function(id, path_database)
 
 # get_file_info_files ----------------------------------------------------------
 
-#' @importFrom kwb.fakin extdata_file
 #' @importFrom kwb.utils removeExtension multiSubstitute
 #' @importFrom stats setNames
 #' @keywords internal
 get_file_info_files <- function(path_database)
 {
   files <- c(
-    dir_or_stop(kwb.fakin::extdata_file(""), "^example_file_info.*\\.csv$"),
+    dir_or_stop(extdata_file(), "^example_file_info.*\\.csv$"),
     dir_or_stop(path_database, "\\.csv$")
   )
 
@@ -46,7 +44,6 @@ get_file_info_files <- function(path_database)
 # csvFile ----------------------------------------------------------------------
 
 #' @importFrom shiny reactive
-#' @importFrom kwb.fakin read_file_paths
 #' @importFrom kwb.utils selectColumns
 #' @importFrom pathlist pathlist hide_server
 #' @keywords internal
@@ -89,7 +86,7 @@ csvFile <- function(input, output, session, read_function)
           date_key <- strsplit(csv_file(), db_split_pattern)[[1]][-1]
           get_path_data_from_database(date_key[1], date_key[2])
         } else {
-          kwb.fakin::read_file_paths(csv_file())
+          read_file_paths(csv_file())
         }
       }
     )

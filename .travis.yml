@@ -8,7 +8,7 @@
 
 language: r
 sudo: required
-cache: packages
+#cache: packages
 r_packages:
 - remotes
 - covr
@@ -26,6 +26,6 @@ matrix:
       skip_cleanup: 'true'
       on:
         branch: 
-          - master
-          - dev
+        - master
+        - dev
   - r: oldrel

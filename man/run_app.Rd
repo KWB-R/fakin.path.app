@@ -4,11 +4,12 @@
 \alias{run_app}
 \title{Run the Shiny App}
 \usage{
-run_app(path_database = NULL, ...)
+run_app(path_database = default_targetdir(), ...)
 }
 \arguments{
 \item{path_database}{if not \code{NULL} the path to a folder containing 
-text files with path information}
+text files with path information. Default: 
+\code{fakin.path.app:::default_targetdir()}}
 
 \item{\dots}{further \code{key = value} pairs to be used as global variables}
 }

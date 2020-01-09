@@ -52,11 +52,12 @@ server <- function(input, output, session)
 #' Run the Shiny App
 #' 
 #' @param path_database if not \code{NULL} the path to a folder containing 
-#'   text files with path information
+#'   text files with path information. Default: 
+#'   \code{fakin.path.app:::default_targetdir()}
 #' @param \dots further \code{key = value} pairs to be used as global variables
 #' @importFrom shiny shinyApp
 #' @export
-run_app <- function(path_database = NULL, ...)
+run_app <- function(path_database = default_targetdir(), ...)
 {
   # Set defaults (1. hard coded, 2. from environment variables, 3. from user)
   set_global(list. = default_globals())

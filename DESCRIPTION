@@ -41,7 +41,7 @@ Imports:
     ggplot2 (>= 3.2.0),
     htmltools (>= 0.3.6),
     jsTree (>= 1.0.1),
-    kwb.file (>= 0.2.0),
+    kwb.file (>= 0.3.0),
     kwb.utils (>= 0.5.0),
     magrittr (>= 1.5),
     networkD3 (>= 0.4),

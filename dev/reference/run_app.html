@@ -129,7 +129,7 @@
     <p>Run the Shiny App</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run_app</span>(<span class='kw'>path_database</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>run_app</span>(<span class='kw'>path_database</span> <span class='kw'>=</span> <span class='fu'>default_targetdir</span>(), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,7 +137,8 @@
     <tr>
       <th>path_database</th>
       <td><p>if not <code>NULL</code> the path to a folder containing 
-text files with path information</p></td>
+text files with path information. Default: 
+<code>fakin.path.app:::default_targetdir()</code></p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -1,6 +1,6 @@
 # server_app_scan --------------------------------------------------------------
-server_app_scan <- function(input, output, session) {
-
+server_app_scan <- function(input, output, session)
+{
   # Helper function to update the list of root directories  
   update_root_dirs <- function(root_dirs) {
     write_root_dirs(root_dirs)
@@ -21,10 +21,17 @@ server_app_scan <- function(input, output, session) {
   
   # Update the list of root directories if a new path was selected
   shiny::observeEvent(input$browse, {
+    
+    #req(is.list(input$browse))
+    
+    #browser(expr = TRUE)
+    
     new_dir <- shinyFiles::parseDirPath(volumes, input$browse)
+    
     if (length(new_dir) == 0) {
       return()
     }
+    
     root_dirs <- read_root_dirs()
     root_dirs <- sort(unique(c(root_dirs, new_dir)))
     update_root_dirs(root_dirs)

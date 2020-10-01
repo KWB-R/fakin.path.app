@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/github/KWB-R/fakin.path.app/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/fakin.path.app)
 [![Project Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/fakin.path.app)]()
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.3603502.svg)](https://doi.org/10.5281/zenodo.3603502)
 [![Launch binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kwb-r/fakin.path.app/master?urlpath=https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny)
 
 # fakin.path.app

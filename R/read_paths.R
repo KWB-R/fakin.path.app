@@ -42,8 +42,8 @@ read_paths_only <- function(file, metadata)
 #' @param fileEncoding The name of the encoding to be assumed. Passed as
 #'   \code{encoding} to \code{\link{file}}, see there.
 #' @param encoding passed to \code{\link{readLines}}.
-#' @param \dots arguments passed to \code{fakin.path.app:::read_lines},
-#'   such as \code{n}
+#' @param \dots arguments passed to 
+#'   \code{\link[kwb.utils]{readLinesWithEncoding}}, such as \code{n}
 #' @param do_sort if \code{TRUE} (default), the vector of paths is sorted
 #'   alphanumerically.
 #' @param expected_encodings vector of names of file encodings that are
@@ -65,8 +65,11 @@ read_paths_ <- function(
     fileEncoding <- guess_expected_encoding(file, expected_encodings)
   }
 
-  paths <- kwb.utils::catAndRun(sprintf("Reading paths from '%s'", file), {
-    read_lines(file, encoding = encoding, fileEncoding = fileEncoding, ...)
+  paths <- kwb.utils::catAndRun(
+    sprintf("Reading paths from '%s'", file), {
+    kwb.utils::readLinesWithEncoding(
+      file, encoding = encoding, fileEncoding = fileEncoding, ...
+    )
   })
 
   cat(length(paths), "lines have been read.\n")

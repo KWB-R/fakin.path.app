@@ -1,3 +1,7 @@
+# Current developments
+
+* Move read_lines() to kwb.utils::readLinesWithEncoding()
+
 # fakin.path.app v0.3.0 (2020-01-10)
 
 First release with main functions:

@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Using the FAKIN Path Analyser • fakin.path.app</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Using the FAKIN Path Analyser">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="fakin.path.app">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -64,7 +64,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/KWB-R/fakin.path.app">
+  <a href="https://github.com/KWB-R/fakin.path.app/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -79,10 +79,11 @@
 
       
 
-      </header><div class="row">
+      </header><script src="usage_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="usage_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="usage_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Using the FAKIN Path Analyser</h1>
+      <h1 data-toc-skip>Using the FAKIN Path Analyser</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/KWB-R/fakin.path.app/blob/master/vignettes/usage.Rmd"><code>vignettes/usage.Rmd</code></a></small>
@@ -101,10 +102,11 @@
 <h2 class="hasAnchor">
 <a href="#step-1" class="anchor"></a>Application 1: Scan your file system</h2>
 <p>Run the following R command to start the application that scans your system for files to be analysed:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">fakin.path.app<span class="op">::</span><span class="kw">run_app_scan</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">fakin.path.app</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app_scan.html">run_app_scan</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>This will open a new tab in your default web browser as shown here for a Mozilla Firefox browser on an Ubuntu Linux system:</p>
 <div class="figure">
-<img src="images/pathana-01.png" alt="Main window of the scan app" width="300"><p class="caption">Main window of the scan app</p>
+<img src="images/pathana-01.png" width="300" alt=""><p class="caption">Main window of the scan app</p>
 </div>
 <p>The main window is devided into three sections representing the steps required to start the scan process:</p>
 <ol style="list-style-type: decimal">
@@ -114,24 +116,24 @@
 </ol>
 <p>In the first step you define one or more root directories that act as the starting point of the scan. The search is done recursively, i.e. files in all folders and subfolders will be considered. Take this in mind when selecting a root directory. It can take a long time to scan a “top-level” folder! Click the Button “Add root directory…” to select a root directory:</p>
 <div class="figure">
-<img src="images/pathana-02.png" alt="Select a root directory" width="500"><p class="caption">Select a root directory</p>
+<img src="images/pathana-02.png" width="500" alt=""><p class="caption">Select a root directory</p>
 </div>
 <p>In the opening dialog window, use the left-hand pane to navigate to the folder that you want to scan. Select the folder by clicking on its name (<code>hauke</code> in the example). The contents of the folder are shown in the right-hand pane. Confirm your selection by clicking the “Select” button. This closes the dialog window and enters the path to the selected root directory (here: <code>/home/hauke</code>) in the text field on top of the main window:</p>
 <div class="figure">
-<img src="images/pathana-03.png" alt="After selecting a root directory" width="300"><p class="caption">After selecting a root directory</p>
+<img src="images/pathana-03.png" width="300" alt=""><p class="caption">After selecting a root directory</p>
 </div>
 <p>In the next (optional) step you can set the output directory, i.e. the location where to store the results of the scan. You may use the default (<code>/home/hauke/pathana-db</code> in the example) or select another location by clicking “Change output directory…” and selecting a different folder (similar to selecting a root directory).</p>
 <p>Once the root and output directories are specified, you are ready to start the scan process. Therefore, click the “Scan root directories” button…</p>
 <div class="figure">
-<img src="images/pathana-04.png" alt="Start the scan process" width="300"><p class="caption">Start the scan process</p>
+<img src="images/pathana-04.png" width="300" alt=""><p class="caption">Start the scan process</p>
 </div>
 <p>… and wait until the scan has been completed.</p>
 <div class="figure">
-<img src="images/pathana-05.png" alt="Wait for the scan to be completed" width="300"><p class="caption">Wait for the scan to be completed</p>
+<img src="images/pathana-05.png" width="300" alt=""><p class="caption">Wait for the scan to be completed</p>
 </div>
 <p>The completion of the scan is indicated by a message box stating that the information on the scanned files have been written to a CSV file in the output directory:</p>
 <div class="figure">
-<img src="images/pathana-06.png" alt="Message after successful completion of the scan" width="300"><p class="caption">Message after successful completion of the scan</p>
+<img src="images/pathana-06.png" width="300" alt=""><p class="caption">Message after successful completion of the scan</p>
 </div>
 <p>Close the message box by clicking the “Dismiss” button.</p>
 <p>Now, that the result of the scan is available in a CSV file you are ready to run the application that helps you to inspect and analyse this file. Before you run this second application, close the current application by pressing ESC in the R console or by closing the corresponding tab in the web browser.</p>
@@ -139,24 +141,19 @@
 <div id="step-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#step-2" class="anchor"></a>Application 2: Run the Web Application</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Set the path to your personal "path database" (a folder containing files as</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># e.g. generated )</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">fakin.path.app<span class="op">::</span><span class="kw">run_app</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Set the path to your personal "path database" (a folder containing files as</span>
+<span class="co"># e.g. generated )</span>
+
+<span class="fu">fakin.path.app</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#step-1">Application 1: Scan your file system</a></li>
-      <li><a href="#step-2">Application 2: Run the Web Application</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -167,7 +164,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

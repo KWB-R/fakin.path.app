@@ -387,8 +387,14 @@ aggregate_by_levels <- function(folder_data, group_by = names(folder_data)[1:2])
   # Convert size to numeric, otherwise we get an overflow when summing up
   folder_data$size <- as.numeric(folder_data$size)
 
-  do.call(dplyr::group_by_, c(list(folder_data), as.list(group_by))) %>%
-    dplyr::summarise_(n_files = "length(size)", total_size = "sum(size)") %>%
+  do.call(dplyr::group_by, args = c(
+    list(folder_data), folder_data[group_by])
+  ) %>%
+    dplyr::summarise(
+      n_files = length(.data$size), 
+      total_size = sum(.data$size),
+      .groups = "drop"
+    ) %>%
     as.data.frame()
 }
 

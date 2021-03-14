@@ -11,19 +11,13 @@
 #'
 read_lines <- function(file, ..., encoding = "unknown", fileEncoding = "")
 {
-  # This part is copied from the implementation of read.table
-  if (is.character(file)) {
-    con <- if (nzchar(fileEncoding)) {
-      file(file, "rt", encoding = fileEncoding)
-    } else {
-      file(file, "rt")
-    }
-    on.exit(close(con))
-  } else {
-    con <- file
-  }
-
-  readLines(con, encoding = encoding, ...)
+  kwb.utils::warningDeprecated(
+    "fakin.path.app:::read_lines", "kwb.utils::readLinesWithEncoding"
+  )
+  
+  kwb.utils::readLinesWithEncoding(
+    file, ..., fileEncoding = fileEncoding, encoding = encoding
+  )
 }
 
 # default_local_encoding -------------------------------------------------------

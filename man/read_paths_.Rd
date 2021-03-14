@@ -4,8 +4,14 @@
 \alias{read_paths_}
 \title{Read Paths From File}
 \usage{
-read_paths_(file, fileEncoding = NULL, encoding = NULL, ...,
-  do_sort = TRUE, expected_encodings = c("windows-1252", "ISO-8859-1"))
+read_paths_(
+  file,
+  fileEncoding = NULL,
+  encoding = NULL,
+  ...,
+  do_sort = TRUE,
+  expected_encodings = c("windows-1252", "ISO-8859-1")
+)
 }
 \arguments{
 \item{file}{full path to the text file containing paths}
@@ -15,8 +21,8 @@ read_paths_(file, fileEncoding = NULL, encoding = NULL, ...,
 
 \item{encoding}{passed to \code{\link{readLines}}.}
 
-\item{\dots}{arguments passed to \code{fakin.path.app:::read_lines},
-such as \code{n}}
+\item{\dots}{arguments passed to 
+\code{\link[kwb.utils]{readLinesWithEncoding}}, such as \code{n}}
 
 \item{do_sort}{if \code{TRUE} (default), the vector of paths is sorted
 alphanumerically.}

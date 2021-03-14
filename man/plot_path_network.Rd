@@ -4,11 +4,20 @@
 \alias{plot_path_network}
 \title{Plot Paths as Sankey Network}
 \usage{
-plot_path_network(paths, max_depth = 3, nodePadding = 8,
-  nodeHeight = 10, sinksRight = FALSE, remove_common_root = TRUE,
-  names_to_colours = name_to_traffic_light, height = NULL, ...,
-  method = 1, weight_by = c("n_files", "size", "none")[1],
-  sizes = NULL)
+plot_path_network(
+  paths,
+  max_depth = 3,
+  nodePadding = 8,
+  nodeHeight = 10,
+  sinksRight = FALSE,
+  remove_common_root = TRUE,
+  names_to_colours = name_to_traffic_light,
+  height = NULL,
+  ...,
+  method = 1,
+  weight_by = c("n_files", "size", "none")[1],
+  sizes = NULL
+)
 }
 \arguments{
 \item{paths}{character vector of paths}

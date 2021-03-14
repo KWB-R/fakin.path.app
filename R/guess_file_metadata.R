@@ -5,8 +5,8 @@
 #' @param file path to text file
 #' @param n_first_rows number of first rows of \code{file} from which to guess
 #'   the meta information.
-#' @param \dots further arguments passed to \code{fakin.path.app:::read_lines},
-#'   such as \code{fileEncoding}
+#' @param \dots further arguments passed to 
+#'   \code{\link[kwb.utils]{readLinesWithEncoding}}, such as \code{fileEncoding}
 #' @return data frame with columns
 #' \itemize{
 #'   \item \code{paths}: does the file seem to contain path information, i.e.
@@ -29,7 +29,7 @@
 #'
 guess_file_metadata <- function(file, n_first_rows = 1000, ...)
 {
-  first_rows <- read_lines(file, n_first_rows, ...)
+  first_rows <- kwb.utils::readLinesWithEncoding(file, n_first_rows, ...)
   patterns <- c(slash = "/", backslash = "\\\\")
   has_pattern <- lapply(patterns, grepl_bytes, first_rows)
   has_paths <- has_pattern$slash | has_pattern$backslash

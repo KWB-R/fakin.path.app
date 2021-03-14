@@ -30,7 +30,7 @@ Suggests:
     knitr (>= 1.23),
     rmarkdown (>= 1.13),
     testthat (>= 2.2.1)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Imports: 
     bit64 (>= 0.9.7),
     data.table (>= 1.11.8),
@@ -42,7 +42,7 @@ Imports:
     htmltools (>= 0.3.6),
     jsTree (>= 1.0.1),
     kwb.file (>= 0.3.0),
-    kwb.utils (>= 0.5.0),
+    kwb.utils (>= 0.7.0.9000),
     magrittr (>= 1.5),
     networkD3 (>= 0.4),
     pathlist (>= 0.2.0),
@@ -60,4 +60,4 @@ Remotes:
     github::hsonne/pathlist,
     github::kwb-r/kwb.db,
     github::kwb-r/kwb.file,
-    github::kwb-r/kwb.utils
+    github::kwb-r/kwb.utils@dev

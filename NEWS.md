@@ -1,3 +1,8 @@
+# Current developments
+
+* Move read_lines() to kwb.utils::readLinesWithEncoding()
+* Improve error message when path file is empty
+
 # fakin.path.app v0.3.0 (2020-01-10)
 
 First release with main functions:

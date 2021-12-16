@@ -12,16 +12,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Shiny App to Visualise File Paths">
-<meta property="og:description" content="This package contains an R Shiny App that
-    loads file path information from a file and displays the paths in
-    different ways.  The aim of the app is to find weaknesses in the
-    folder structure.">
+<meta property="og:description" content="This package contains an R Shiny App that loads file path
+    information from a file and displays the paths in different ways.  The
+    aim of the app is to find weaknesses in the folder structure.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -34,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">fakin.path.app</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -67,8 +62,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/KWB-R/fakin.path.app/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/KWB-R/fakin.path.app/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -87,21 +82,21 @@
 
 
 <p>This package contains an R Shiny App that loads file path information from a file and displays the paths in different ways. The aim of the app is to find weaknesses in given folder structures.</p>
-<div id="online-demo" class="section level2">
-<h2 class="hasAnchor">
-<a href="#online-demo" class="anchor"></a>Online Demo</h2>
-<p>For starting an interactive online demo of the app please click on this <a href="https://mybinder.org/v2/gh/kwb-r/fakin.path.app/master?urlpath=https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny"><img src="https://mybinder.org/badge_logo.svg" alt="Launch binder"></a> badge.</p>
+<div class="section level2">
+<h2 id="online-demo">Online Demo<a class="anchor" aria-label="anchor" href="#online-demo"></a>
+</h2>
+<p>For starting an interactive online demo of the app please click on this <a href="https://mybinder.org/v2/gh/kwb-r/fakin.path.app/master?urlpath=https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny" class="external-link"><img src="https://mybinder.org/badge_logo.svg" alt="Launch binder"></a> badge.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You need to have R installed on your computer. R is a language and environment for statistical computing and graphics. The software is Open Source. For Windows, you find an installer file here: <a href="https://cran.r-project.org/bin/windows/base/" class="uri">https://cran.r-project.org/bin/windows/base/</a></p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You need to have R installed on your computer. R is a language and environment for statistical computing and graphics. The software is Open Source. For Windows, you find an installer file here: <a href="https://cran.r-project.org/bin/windows/base/" class="external-link uri">https://cran.r-project.org/bin/windows/base/</a></p>
 <p>Once you have R installed, you need some additional so called R packages that extend the functionality of the R environment. Start by installing the package “remotes” that allows to directly install R packages from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span></code></pre></div>
-<p>Use the function <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> from this package to install this package “fakin.path.app” and all other packages that this package depends on:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span></code></pre></div>
+<p>Use the function <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> from this package to install this package “fakin.path.app” and all other packages that this package depends on:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"KWB-R/fakin.path.app"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"KWB-R/fakin.path.app"</span><span class="op">)</span></code></pre></div>
 <p>If all packages are installed, you can run the application by:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">fakin.path.app</span><span class="fu">::</span><span class="fu"><a href="reference/run_app.html">run_app</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -124,52 +119,64 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/KWB-R/fakin.path.app/">https://​github.com/​KWB-R/​fakin.path.app/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/KWB-R/fakin.path.app/issues">https://​github.com/​KWB-R/​fakin.path.app/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://github.com/hsonne">Hauke Sonnenberg</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9134-2871" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://github.com/KWB-R/fakin.path.app/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/KWB-R/fakin.path.app/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/KWB-R/fakin.path.app/actions?query=workflow%3AR-CMD-check"><img src="https://github.com/KWB-R/fakin.path.app/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://github.com/KWB-R/fakin.path.app/actions?query=workflow%3Apkgdown"><img src="https://github.com/KWB-R/fakin.path.app/workflows/pkgdown/badge.svg" alt="pkgdown"></a></li>
-<li><a href="https://codecov.io/github/KWB-R/fakin.path.app"><img src="https://codecov.io/github/KWB-R/fakin.path.app/branch/master/graphs/badge.svg" alt="codecov"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Project Status"></a></li>
-<li><a href=""><img src="https://www.r-pkg.org/badges/version/fakin.path.app" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://doi.org/10.5281/zenodo.3603502"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.3603502.svg" alt="DOI"></a></li>
-<li><a href="https://mybinder.org/v2/gh/kwb-r/fakin.path.app/master?urlpath=https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny"><img src="https://mybinder.org/badge_logo.svg" alt="Launch binder"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing fakin.path.app</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>
+<a href="https://github.com/hsonne" class="external-link">Hauke Sonnenberg</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9134-2871" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/KWB-R/fakin.path.app/actions?query=workflow%3AR-CMD-check" class="external-link"><img src="https://github.com/KWB-R/fakin.path.app/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/KWB-R/fakin.path.app/actions?query=workflow%3Apkgdown" class="external-link"><img src="https://github.com/KWB-R/fakin.path.app/workflows/pkgdown/badge.svg" alt="pkgdown"></a></li>
+<li><a href="https://codecov.io/github/KWB-R/fakin.path.app" class="external-link"><img src="https://codecov.io/github/KWB-R/fakin.path.app/branch/master/graphs/badge.svg" alt="codecov"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Project Status"></a></li>
+<li><a href=""><img src="https://www.r-pkg.org/badges/version/fakin.path.app" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://kwb-r.r-universe.dev/" class="external-link"><img src="https://kwb-r.r-universe.dev/badges/fakin.path.app" alt="R-Universe_Status_Badge"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.3603502" class="external-link"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.3603502.svg" alt="DOI"></a></li>
+<li><a href="https://mybinder.org/v2/gh/kwb-r/fakin.path.app/master?urlpath=https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny" class="external-link"><img src="https://mybinder.org/badge_logo.svg" alt="Launch binder"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://github.com/hsonne">Hauke Sonnenberg</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://github.com/hsonne" class="external-link">Hauke Sonnenberg</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -177,6 +184,8 @@
 
   
 
+
+  
 
   </body>
 </html>

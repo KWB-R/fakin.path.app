@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fakin.path.app</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -64,8 +60,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/KWB-R/fakin.path.app/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/KWB-R/fakin.path.app/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -79,14 +75,13 @@
 
       
 
-      </header><script src="usage_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="usage_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="usage_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="usage_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the FAKIN Path Analyser</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/KWB-R/fakin.path.app/blob/master/vignettes/usage.Rmd"><code>vignettes/usage.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/KWB-R/fakin.path.app/blob/HEAD/vignettes/usage.Rmd" class="external-link"><code>vignettes/usage.Rmd</code></a></small>
       <div class="hidden name"><code>usage.Rmd</code></div>
 
     </div>
@@ -98,9 +93,9 @@
 <li><p><a href="#step-1">Scan your file system</a> for file paths and file properties and save them to CSV files (CSV = Comma Separated Values),</p></li>
 <li><p><a href="#step-2">Run the Web Application</a> to analyse the path information produced in the first step.</p></li>
 </ol>
-<div id="step-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-1" class="anchor"></a>Application 1: Scan your file system</h2>
+<div class="section level2">
+<h2 id="step-1">Application 1: Scan your file system<a class="anchor" aria-label="anchor" href="#step-1"></a>
+</h2>
 <p>Run the following R command to start the application that scans your system for files to be analysed:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">fakin.path.app</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app_scan.html">run_app_scan</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -138,9 +133,9 @@
 <p>Close the message box by clicking the “Dismiss” button.</p>
 <p>Now, that the result of the scan is available in a CSV file you are ready to run the application that helps you to inspect and analyse this file. Before you run this second application, close the current application by pressing ESC in the R console or by closing the corresponding tab in the web browser.</p>
 </div>
-<div id="step-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-2" class="anchor"></a>Application 2: Run the Web Application</h2>
+<div class="section level2">
+<h2 id="step-2">Application 2: Run the Web Application<a class="anchor" aria-label="anchor" href="#step-2"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Set the path to your personal "path database" (a folder containing files as</span>
 <span class="co"># e.g. generated )</span>
@@ -160,11 +155,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://github.com/hsonne">Hauke Sonnenberg</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://github.com/hsonne" class="external-link">Hauke Sonnenberg</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -172,6 +169,8 @@
 
   
 
+
+  
 
   </body>
 </html>

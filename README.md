@@ -5,7 +5,7 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/fakin.path.app)]()
 [![R-Universe_Status_Badge](https://kwb-r.r-universe.dev/badges/fakin.path.app)](https://kwb-r.r-universe.dev/)
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.3603502.svg)](https://doi.org/10.5281/zenodo.3603502)
-[![Launch binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kwb-r/fakin.path.app/master?urlpath=https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny)
+[![Launch binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny/)
 
 # fakin.path.app
 
@@ -16,7 +16,7 @@ folder structure.
 
 ## Online Demo 
 
-For starting an interactive online demo of the app please click on this [![Launch binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kwb-r/fakin.path.app/master?urlpath=https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny) badge.
+For starting an interactive online demo of the app please click on this [![Launch binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kwb-r/apps/fakin.path.app?urlpath=shiny/) badge.
 
 ## Installation
 

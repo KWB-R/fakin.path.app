@@ -1,6 +1,6 @@
 Package: fakin.path.app
 Title: Shiny App to Visualise File Paths
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     c(person(given = "Hauke",
              family = "Sonnenberg",
@@ -30,7 +30,7 @@ Suggests:
     knitr (>= 1.23),
     rmarkdown (>= 1.13),
     testthat (>= 2.2.1)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     bit64 (>= 0.9.7),
     data.table (>= 1.11.8),

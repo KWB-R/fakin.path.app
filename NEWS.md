@@ -1,6 +1,8 @@
-# Current developments
+# fakin.path.app v0.3.1 (2021-12-16)
 
-* Move read_lines() to kwb.utils::readLinesWithEncoding()
+* Add badges for [https://kwb-r.r-universe.dev]([https://kwb-r.r-universe.dev)
+* Use GitHub actions for continious integration
+* Move `read_lines()` to `kwb.utils::readLinesWithEncoding()`
 * Improve error message when path file is empty
 
 # fakin.path.app v0.3.0 (2020-01-10)

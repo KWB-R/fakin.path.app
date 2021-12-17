@@ -10,5 +10,6 @@ test_that("plot_treemaps_from_path_data() works", {
     type = "file"
   )
 
-  expect_error(f(path_data, n_levels = 1))
+  f(path_data)
+  f(path_data, n_levels = 1L)
 })

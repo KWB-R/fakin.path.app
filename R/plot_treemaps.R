@@ -86,6 +86,9 @@ plot_treemaps_from_path_data <- function(
   depth = 1, types = c("size", "files")
 )
 {
+  #kwb.utils::assignPackageObjects("fakin.path.app")
+  #kwb.utils::assignArgumentDefaults(fakin.path.app:::plot_treemaps_from_path_data)
+  
   if (! inherits(path_data, "pathlist") && ! check_path_data(path_data)) {
     return()
   }
@@ -109,6 +112,7 @@ plot_treemaps_from_path_data <- function(
 
   maps <- lapply(types, function(map_type) {
 
+    #map_type <- types[1L]
     map <- kwb.utils::catAndRun(
       sprintf("Creating treemap '%s'", map_type),
       kwb.utils::callWith(
@@ -255,7 +259,11 @@ args_treemap <- function(
     vSize = setting$column,
     vColor = anti_setting$column,
     title = setting$title,
-    title.legend = setting$legend
+    title.legend = setting$legend,
+    # The default value "NULL" of argument "format.legend" in treemap::treemap()
+    # leads to an error! It must be a list since this list is finally passed
+    # to do.call() (e.g. in treemap:::dens2col())
+    format.legend = list() 
   )
 }
 
@@ -406,7 +414,7 @@ plot_treemap <- function(
   #args <- list()
   args <- list(...)
 
-  if (length(args) == 0) {
+  if (length(args) == 0L) {
     args <- args_treemap()
   }
 

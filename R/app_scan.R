@@ -8,15 +8,15 @@ server_app_scan <- function(input, output, session)
   }
 
   # Volumes required as start paths for shinyDirChoose()
-  volumes <- shinyFiles::getVolumes()
+  get_volumes <- shinyFiles::getVolumes()
 
   # Let the user choose a new root directory if the browse button is clicked
   shinyFiles::shinyDirChoose(
-    input, "browse", roots = volumes, session = session
+    input, "browse", roots = get_volumes(), session = session
   )
 
   shinyFiles::shinyDirChoose(
-    input, "browse_target", roots = volumes, session = session
+    input, "browse_target", roots = get_volumes(), session = session
   )
   
   # Update the list of root directories if a new path was selected
@@ -26,7 +26,7 @@ server_app_scan <- function(input, output, session)
     
     #browser(expr = TRUE)
     
-    new_dir <- shinyFiles::parseDirPath(volumes, input$browse)
+    new_dir <- shinyFiles::parseDirPath(get_volumes(), input$browse)
     
     if (length(new_dir) == 0) {
       return()
@@ -39,7 +39,7 @@ server_app_scan <- function(input, output, session)
 
   # Update the target directory if a new path was selected
   shiny::observeEvent(input$browse_target, {
-    new_dir <- shinyFiles::parseDirPath(volumes, input$browse_target)
+    new_dir <- shinyFiles::parseDirPath(get_volumes(), input$browse_target)
     if (length(new_dir) == 0) {
       return()
     }

@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,7 +63,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_recursive_file_info</span><span class="op">(</span><span class="va">root_dir</span>, pattern <span class="op">=</span> <span class="cn">NULL</span>, all <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span>, dbg <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_recursive_file_info</span><span class="op">(</span><span class="va">root_dir</span>, pattern <span class="op">=</span> <span class="cn">NULL</span>, all <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span>, dbg <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,15 +71,24 @@
     <dl><dt>root_dir</dt>
 <dd><p>path to the root directory from which to start the recursive
 search for files</p></dd>
+
+
 <dt>pattern</dt>
 <dd><p>regular expression matching the names of the files to be
 considered. By default, all files are considered.</p></dd>
+
+
 <dt>all</dt>
 <dd><p>if <code>TRUE</code> (default) hidden files are also returned</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments passed to <code><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">fs::dir_info</a></code></p></dd>
+
+
 <dt>dbg</dt>
 <dd><p>if <code>TRUE</code> (default) progress messages are shown</p></dd>
+
 </dl></div>
 
   </div>
@@ -94,7 +103,7 @@ considered. By default, all files are considered.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

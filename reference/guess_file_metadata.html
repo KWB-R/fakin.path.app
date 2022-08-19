@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,23 +63,30 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">guess_file_metadata</span><span class="op">(</span><span class="va">file</span>, n_first_rows <span class="op">=</span> <span class="fl">1000</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">guess_file_metadata</span><span class="op">(</span><span class="va">file</span>, n_first_rows <span class="op">=</span> <span class="fl">1000</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>path to text file</p></dd>
+
+
 <dt>n_first_rows</dt>
 <dd><p>number of first rows of <code>file</code> from which to guess
 the meta information.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments passed to 
 <code><a href="https://rdrr.io/pkg/kwb.utils/man/readLinesWithEncoding.html" class="external-link">readLinesWithEncoding</a></code>, such as <code>fileEncoding</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>data frame with columns</p><ul><li><p><code>paths</code>: does the file seem to contain path information, i.e.
+    
+
+<p>data frame with columns</p><ul><li><p><code>paths</code>: does the file seem to contain path information, i.e.
   were slashes or backslashes found?</p></li>
 <li><p><code>forbidden</code>: does the file contain characters that are forbidden
   in file paths?</p></li>
@@ -106,7 +113,7 @@ the meta information.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

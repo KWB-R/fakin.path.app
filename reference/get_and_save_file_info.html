@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,13 +63,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_and_save_file_info</span><span class="op">(</span>
-  <span class="va">root_dir</span>,
-  <span class="va">output_dir</span>,
-  check_dirs <span class="op">=</span> <span class="cn">TRUE</span>,
-  format <span class="op">=</span> <span class="st">"%Y-%m-%d_%H%M"</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_and_save_file_info</span><span class="op">(</span></span>
+<span>  <span class="va">root_dir</span>,</span>
+<span>  <span class="va">output_dir</span>,</span>
+<span>  check_dirs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  format <span class="op">=</span> <span class="st">"%Y-%m-%d_%H%M"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,28 +77,39 @@
     <dl><dt>root_dir</dt>
 <dd><p>path to the directory from which to start searching for
 files</p></dd>
+
+
 <dt>output_dir</dt>
 <dd><p>path to the output directory. In this directory, a file
 "path-info_&lt;date-time&gt;_&lt;parent-folder&gt;.csv" will be generated with
 &lt;date-time&gt; being a date and time string in yyyy-mm-dd_HHMM format and
 &lt;parent-folder&gt; being the last path segment of <code>root_dir</code></p></dd>
+
+
 <dt>check_dirs</dt>
 <dd><p>if <code>TRUE</code> (default) it is checked in advance if both
 <code>root_dir</code> and <code>output_dir</code> exist. Switch this off if e.g.
 network paths are wrongly considered to be non-existing.</p></dd>
+
+
 <dt>format</dt>
 <dd><p>format string specifying how to format the part of the
 filename intended to contain date (and, if required, time) information.
 Default: "%Y-%m-%d_%H%M"</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments passed to
 <code><a href="get_recursive_file_info.html">get_recursive_file_info</a></code> and finally to
 <code><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">fs::dir_info</a></code>. Set e.g. <code>fail = FALSE</code> to avoid failure
 due to insufficient access permissions.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>full path to the file to which all file information were written</p>
+    
+
+<p>full path to the file to which all file information were written</p>
     </div>
 
   </div>
@@ -113,7 +124,7 @@ due to insufficient access permissions.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,19 +63,19 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plot_treemaps_from_path_data</span><span class="op">(</span>
-  <span class="va">path_data</span>,
-  root_path <span class="op">=</span> <span class="st">""</span>,
-  name <span class="op">=</span> <span class="st">"root"</span>,
-  as_png <span class="op">=</span> <span class="cn">FALSE</span>,
-  n_levels <span class="op">=</span> <span class="fl">2</span>,
-  output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  type <span class="op">=</span> <span class="st">"value"</span>,
-  args_png <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  n_biggest <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,
-  depth <span class="op">=</span> <span class="fl">1</span>,
-  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"files"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_treemaps_from_path_data</span><span class="op">(</span></span>
+<span>  <span class="va">path_data</span>,</span>
+<span>  root_path <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">"root"</span>,</span>
+<span>  as_png <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  n_levels <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"value"</span>,</span>
+<span>  args_png <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  n_biggest <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
+<span>  depth <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"files"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -83,29 +83,45 @@
     <dl><dt>path_data</dt>
 <dd><p>data frame containing file path information as returned by
 <code><a href="read_file_info.html">read_file_info</a></code></p></dd>
+
+
 <dt>root_path</dt>
 <dd><p>path to the folder that contains all paths to be considered.
 By setting the root path to "/path/to/root" you can "zoom into" the
 treeplot, showing the contents below "/path/to/root" only. If
 <code>root_path</code> is <code>""</code> (default) all paths in <code>path_data</code> are
 considered.</p></dd>
+
+
 <dt>name</dt>
 <dd><p>name to be used in png file name if <code>as_png</code> is set. If
 <code>path_data</code> is a list, the names of the list elements are used.</p></dd>
+
+
 <dt>as_png</dt>
 <dd><p>if <code>TRUE</code> (default) the plots are saved to png files in
 the directory given in <code>output_dir</code> (<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> by default).
 Otherwise they are plotted into the active graphical device.</p></dd>
+
+
 <dt>n_levels</dt>
 <dd><p>number of folder depth levels to be shown in the plots</p></dd>
+
+
 <dt>output_dir</dt>
 <dd><p>path to output directory if <code>as_png = TRUE</code>. Default:
 <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code></p></dd>
+
+
 <dt>type</dt>
 <dd><p>passed to <code><a href="https://rdrr.io/pkg/treemap/man/treemap.html" class="external-link">treemap</a></code></p></dd>
+
+
 <dt>args_png</dt>
 <dd><p>list of arguments passed to <code><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></code> if
 <code>as_png = TRUE</code></p></dd>
+
+
 <dt>n_biggest</dt>
 <dd><p>vector of integer, specifying the number(s) of biggest
 folders (in terms of size and number of files) in which to "zoom into". The
@@ -120,11 +136,16 @@ in each case. The length of the vector <code>n_biggest</code> determines the
 maximal depth until which to generate treemaps. By setting an element
 to <code>-1L</code> you specify that sub-treemaps are generated for each
 subfolder on the corresponding folder depth.</p></dd>
+
+
 <dt>depth</dt>
 <dd><p>current depth of recursion</p></dd>
+
+
 <dt>types</dt>
 <dd><p>type(s) of treeplots: one or both of <code>c("size", "files")</code>
 (the default).</p></dd>
+
 </dl></div>
 
   </div>
@@ -139,7 +160,7 @@ subfolder on the corresponding folder depth.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

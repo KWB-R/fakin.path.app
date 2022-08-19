@@ -27,7 +27,7 @@ to slashes and sort the paths (by default)"><!-- mathjax --><script src="https:/
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -65,38 +65,51 @@ to slashes and sort the paths (by default)</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_paths_</span><span class="op">(</span>
-  <span class="va">file</span>,
-  fileEncoding <span class="op">=</span> <span class="cn">NULL</span>,
-  encoding <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>,
-  do_sort <span class="op">=</span> <span class="cn">TRUE</span>,
-  expected_encodings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"windows-1252"</span>, <span class="st">"ISO-8859-1"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_paths_</span><span class="op">(</span></span>
+<span>  <span class="va">file</span>,</span>
+<span>  fileEncoding <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  encoding <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  do_sort <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  expected_encodings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"windows-1252"</span>, <span class="st">"ISO-8859-1"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>full path to the text file containing paths</p></dd>
+
+
 <dt>fileEncoding</dt>
 <dd><p>The name of the encoding to be assumed. Passed as
 <code>encoding</code> to <code><a href="https://rdrr.io/r/base/connections.html" class="external-link">file</a></code>, see there.</p></dd>
+
+
 <dt>encoding</dt>
 <dd><p>passed to <code><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments passed to 
 <code><a href="https://rdrr.io/pkg/kwb.utils/man/readLinesWithEncoding.html" class="external-link">readLinesWithEncoding</a></code>, such as <code>n</code></p></dd>
+
+
 <dt>do_sort</dt>
 <dd><p>if <code>TRUE</code> (default), the vector of paths is sorted
 alphanumerically.</p></dd>
+
+
 <dt>expected_encodings</dt>
 <dd><p>vector of names of file encodings that are
 expected to occur. Expected encodings will be preferred.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>vector of character</p>
+    
+
+<p>vector of character</p>
     </div>
 
   </div>
@@ -111,7 +124,7 @@ expected to occur. Expected encodings will be preferred.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

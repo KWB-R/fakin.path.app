@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,25 +63,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">prepare_for_treemap</span><span class="op">(</span><span class="va">path_data</span>, root_path <span class="op">=</span> <span class="st">""</span>, variable <span class="op">=</span> <span class="st">"size"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prepare_for_treemap</span><span class="op">(</span><span class="va">path_data</span>, root_path <span class="op">=</span> <span class="st">""</span>, variable <span class="op">=</span> <span class="st">"size"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path_data</dt>
 <dd><p>data frame as returned by <code><a href="read_file_info.html">read_file_info</a></code></p></dd>
+
+
 <dt>root_path</dt>
 <dd><p>path to the folder that contains all paths to be considered.
 By setting the root path to "/path/to/root" you can "zoom into" the
 treeplot, showing the contents below "/path/to/root" only. If
 <code>root_path</code> is <code>""</code> (default) all paths in <code>path_data</code> are
 considered.</p></dd>
+
+
 <dt>variable</dt>
 <dd><p>name(s) of variable(s) to be selected. Default: "size"</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments passed to
 <code><a href="https://rdrr.io/pkg/kwb.file/man/remove_common_root.html" class="external-link">remove_common_root</a></code>, such as <code>n_keep</code> (number
 of last segments to be kept from the common first part of all paths)</p></dd>
+
 </dl></div>
 
   </div>
@@ -96,7 +103,7 @@ of last segments to be kept from the common first part of all paths)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

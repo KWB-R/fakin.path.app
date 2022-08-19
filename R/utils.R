@@ -48,14 +48,6 @@ grepl_bytes <- function(...)
   grepl(..., useBytes = TRUE)
 }
 
-# has_final_slash --------------------------------------------------------------
-has_final_slash <- function(x)
-{
-  #grepl_bytes("/$", x)
-  n <- nchar(x)
-  substr(x, n, n) == "/"
-}
-
 # prepare_root_for_jsTree ------------------------------------------------------
 prepare_root_for_jsTree <- function(root)
 {
@@ -78,20 +70,6 @@ prepare_root_for_jsTree <- function(root)
 inlineRadioButtons <- function(...)
 {
   shiny::radioButtons(..., inline = TRUE)
-}
-
-# left_substring_equals --------------------------------------------------------
-
-#' Is Left Substring of X Equal To Y?
-#'
-#' @param x String of which the left part is compared with \code{y}
-#' @param y String to be compared with the left part of \code{x}
-#'
-left_substring_equals <- function(x, y)
-{
-  stopifnot(is.character(x), is.character(y))
-  
-  substr(x, 1, nchar(y)) == y
 }
 
 # normalise_column_names -------------------------------------------------------
@@ -138,12 +116,6 @@ read_slider_config_raw <- function(file)
   raw_config$name <- kwb.utils::toFactor(raw_config$name)
   raw_config <- split(raw_config, raw_config$name)
   lapply(raw_config, kwb.utils::removeColumns, "name")
-}
-
-# remove_empty -----------------------------------------------------------------
-remove_empty <- function(x)
-{
-  x[! kwb.utils::isNaOrEmpty(x)]
 }
 
 # run_with_modal ---------------------------------------------------------------

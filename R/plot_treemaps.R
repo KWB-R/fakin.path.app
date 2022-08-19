@@ -216,7 +216,7 @@ prepare_for_n_level_treemap2 <- function(
 
       # Filter for paths starting with root_path if root_path is given
       if (root_path != "") {
-        pl <- pl[left_substring_equals(as.character(pl), root_path)]
+        pl <- pl[kwb.utils::leftSubstringEquals(as.character(pl), root_path)]
       }
 
       # Let pathlist remove common roots
@@ -386,7 +386,7 @@ filter_for_start_path <- function(path_data, start_path = "")
   paths <- kwb.utils::selectColumns(path_data, "path")
 
   # Filter for paths starting with start_path
-  path_data[left_substring_equals(paths, start_path), ]
+  path_data[kwb.utils::leftSubstringEquals(paths, start_path), ]
 }
 
 # aggregate_by_levels ----------------------------------------------------------

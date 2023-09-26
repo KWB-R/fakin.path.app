@@ -75,7 +75,7 @@
 
       
 
-      </header><script src="usage_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the FAKIN Path Analyser</h1>
@@ -88,37 +88,62 @@
 
     
     
-<p>Once you have installed the package fakin.path.app and all related packages, you are set up to</p>
+<p>Once you have installed the package fakin.path.app and all related
+packages, you are set up to</p>
 <ol style="list-style-type: decimal">
-<li><p><a href="#step-1">Scan your file system</a> for file paths and file properties and save them to CSV files (CSV = Comma Separated Values),</p></li>
-<li><p><a href="#step-2">Run the Web Application</a> to analyse the path information produced in the first step.</p></li>
+<li><p><a href="#step-1">Scan your file system</a> for file paths and
+file properties and save them to CSV files (CSV = Comma Separated
+Values),</p></li>
+<li><p><a href="#step-2">Run the Web Application</a> to analyse the path
+information produced in the first step.</p></li>
 </ol>
 <div class="section level2">
 <h2 id="step-1">Application 1: Scan your file system<a class="anchor" aria-label="anchor" href="#step-1"></a>
 </h2>
-<p>Run the following R command to start the application that scans your system for files to be analysed:</p>
+<p>Run the following R command to start the application that scans your
+system for files to be analysed:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">fakin.path.app</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app_scan.html">run_app_scan</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This will open a new tab in your default web browser as shown here for a Mozilla Firefox browser on an Ubuntu Linux system:</p>
+<p>This will open a new tab in your default web browser as shown here
+for a Mozilla Firefox browser on an Ubuntu Linux system:</p>
 <div class="figure">
 <img src="images/pathana-01.png" width="300" alt=""><p class="caption">Main window of the scan app</p>
 </div>
-<p>The main window is devided into three sections representing the steps required to start the scan process:</p>
+<p>The main window is devided into three sections representing the steps
+required to start the scan process:</p>
 <ol style="list-style-type: decimal">
 <li>Define root directories</li>
 <li>Define ouput directory</li>
 <li>Scan root directories</li>
 </ol>
-<p>In the first step you define one or more root directories that act as the starting point of the scan. The search is done recursively, i.e. files in all folders and subfolders will be considered. Take this in mind when selecting a root directory. It can take a long time to scan a “top-level” folder! Click the Button “Add root directory…” to select a root directory:</p>
+<p>In the first step you define one or more root directories that act as
+the starting point of the scan. The search is done recursively,
+i.e. files in all folders and subfolders will be considered. Take this
+in mind when selecting a root directory. It can take a long time to scan
+a “top-level” folder! Click the Button “Add root directory…” to select a
+root directory:</p>
 <div class="figure">
 <img src="images/pathana-02.png" width="500" alt=""><p class="caption">Select a root directory</p>
 </div>
-<p>In the opening dialog window, use the left-hand pane to navigate to the folder that you want to scan. Select the folder by clicking on its name (<code>hauke</code> in the example). The contents of the folder are shown in the right-hand pane. Confirm your selection by clicking the “Select” button. This closes the dialog window and enters the path to the selected root directory (here: <code>/home/hauke</code>) in the text field on top of the main window:</p>
+<p>In the opening dialog window, use the left-hand pane to navigate to
+the folder that you want to scan. Select the folder by clicking on its
+name (<code>hauke</code> in the example). The contents of the folder are
+shown in the right-hand pane. Confirm your selection by clicking the
+“Select” button. This closes the dialog window and enters the path to
+the selected root directory (here: <code>/home/hauke</code>) in the text
+field on top of the main window:</p>
 <div class="figure">
 <img src="images/pathana-03.png" width="300" alt=""><p class="caption">After selecting a root directory</p>
 </div>
-<p>In the next (optional) step you can set the output directory, i.e. the location where to store the results of the scan. You may use the default (<code>/home/hauke/pathana-db</code> in the example) or select another location by clicking “Change output directory…” and selecting a different folder (similar to selecting a root directory).</p>
-<p>Once the root and output directories are specified, you are ready to start the scan process. Therefore, click the “Scan root directories” button…</p>
+<p>In the next (optional) step you can set the output directory,
+i.e. the location where to store the results of the scan. You may use
+the default (<code>/home/hauke/pathana-db</code> in the example) or
+select another location by clicking “Change output directory…” and
+selecting a different folder (similar to selecting a root
+directory).</p>
+<p>Once the root and output directories are specified, you are ready to
+start the scan process. Therefore, click the “Scan root directories”
+button…</p>
 <div class="figure">
 <img src="images/pathana-04.png" width="300" alt=""><p class="caption">Start the scan process</p>
 </div>
@@ -126,12 +151,18 @@
 <div class="figure">
 <img src="images/pathana-05.png" width="300" alt=""><p class="caption">Wait for the scan to be completed</p>
 </div>
-<p>The completion of the scan is indicated by a message box stating that the information on the scanned files have been written to a CSV file in the output directory:</p>
+<p>The completion of the scan is indicated by a message box stating that
+the information on the scanned files have been written to a CSV file in
+the output directory:</p>
 <div class="figure">
 <img src="images/pathana-06.png" width="300" alt=""><p class="caption">Message after successful completion of the scan</p>
 </div>
 <p>Close the message box by clicking the “Dismiss” button.</p>
-<p>Now, that the result of the scan is available in a CSV file you are ready to run the application that helps you to inspect and analyse this file. Before you run this second application, close the current application by pressing ESC in the R console or by closing the corresponding tab in the web browser.</p>
+<p>Now, that the result of the scan is available in a CSV file you are
+ready to run the application that helps you to inspect and analyse this
+file. Before you run this second application, close the current
+application by pressing ESC in the R console or by closing the
+corresponding tab in the web browser.</p>
 </div>
 <div class="section level2">
 <h2 id="step-2">Application 2: Run the Web Application<a class="anchor" aria-label="anchor" href="#step-2"></a>
@@ -161,7 +192,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

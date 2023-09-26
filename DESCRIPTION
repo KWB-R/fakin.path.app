@@ -1,6 +1,6 @@
 Package: fakin.path.app
 Title: Shiny App to Visualise File Paths
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     c(person(given = "Hauke",
              family = "Sonnenberg",
@@ -14,25 +14,13 @@ Authors@R:
              comment = c(ORCID = "0000-0003-0647-7726")),
       person(given = "Kompetenzzentrum Wasser Berlin gGmbH (KWB)",
              role = "cph"))
-Description: This package contains an R Shiny App that
-    loads file path information from a file and displays the paths in
-    different ways.  The aim of the app is to find weaknesses in the
-    folder structure.
+Description: This package contains an R Shiny App that loads file path
+    information from a file and displays the paths in different ways.  The
+    aim of the app is to find weaknesses in the folder structure.
 License: MIT + file LICENSE
 URL: https://github.com/KWB-R/fakin.path.app
 BugReports: https://github.com/KWB-R/fakin.path.app/issues
-Encoding: UTF-8
-LazyData: true
-Suggests: 
-    covr (>= 3.2.1),
-    kwb.db (>= 0.3.0),
-    RMySQL (>= 0.10.17),
-    knitr (>= 1.23),
-    rmarkdown (>= 1.13),
-    testthat (>= 2.2.1)
-RoxygenNote: 6.1.1
 Imports: 
-    bit64 (>= 0.9.7),
     data.table (>= 1.11.8),
     dplyr (>= 0.8.1),
     DT (>= 0.7),
@@ -42,7 +30,7 @@ Imports:
     htmltools (>= 0.3.6),
     jsTree (>= 1.0.1),
     kwb.file (>= 0.3.0),
-    kwb.utils (>= 0.5.0),
+    kwb.utils (>= 0.7.0),
     magrittr (>= 1.5),
     networkD3 (>= 0.4),
     pathlist (>= 0.2.0),
@@ -54,6 +42,13 @@ Imports:
     shinyjs (>= 1.0),
     treemap (>= 2.4.2),
     wordcloud (>= 2.6)
+Suggests: 
+    covr (>= 3.2.1),
+    knitr (>= 1.23),
+    kwb.db (>= 0.3.0),
+    rmarkdown (>= 1.13),
+    RMySQL (>= 0.10.17),
+    testthat (>= 2.2.1)
 VignetteBuilder: 
     knitr
 Remotes:
@@ -61,3 +56,6 @@ Remotes:
     github::kwb-r/kwb.db,
     github::kwb-r/kwb.file,
     github::kwb-r/kwb.utils
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3

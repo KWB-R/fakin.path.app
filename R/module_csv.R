@@ -90,7 +90,11 @@ csvFile <- function(input, output, session, read_function)
         }
       }
     )
-    
+
+    if (is.null(x)) {
+      stop("The file seems to be empty:\n  ", csv_file())
+    }
+
     kwb.utils::selectColumns(
       x = normalise_column_names(x), 
       columns = c("path", "type", "size", "modified")

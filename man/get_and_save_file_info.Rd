@@ -4,8 +4,13 @@
 \alias{get_and_save_file_info}
 \title{Get and Save File Information}
 \usage{
-get_and_save_file_info(root_dir, output_dir, check_dirs = TRUE,
-  format = "\%Y-\%m-\%d_\%H\%M", ...)
+get_and_save_file_info(
+  root_dir,
+  output_dir,
+  check_dirs = TRUE,
+  format = "\%Y-\%m-\%d_\%H\%M",
+  ...
+)
 }
 \arguments{
 \item{root_dir}{path to the directory from which to start searching for

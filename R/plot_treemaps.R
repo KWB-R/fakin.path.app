@@ -86,6 +86,9 @@ plot_treemaps_from_path_data <- function(
   depth = 1, types = c("size", "files")
 )
 {
+  #kwb.utils::assignPackageObjects("fakin.path.app")
+  #kwb.utils::assignArgumentDefaults(fakin.path.app:::plot_treemaps_from_path_data)
+  
   if (! inherits(path_data, "pathlist") && ! check_path_data(path_data)) {
     return()
   }
@@ -109,6 +112,7 @@ plot_treemaps_from_path_data <- function(
 
   maps <- lapply(types, function(map_type) {
 
+    #map_type <- types[1L]
     map <- kwb.utils::catAndRun(
       sprintf("Creating treemap '%s'", map_type),
       kwb.utils::callWith(
@@ -212,7 +216,7 @@ prepare_for_n_level_treemap2 <- function(
 
       # Filter for paths starting with root_path if root_path is given
       if (root_path != "") {
-        pl <- pl[left_substring_equals(as.character(pl), root_path)]
+        pl <- pl[kwb.utils::leftSubstringEquals(as.character(pl), root_path)]
       }
 
       # Let pathlist remove common roots
@@ -255,7 +259,11 @@ args_treemap <- function(
     vSize = setting$column,
     vColor = anti_setting$column,
     title = setting$title,
-    title.legend = setting$legend
+    title.legend = setting$legend,
+    # The default value "NULL" of argument "format.legend" in treemap::treemap()
+    # leads to an error! It must be a list since this list is finally passed
+    # to do.call() (e.g. in treemap:::dens2col())
+    format.legend = list() 
   )
 }
 
@@ -378,7 +386,7 @@ filter_for_start_path <- function(path_data, start_path = "")
   paths <- kwb.utils::selectColumns(path_data, "path")
 
   # Filter for paths starting with start_path
-  path_data[left_substring_equals(paths, start_path), ]
+  path_data[kwb.utils::leftSubstringEquals(paths, start_path), ]
 }
 
 # aggregate_by_levels ----------------------------------------------------------
@@ -387,8 +395,14 @@ aggregate_by_levels <- function(folder_data, group_by = names(folder_data)[1:2])
   # Convert size to numeric, otherwise we get an overflow when summing up
   folder_data$size <- as.numeric(folder_data$size)
 
-  do.call(dplyr::group_by_, c(list(folder_data), as.list(group_by))) %>%
-    dplyr::summarise_(n_files = "length(size)", total_size = "sum(size)") %>%
+  do.call(dplyr::group_by, args = c(
+    list(folder_data), folder_data[group_by])
+  ) %>%
+    dplyr::summarise(
+      n_files = length(.data$size), 
+      total_size = sum(.data$size),
+      .groups = "drop"
+    ) %>%
     as.data.frame()
 }
 
@@ -400,7 +414,7 @@ plot_treemap <- function(
   #args <- list()
   args <- list(...)
 
-  if (length(args) == 0) {
+  if (length(args) == 0L) {
     args <- args_treemap()
   }
 

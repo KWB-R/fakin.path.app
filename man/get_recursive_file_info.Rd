@@ -4,8 +4,7 @@
 \alias{get_recursive_file_info}
 \title{Call file.info recursively on files below a root folder}
 \usage{
-get_recursive_file_info(root_dir, pattern = NULL, all = TRUE, ...,
-  dbg = TRUE)
+get_recursive_file_info(root_dir, pattern = NULL, all = TRUE, ..., dbg = TRUE)
 }
 \arguments{
 \item{root_dir}{path to the root directory from which to start the recursive

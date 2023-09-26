@@ -101,6 +101,6 @@ guess_file_path_type <- function(x)
 {
   kwb.utils::catAndRun("Guessing file path type", {
     has_extension <- kwb.utils::fileExtension(x) != ""
-    ifelse(has_final_slash(x) | ! has_extension, "directory", "file")
+    ifelse(kwb.utils::hasFinalSlash(x) | ! has_extension, "directory", "file")
   })
 }

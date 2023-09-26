@@ -12,8 +12,8 @@ guess_file_metadata(file, n_first_rows = 1000, ...)
 \item{n_first_rows}{number of first rows of \code{file} from which to guess
 the meta information.}
 
-\item{\dots}{further arguments passed to \code{fakin.path.app:::read_lines},
-such as \code{fileEncoding}}
+\item{\dots}{further arguments passed to 
+\code{\link[kwb.utils]{readLinesWithEncoding}}, such as \code{fileEncoding}}
 }
 \value{
 data frame with columns
